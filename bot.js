@@ -34,7 +34,7 @@ client.on('ready', () => {
   console.log(`${client.user.tag} est connecté !`);
  });
 
-client.login("NTI1NjkxNDA2MDE1MDA0Njgy.DyjFzA.TvQPziQWBcGTL_g6IBJDY6klnfc");
+client.login("");
 
 
 client.on('message', msg => {
