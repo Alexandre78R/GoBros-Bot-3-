@@ -461,7 +461,7 @@ function jeux (message) { // !reportbug @membre-qui-report citer-le-bug
 
   let messageArray = message.content.split(" ");
   let cmd = messageArray[0];
-  let args = messageArray.slice(1);
+  let args = messageArray.slice(0);
 
        if (message.length == 1){
            if (message[0].charAt(0) == config.prefix) 
@@ -484,7 +484,7 @@ function jeux (message) { // !reportbug @membre-qui-report citer-le-bug
     .addField(":x: Vous n’avez pas mis de nom de jeu.", "👮Merci de refaire la commande avec un nom de jeu.")
     message.delete().catch(O_o=>{});
 
-    let rreason = message.guild.members.get([1]) || args.join(" ").slice(22);
+    let rreason = message.guild.members.get([0]) || args.join(" ").slice(22);
     if(!rreason) return message.channel.send(reponsebfembed) || message.delete(3600).catch(O_o=>{}); 
 
     let reportEmbed = new Discord.RichEmbed()
@@ -543,55 +543,9 @@ function mascotte (msg) {
   }
 }
 
+
 function reactaddrole (message){
-  let messageArray = message.content.split(" ");
-  let messageArrayemo = message.content.split("  ");
-  let messageArrayrole = message.content.split("   ");
-  let cmd = messageArray[0];
-  let argsmessage = messageArray.slice(1);
-  let argsemoji = messageArrayemo.slice(2);
-  let argsrole = messageArrayrole.slice(3);
 
-     if (message.length == 1) { 
-        if (message[0].charAt(0) == config.prefix) 
-            message[0] = message[0].slice(1);
-    } 
-
-    let reponsebfembed = new Discord.RichEmbed()
-    .setDescription("Réponse de la commande :")
-    .setColor("#bc0000")
-    .addField(":x: ERROR message", "👮ERROR")
-    message.delete().catch(O_o=>{});
-
-        let reponsebfembed1 = new Discord.RichEmbed()
-    .setDescription("Réponse de la commande :")
-    .setColor("#bc0000")
-    .addField(":x: ERROR icone", "👮ERROR")
-    message.delete().catch(O_o=>{});
-
-
-    let reponsebfembed2 = new Discord.RichEmbed()
-    .setDescription("Réponse de la commande :")
-    .setColor("#bc0000")
-    .addField(":x: ERROR role", "👮ERROR")
-    message.delete().catch(O_o=>{});
-
-
-    let idmessage = message.guild.members.get([1]) || argsmessage.join(" ").slice();
-    if(!idmessage) return message.channel.send(reponsebfembed);
-    let emoji = message.guild.members.get([2]) || argsemoji.join("  ").slice();
-    if(!emoji) return message.channel.send(reponsebfembed1);
-    let role = message.guild.members.get([3]) || argsrole.join("   ").slice();
-    if(!role) return message.channel.send(reponsebfembed2);
-
-    let roleadd = new Discord.RichEmbed()
-    .setDescription("Réponse de la commande :")
-    .setColor("#15f153")
-    .addField("id message :", idmessage)
-    .addField("emoji :", emoji)
-    .addField("role :", role);
-    //message.member.addRole(role)
-    message.reply(roleadd)
 }
 
   
