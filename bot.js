@@ -48,11 +48,6 @@ client.on('message', msg => {
     getCmdFunction(cmd)(msg);
 });
 
-client.on('messageReactionAdd', (reaction, user) => {
-    if(reaction.emoji.name === ":SW:")
-        member.addRole("525127518156750850")
-}); 
-
 function getCmdFunction(cmd) {
     const COMMANDS = {
         'aide': cmds.aide,
