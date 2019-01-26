@@ -543,27 +543,55 @@ function mascotte (msg) {
   }
 }
 
-function reactaddrole (msg, event){
-  let messageArray = msg.content.split(" ");
+function reactaddrole (message){
+  let messageArray = message.content.split(" ");
+  let messageArrayemo = message.content.split("  ");
+  let messageArrayrole = message.content.split("   ");
   let cmd = messageArray[0];
-  let args = messageArray.slice(1);
+  let argsmessage = messageArray.slice(1);
+  let argsemoji = messageArrayemo.slice(2);
+  let argsrole = messageArrayrole.slice(3);
 
-     if (msg.length == 1) { 
-        if (msg[0].charAt(0) == config.prefix) 
-            msg[0] = msg[0].slice(1);
+     if (message.length == 1) { 
+        if (message[0].charAt(0) == config.prefix) 
+            message[0] = message[0].slice(1);
     } 
-    let idmessage = msg.guild.members.get([0]) || args.join(" ").slice(22);
-    let emoji = msg.guild.members.get([1]) || args.join(" ").slice(22);
-    let role = msg.guild.members.get([2]) || args.join(" ").slice(22);
-    
+
+    let reponsebfembed = new Discord.RichEmbed()
+    .setDescription("Réponse de la commande :")
+    .setColor("#bc0000")
+    .addField(":x: ERROR message", "👮ERROR")
+    message.delete().catch(O_o=>{});
+
+        let reponsebfembed1 = new Discord.RichEmbed()
+    .setDescription("Réponse de la commande :")
+    .setColor("#bc0000")
+    .addField(":x: ERROR icone", "👮ERROR")
+    message.delete().catch(O_o=>{});
+
+
+    let reponsebfembed2 = new Discord.RichEmbed()
+    .setDescription("Réponse de la commande :")
+    .setColor("#bc0000")
+    .addField(":x: ERROR role", "👮ERROR")
+    message.delete().catch(O_o=>{});
+
+
+    let idmessage = message.guild.members.get([1]) || argsmessage.join(" ").slice();
+    if(!idmessage) return message.channel.send(reponsebfembed);
+    let emoji = message.guild.members.get([2]) || argsemoji.join("  ").slice();
+    if(!emoji) return message.channel.send(reponsebfembed1);
+    let role = message.guild.members.get([3]) || argsrole.join("   ").slice();
+    if(!role) return message.channel.send(reponsebfembed2);
+
     let roleadd = new Discord.RichEmbed()
     .setDescription("Réponse de la commande :")
     .setColor("#15f153")
     .addField("id message :", idmessage)
     .addField("emoji :", emoji)
     .addField("role :", role);
-    msg.member.addRole(role)
-    msg.reply(roleadd)
+    //message.member.addRole(role)
+    message.reply(roleadd)
 }
 
   
