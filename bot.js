@@ -60,6 +60,7 @@ function getCmdFunction(cmd) {
         'serverinfo': cmds.serverinfo,
         'jeux': cmds.jeux,
         'mascotte': cmds.mascotte,
+        'overwatch': cmds.overwatch,
         'reactaddrole': cmds.reactaddrole,
     }
     return COMMANDS[cmd] ? COMMANDS[cmd] : () => {};
