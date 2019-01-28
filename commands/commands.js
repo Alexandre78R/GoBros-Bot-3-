@@ -377,22 +377,13 @@ function reportbug (message) { // !reportbug @membre-qui-report citer-le-bug
 
       } 
 
-    let errmention = new Discord.RichEmbed()
-    .setDescription("Réponse de la commande :")
-    .setColor("#bc0000")
-    .addField(":x: Merci de mentionné votre pseudo !", "👮Merci de refaire la commande avec une mention de votre pseudo.")
-    message.delete().catch(O_o=>{});
-
-    let mention = message.guild.member(message.mentions.users.first() || message.guild.members.get(args[0]));;
-    if(!mention) return message.channel.send(errmention);
-
     let reponsebfembed = new Discord.RichEmbed()
     .setDescription("Réponse de la commande :")
     .setColor("#bc0000")
     .addField(":x: Vous n’avez pas mis de message en expliquant le bug.", "👮Merci de refaire la commande avec un message.")
     message.delete().catch(O_o=>{});
 
-    let rreason = message.guild.members.get([1]) || args.join(" ").slice(22);
+    let rreason = message.guild.members.get([0]) || args.join(" ").slice();
     if(!rreason) return message.channel.send(reponsebfembed) || message.delete(3600).catch(O_o=>{}); 
 
     let reportEmbed = new Discord.RichEmbed()
@@ -463,7 +454,7 @@ function jeux (message) { // !reportbug @membre-qui-report citer-le-bug
 
   let messageArray = message.content.split(" ");
   let cmd = messageArray[0];
-  let args = messageArray.slice(0);
+  let args = messageArray.slice(1);
 
        if (message.length == 1){
            if (message[0].charAt(0) == config.prefix) 
@@ -471,22 +462,13 @@ function jeux (message) { // !reportbug @membre-qui-report citer-le-bug
 
       } 
 
-    let errmention = new Discord.RichEmbed()
-    .setDescription("Réponse de la commande :")
-    .setColor("#bc0000")
-    .addField(":x: Merci de mentionné votre pseudo !", "👮Merci de refaire la commande avec une mention de votre pseudo.")
-    message.delete().catch(O_o=>{});
-
-    let mention = message.guild.member(message.mentions.users.first() || message.guild.members.get(args[0]));;
-    if(!mention) return message.channel.send(errmention);
-
     let reponsebfembed = new Discord.RichEmbed()
     .setDescription("Réponse de la commande :")
     .setColor("#bc0000")
     .addField(":x: Vous n’avez pas mis de nom de jeu.", "👮Merci de refaire la commande avec un nom de jeu.")
     message.delete().catch(O_o=>{});
 
-    let rreason = message.guild.members.get([0]) || args.join(" ").slice(22);
+    let rreason = message.guild.members.get([0]) || args.join(" ").slice();
     if(!rreason) return message.channel.send(reponsebfembed) || message.delete(3600).catch(O_o=>{}); 
 
     let reportEmbed = new Discord.RichEmbed()
@@ -605,7 +587,7 @@ if(message.author.bot) return;
     let id = message.guild.members.get([1]) || argsid.join(" ");
     if(!id) return message.channel.send(errorid); 
 
-    let emoji = message.guild.members.get([2]) || argsemoji.join(" ") || message.react(":x:");
+    let emoji = message.guild.members.get([2]) || argsemoji.join(" ");
     if(!emoji) return message.channel.send(erroremoji); 
 
     let role = message.guild.members.get([3]) || argsrole.join(" ");
@@ -617,7 +599,9 @@ if(message.author.bot) return;
     .addField("ID :", id)
     .addField("EMOJI :", emoji)
     .addField("ROLE :", role);
-    message.react(":x:")
+
+     // message.reaction.get(emoji);
+    
 
     let canalerror = new Discord.RichEmbed()
     .setDescription("Réponse de la commande :")
