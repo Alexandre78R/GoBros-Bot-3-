@@ -567,6 +567,74 @@ function overwatch(msg) {
     }
   }
 
-function reactaddrole (message){
+function reactaddrole (message){ // !reactaddrole 123 :smiley: @role
 
+if(message.author.bot) return;
+  if(message.channel.type === "dm") return;
+
+  let messageArray = message.content.split(" ");
+  let cmd = messageArray[0];
+  let argsid = messageArray.slice(1, 2);
+  let argsemoji = messageArray.slice(2, 3);
+  let argsrole = messageArray.slice(3);
+
+       if (message.length == 1){
+           if (message[0].charAt(0) == config.prefix) 
+               message[0] = message[0].slice(1);
+
+      } 
+
+    let errorid = new Discord.RichEmbed()
+    .setDescription("Réponse de la commande :")
+    .setColor("#bc0000")
+    .addField(":x: ERROR ID", "👮 ERROR ID")
+    message.delete().catch(O_o=>{});
+
+    let erroremoji = new Discord.RichEmbed()
+    .setDescription("Réponse de la commande :")
+    .setColor("#bc0000")
+    .addField(":x: ERROR EMOJI", "👮 ERROR EMOJI")
+    message.delete().catch(O_o=>{});
+
+    let errorrole = new Discord.RichEmbed()
+    .setDescription("Réponse de la commande :")
+    .setColor("#bc0000")
+    .addField(":x: ERROR ROLE", "👮 ERROR ROLE")
+    message.delete().catch(O_o=>{});
+
+    let id = message.guild.members.get([1]) || argsid.join(" ");
+    if(!id) return message.channel.send(errorid); 
+
+    let emoji = message.guild.members.get([2]) || argsemoji.join(" ");
+    if(!emoji) return message.channel.send(erroremoji); 
+
+    let role = message.guild.members.get([3]) || argsrole.join(" ");
+    if(!role) return message.channel.send(errorrole); 
+
+    let reportEmbed = new Discord.RichEmbed()
+    .setDescription("Info réaction role:")
+    .setColor("#15f153")
+    .addField("ID :", id)
+    .addField("EMOJI :", emoji)
+    .addField("ROLE :", role);
+
+
+    let canalerror = new Discord.RichEmbed()
+    .setDescription("Réponse de la commande :")
+    .setColor("#bc0000")
+    .addField(":x: Je ne trouve pas le canal d'envoi.", "👮Merci de contacter un Administrateur.")
+    message.delete().catch(O_o=>{});
+
+    let reportschannel = message.guild.channels.find(`name`, "test-dev");
+    if(!reportschannel) return message.channel.send(canalerror);
+
+    /*let reponsebvembed = new Discord.RichEmbed()
+    .setDescription("Réponse de la commande :")
+    .setColor("#15f153")
+    .addField(":white_check_mark: Merci d'avoir report ce membre.", "👮Ce report sera vérifié par l'équipe du discord.");
+    message.channel.send(reponsebvembed);*/
+
+    message.delete().catch(O_o=>{});    
+    reportschannel.send(reportEmbed);
+    return;
 }
