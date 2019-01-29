@@ -48,10 +48,10 @@ function aide (message) {
     .setColor("#15f153")
     //.setThumbnail(sicon)
     .addField("!aide", "Voir les commandes du bot.")
-    .addField("!reportmembre", "Report d'un membre du serveur // EX : !reportmembre @nom_de_la_personne_a_signaler message.")
-    .addField("!reportbug", "Report un bug sur le discord ou sur le bot // EX : !reportbug @votrepseudo message.")
+    .addField("!reportmembre", "Report d'un membre du serveur // EX : !reportmembre message.")
+    .addField("!reportbug", "Report un bug sur le discord ou sur le bot // EX : !reportbug message_du_bug.")
     .addField("!serverinfo", "Indique les informations du serveur.")
-    .addField("!jeux", "Report un bug sur le discord ou sur le bot // EX : !jeux @votrepseudo [message avec le nom du jeux, quel type de jeux etc...]")
+    .addField("!jeux", "Report un bug sur le discord ou sur le bot // EX : !jeux [message avec le nom du jeux, quel type de jeux etc...]")
     .addField("!mascotte", "Pour avoir le rôle 'Apprenti Mascotte' ou le retirer.")
 
     message.channel.send(aideembed);
@@ -75,13 +75,17 @@ function aide_modo (message) {
 
       }
 
-      let cleanPerm = new Discord.RichEmbed()
+      let aide_modoPerm = new Discord.RichEmbed()
       .setDescription("Réponse de la commande :")
       .setColor("#bc0000")
-      .addField(":x: Tu n'as pas le droit de sutilisé cette commande.", "👮 Bien essayer en tous cas.")
+      .addField(":x: Tu n'as pas le droit de utilisé cette commande.", "👮 Bien essayer en tous cas.")
       message.delete().catch(O_o=>{});
 
-      if(!message.member.hasPermission("MANAGE_MESSAGES")) return message.channel.send(aide_modoPerm);
+      if (!message.channel.permissionsFor(message.author).hasPermission("MANAGE_MESSAGES")) {
+        message.channel.sendMessage(aide_modoPerm);
+        console.log("Désolé, vous n'avez pas la permission d'exécuter la commande \""+message.content+"\"");
+        return;
+      }
 
     let aideembed = new Discord.RichEmbed()
     .setColor("#15f153")
