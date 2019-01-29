@@ -36,6 +36,22 @@ client.on('ready', () => {
 
 client.login("");
 
+client.on('guildMemberAdd', member => {
+  member.guild.channels.find("name", "🎉bienvenue").send(`Hey ${member.user}, bienvenue sur le serveur de ${member.guild.name} :hugging: !`)
+  member.createDM().then(channel => {
+  return channel.send(` 
+    Hey ${member.user},
+
+Bienvenue sur le serveur de ${member.guild.name}:tada::hugging:!
+Pour accéder à la totalité du serveur merci de lire le règlement qui se trouve dans la section " :scroll:règlement  " et de mentionner avec la réaction : :100:.
+Pour voir les autres catégorie de jeux allez dans la section " :necktie:addrole " pour récupérer les rôles des jeux.
+
+Cordialement, 
+
+L'équipe du discord de ${member.guild.name}.`)
+
+  }).catch(console.error);
+  });
 
 client.on('message', msg => {
     if (msg.author.bot || msg.channel.type != 'text')
