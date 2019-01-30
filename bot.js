@@ -29,7 +29,7 @@ client.on('disconnect', () => console.log('Je viens de me déconnecter, en m\'as
 client.on('reconnecting', () => console.log('Je reconnecte maintenant !'));
 
 client.on('ready', () => {
-  client.user.setPresence({ game: { name: "Je serais disponible dans quelque heures !", type : "STREAMING", url: "https://www.twitch.tv/go_bros"}});
+  client.user.setPresence({ game: { name: "En développement By Alexandre78R", type : "STREAMING", url: "https://www.twitch.tv/go_bros"}});
   client.user.setStatus('offline'); // online (vert) idle (absant) offline (offline)
   console.log(`${client.user.tag} est connecté !`);
  });
@@ -78,6 +78,7 @@ function getCmdFunction(cmd) {
         'mascotte': cmds.mascotte,
         'overwatch': cmds.overwatch,
         'reactaddrole': cmds.reactaddrole,
+        'cmdsaidee': cmds.cmdsaidee,
     }
     return COMMANDS[cmd] ? COMMANDS[cmd] : () => {};
 }
