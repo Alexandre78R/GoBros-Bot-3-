@@ -28,6 +28,7 @@ module.exports = {
     'mascotte': mascotte,
     'overwatch': overwatch,
     'reactaddrole': reactaddrole,
+    'cmdsaidee': cmdsaidee,
 } 
 
 function aide (message) {
@@ -476,7 +477,7 @@ function jeux (message) { // !reportbug @membre-qui-report citer-le-bug
     if(!rreason) return message.channel.send(reponsebfembed) || message.delete(3600).catch(O_o=>{}); 
 
     let reportEmbed = new Discord.RichEmbed()
-    .setDescription("Info Report du Bug :")
+    .setDescription("Info aidée de jeux :")
     .setColor("#15f153")
     .addField("Jeux proposée :", `<@${message.author}>`)
     .addField("Canal :", message.channel)
@@ -531,7 +532,7 @@ function mascotte (msg) {
   }
 }
 
-function overwatch(msg) {
+  function overwatch(msg) {
        if (msg.length == 1){
            if (msg[0].charAt(0) == config.prefix) 
                msg[0] = msg[0].slice(1);
@@ -553,7 +554,7 @@ function overwatch(msg) {
     }
   }
 
-function reactaddrole (message){ // !reactaddrole 123 :smiley: @role
+function reactaddrole (message){ // !reactaddrole 123 :smiley: @role  encore de développement !
 
 if(message.author.bot) return;
   if(message.channel.type === "dm") return;
@@ -620,3 +621,58 @@ if(message.author.bot) return;
     reportschannel.send(reportEmbed);
     return;
 }
+
+function cmdsaidee (message){
+
+ if(message.author.bot) return;
+  if(message.channel.type === "dm") return;
+
+  let messageArray = message.content.split(" ");
+  let cmd = messageArray[0];
+  let args = messageArray.slice(1);
+
+       if (message.length == 1){
+           if (message[0].charAt(0) == config.prefix) 
+               message[0] = message[0].slice(1);
+
+      } 
+
+    let reponsebfembed = new Discord.RichEmbed()
+    .setDescription("Réponse de la commande :")
+    .setColor("#bc0000")
+    .addField(":x: Vous n’avez pas mis de nom de commandes et des détailles sur cette commandes.", "👮Merci de refaire la commande avec nom de la commande plus les détailles.")
+    message.delete().catch(O_o=>{});
+
+    let rreason = message.guild.members.get([0]) || args.join(" ").slice();
+    if(!rreason) return message.channel.send(reponsebfembed) || message.delete(3600).catch(O_o=>{}); 
+
+    let reportEmbed = new Discord.RichEmbed()
+    .setDescription("Info commande proposée :")
+    .setColor("#15f153")
+    .addField("Commande proposée :", `<@${message.author}>`)
+    .addField("Canal :", message.channel)
+    .addField("Commande proposée le  :", message.createdAt)
+    .addField("Commande :", rreason);
+
+    let canalerror = new Discord.RichEmbed()
+    .setDescription("Réponse de la commande :")
+    .setColor("#bc0000")
+    .addField(":x: Je ne trouve pas le canal d'envoi.", "👮Merci de contacter un Administrateur.")
+    message.delete().catch(O_o=>{});
+
+    let reportschannel = message.guild.channels.find(`name`, "test-dev");
+    if(!reportschannel) return message.channel.send(canalerror);
+
+    let reponsebvembed = new Discord.RichEmbed()
+    .setDescription("Réponse de la commande :")
+    .setColor("#15f153")
+    .addField(":white_check_mark: Merci d'avoir proposée cette commande.", "👮Votre proposition sera regarder par les Administrateur.");
+    message.channel.send(reponsebvembed);
+
+    message.delete().catch(O_o=>{});    
+    reportschannel.send(reportEmbed);
+    return;
+
+}
+
+
