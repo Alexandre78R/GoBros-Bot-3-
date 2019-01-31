@@ -9,7 +9,9 @@ let platform;
 
 const regionOptions = ['us', 'eu', 'kr', 'cn', 'global'];
 let region;
-
+const stripIndent = require('strip-indent');
+const os = require('os');
+const Discord = require("discord.js");
 let buildAPIUrl = (battleTag) => {
   return apiBaseUrl + apiType + '/' + platform + '/' + region + '/' + battleTag;
 };
@@ -73,7 +75,7 @@ module.exports = (message, callback) => {
       let statStar = stats.star;
 
       // Format the string we are going to return to the user
-
+/*
  let statsString = '';
     // statsString += '```';
       statsString += '**' + stats.username + '**\n';
@@ -84,12 +86,23 @@ module.exports = (message, callback) => {
       statsString += 'Victoire en partie rapide : **' + statQuickplayWins + ' victoires !**\n';
       statsString += 'Infos compétitif (saison en cours) : **' + stats.games.competitive.played + ' jouer !** | Détail : **' + stats.games.competitive.won+ ' victoires !** | ** ' + stats.games.competitive.lost+ ' défaites !** | ** ' + stats.games.competitive.draw+ ' égalités !** | ** ' + statCompWinrate+ ' Winrate ! ** \n';
       statsString += '**' + statCompTime + '** jouer en Partie Competitive | ' + '**' + statQuickTime + '** jouer en Partie rapide'
-     // statsString += '```';
+     // statsString += '```';*/
+    let reportEmbed = new Discord.RichEmbed()
+    .setDescription('Info du profils de **' + stats.username + '**\n')
+    .setColor("#bc0000")
+    .setThumbnail(+ statPortrait + '**\n')
+    .addField("Niveau :", '**' + statLevel + '**\n')
+    .addField("Classement compétitif :", '**' + statCompRank + '**\n')
+    .addField("Victoire en partie rapide :", '**' + statQuickplayWins + 'victoire !**\n')
+    .addField("Infos compétitif (saison en cours) : ", '**' + stats.games.competitive.played + ' jouer !** | Détail : **' + stats.games.competitive.won+ ' victoires !** | ** ' + stats.games.competitive.lost+ ' défaites !** | ** ' + stats.games.competitive.draw+ ' égalités !** | ** ' + statCompWinrate+ ' Winrate ! ** \n')
+    .addField('' + statCompTime + '** jouer en Partie Competitive | ' , '**' + statQuickTime + '** jouer en Partie rapide');
+    
+    message.channel.send(reportEmbed)
 
-      return callback(null, statsString);
+     // return callback(null, statsString);
     } else {
       return callback(error || response.statusCode, null);
     }
   });
 
-};
+}
