@@ -9,6 +9,7 @@ var formattedSets = [];
 module.exports = {
 	'name': name,
     'aide': aide,
+    'aide_modo': aide_modo,
     'clean': clean,
     'kick': kick,
     'ban': ban,
@@ -31,6 +32,11 @@ function name() {
 function aide() {
         console.log("Chargement de la commande !aide ...");
         console.log("Chargement de la commande !aide (OK)");
+}
+
+function aide_modo() {
+        console.log("Chargement de la commande !aide_modo ...");
+        console.log("Chargement de la commande !aide_modo (OK)");
 }
 
 function clean() {
