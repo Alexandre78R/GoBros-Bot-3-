@@ -1,19 +1,23 @@
-
 const config = require('../config/config.json');
 const commandHelp = require('./help.js');
 const nameconsole = require('../utils/generate').name();
 const aideconsole = require('../utils/generate').aide();
+const aide_modoconsole = require('../utils/generate').aide_modo();
 const kickconsole = require('../utils/generate').kick();
 const banconsole = require('../utils/generate').ban();
 const reportmconsole = require('../utils/generate').reportm();
 const reportbconsole = require('../utils/generate').reportb();
 const serverconsole = require('../utils/generate').server();
+const jeuxconsole = require('../utils/generate').jeux();
+const mascotteconsole = require('../utils/generate').mascotte();
+const overwatchconsole = require('../utils/generate').overwatch();
+const reactaddroleconsole = require('../utils/generate').reactaddrole();
+const cmdsaideeconsole = require('../utils/generate').cmdsaidee();
 //const rp = require('request-promise');
 const stripIndent = require('strip-indent');
 const os = require('os');
 const Discord = require("discord.js");
 const OverwatchAPI = require('./overwatch.js');
-
 
 module.exports = {
     'aide': aide,
@@ -674,5 +678,4 @@ function cmdsaidee (message){
     return;
 
 }
-
 
