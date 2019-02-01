@@ -1,5 +1,5 @@
 const config = require('../config/config.json');
-const commandHelp = require('./help.js');
+//const commandHelp = require('./help.js'); Fonction pas encore dispo.
 const nameconsole = require('../utils/generate').name();
 const aideconsole = require('../utils/generate').aide();
 const aide_modoconsole = require('../utils/generate').aide_modo();
