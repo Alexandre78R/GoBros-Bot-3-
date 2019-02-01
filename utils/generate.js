@@ -1,10 +1,7 @@
 var fs = require('fs');
 const os = require('os');
-const rp = require('request-promise');
+//const rp = require('request-promise');
 const stripIndent = require('strip-indent');
-
-
-
 
 var formattedItems = [];
 var formattedSets = [];
@@ -18,9 +15,17 @@ module.exports = {
     'reportm': reportm,
     'reportb': reportb,
     'server': server,
+    'jeux': jeux,
+    'mascotte': mascotte,
+    'overwatch': overwatch,
+    'reactaddrole': reactaddrole,
+    'cmdsaidee': cmdsaidee,
 }
+
 function name() {
-        console.log("▁ ▂ ▃ ▄ ▅ ▆ ▇ BOT █ ▇ ▆ ▅ ▄ ▂ ▁");
+		console.log("-----------------------------------");
+        console.log("----------- GoBrosTV Bot ----------");
+        console.log("-----------------------------------");
 }
 
 function aide() {
@@ -56,4 +61,29 @@ function reportb() {
 function server() {
         console.log("Chargement de la commande  !serverinfo...");
         console.log("Chargement de la commande !serverinfo (OK)");
+}
+
+function jeux() {
+        console.log("Chargement de la commande  !jeux...");
+        console.log("Chargement de la commande !jeux (OK)");
+}
+
+function mascotte() {
+        console.log("Chargement de la commande  !mascotte...");
+        console.log("Chargement de la commande !mascotte (OK)");
+}
+
+function overwatch() {
+        console.log("Chargement de la commande  !overwatch...");
+        console.log("Chargement de la commande !overwatch (OK)");
+}
+
+function reactaddrole() {
+        console.log("Chargement de la commande  !reactaddrole...");
+        console.log("Chargement de la commande !reactaddrole (OK)");
+}
+
+function cmdsaidee() {
+        console.log("Chargement de la commande  !cmdsaidee...");
+        console.log("Chargement de la commande !cmdsaidee (OK)");
 }
