@@ -1,5 +1,5 @@
 const config = require('../config/config.json');
-//const commandHelp = require('./help.js'); Fonction pas encore dispo.
+const commandHelp = require('./help.js');
 const nameconsole = require('../utils/generate').name();
 const aideconsole = require('../utils/generate').aide();
 const aide_modoconsole = require('../utils/generate').aide_modo();
@@ -35,6 +35,7 @@ module.exports = {
     'reactaddrole': reactaddrole,
     'cmdsaidee': cmdsaidee,
     //'botinfo': botinfo,
+    //'aide_cmd': aide_cmd,
 } 
 
 function aide (message) {
@@ -720,3 +721,24 @@ function botinfo (message) { en construction
 
     return;
 }*/
+/*
+function aide_cmd(msg, cmd) { // En cours dévelopement
+    let args = msg.content.split(/\s+/).slice(1);
+
+    let helpStr;
+    if (args.length == 1) { 
+        if (args[0].charAt(0) == config.prefix) 
+            args[0] = args[0].slice(1);
+        helpStr = commandHelp[args[0]];
+    }
+
+    if (helpStr){ 
+        msg.channel.send(helpStr)
+
+        }
+    else{ 
+        message.channel.send('erreur');
+
+        };
+}
+*/
