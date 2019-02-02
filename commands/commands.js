@@ -18,6 +18,7 @@ const stripIndent = require('strip-indent');
 const os = require('os');
 const Discord = require("discord.js");
 const OverwatchAPI = require('./overwatch.js');
+//const bot = new Discord.Client({disableEveryone: true});
 
 module.exports = {
     'aide': aide,
@@ -33,6 +34,7 @@ module.exports = {
     'overwatch': overwatch,
     'reactaddrole': reactaddrole,
     'cmdsaidee': cmdsaidee,
+    //'botinfo': botinfo,
 } 
 
 function aide (message) {
@@ -438,21 +440,34 @@ function serverinfo (message) {
 
       }
 
-    let sicon = message.guild.iconURL;
-    let serverembed = new Discord.RichEmbed()
-    .setDescription("Infos du Serveur")
-    .setColor("#15f153")
-    .setThumbnail(sicon)
-    .addField("Nom du Serveur :", message.guild.name)
-    .addField("Serveur créer le :", message.guild.createdAt)
-    .addField("Tu a rejoins le serveur le :", message.member.joinedAt)
-    .addField("Nombre de personne sur le serveur :", message.guild.memberCount)
-    .addField("Nombre de rôle sur le serveur :", message.guild.roles.size)
-    .addField("Localisation du serveur :", message.guild.region)
-    .addField("Propriétaire du serveur : ", message.guild.owner);
+    function bot(guild) {
+    let botCount = 0;
+    guild.members.forEach(member => { 
+      if(member.user.bot) botCount++; 
+    });
+    return botCount;
+  }
 
-    message.channel.send(serverembed);
+  function membre(guild) {
+    let memberCount = 0;
+    guild.members.forEach(member => {
+      if(!member.user.bot) memberCount++; 
+    });
+    return memberCount;
+  }
+    let embed = new Discord.RichEmbed()
+    .setAuthor(`${message.guild.name} - Informations`, message.guild.iconURL)
+    .setColor('#15f153') 
+    .addField('Propriétaire du serveur', message.guild.owner, true)
+    .addField('Localisation du serveur', message.guild.region, true) 
+    .addField('Nombre de canaux sur le serveur', message.guild.channels.size, true) 
+    .addField('Nombre de personne sur le serveur', message.guild.memberCount) 
+    .addField('Nombre de membre sur le serveur', membre(message.guild), true)
+    .addField('Nombre de bot sur le serveur', bot(message.guild), true)
+    .setFooter('Serveur Discord créer le :')
+    .setTimestamp(`${message.guild.createdAt}`)
 
+    message.channel.send(embed);
     return;
 }
 
@@ -678,4 +693,30 @@ function cmdsaidee (message){
     return;
 
 }
+/*
+function botinfo (message) { en construction
 
+ if(message.author.bot) return;
+  if(message.channel.type === "dm") return;
+
+  let messageArray = message.content.split(" ");
+  let cmd = messageArray[0];
+  let args = messageArray.slice(1);
+
+       if (message.length == 1){
+           if (message[0].charAt(0) == config.prefix) 
+               message[0] = message[0].slice(1);
+
+      }
+        let bicon = message.member.user.bot.displayAvatarURL;
+        let botembed = new Discord.RichEmbed()
+        .setDescription("Equal Information")
+        .setColor("#255684")
+        .setThumbnail(bicon)
+        .addField("Bot Name:", message.member.user.bot.username)
+        .addField("Created On:", message.member.user.bot.createdAt);
+      //  .addField("Bot version", bot.config.version);
+        message.channel.send(botembed);
+
+    return;
+}*/
