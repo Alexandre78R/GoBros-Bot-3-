@@ -1,5 +1,4 @@
 const config = require('../config/config.json');
-const commandHelp = require('./help.js');
 const nameconsole = require('../utils/generate').name();
 const aideconsole = require('../utils/generate').aide();
 const aide_modoconsole = require('../utils/generate').aide_modo();
@@ -35,7 +34,7 @@ module.exports = {
     'reactaddrole': reactaddrole,
     'cmdsaidee': cmdsaidee,
     //'botinfo': botinfo,
-    //'aide_cmd': aide_cmd,
+    'aide_cmd': aide_cmd,
 } 
 
 function aide (message) {
@@ -57,11 +56,11 @@ function aide (message) {
     //.setThumbnail(sicon)
     .addField("!aide", "Voir les commandes du bot.")
     .addField("!reportmembre", "Report d'un membre du serveur // EX : !reportmembre message.")
-    .addField("!reportbug", "Report un bug sur le discord ou sur le bot // EX : !reportbug message_du_bug.")
+    .addField("!reportbug", "Report un bug sur le discord ou sur le bot")
     .addField("!serverinfo", "Indique les informations du serveur.")
-    .addField("!jeux", "Report un bug sur le discord ou sur le bot // EX : !jeux [message avec le nom du jeux, quel type de jeux etc...]")
+    .addField("!jeux", "Permettre de proposée vos jeux pour les streams.")
     .addField("!mascotte", "Pour avoir le rôle 'Apprenti Mascotte' ou le retirer.")
-
+    .addField("!aide_cmd", "Permettre de vous aidez pour l'utilisation des commandes.")
     message.channel.send(aideembed);
 
     return;
@@ -721,24 +720,83 @@ function botinfo (message) { en construction
 
     return;
 }*/
-/*
-function aide_cmd(msg, cmd) { // En cours dévelopement
-    let args = msg.content.split(/\s+/).slice(1);
 
-    let helpStr;
+function aide_cmd(msg, cmd) { 
+
+    let args = msg.content.split(/\s+/).slice(1);
+    let messageArray = msg.content.split(" ");
+
     if (args.length == 1) { 
         if (args[0].charAt(0) == config.prefix) 
             args[0] = args[0].slice(1);
-        helpStr = commandHelp[args[0]];
     }
 
-    if (helpStr){ 
-        msg.channel.send(helpStr)
+    let errorembed = new Discord.RichEmbed()
+    .setDescription("Réponse de la commande :")
+    .setColor("#bc0000")
+    .addField(":x: Vous n'avez pas mit de nom de commande.", "👮Merci de refaire la commande avec le nom d'une commande.(Auto-destruction du message dans 20s.)")
 
-        }
-    else{ 
-        message.channel.send('erreur');
+    let helpStr2 = msg.guild.members.get([0]) || args.join(" ");
+    if(!helpStr2) return msg.channel.send(errorembed).then(message => {message.delete(12000)});
+    msg.delete().catch(O_o=>{});  
 
-        };
+    switch (helpStr2) {
+    
+        case 'aide':
+          let aideembed = new Discord.RichEmbed()
+          .setDescription("Réponse de la commande :")
+          .setColor("#15f153")
+          .addField(":white_check_mark: Exemple : !aide", "👮Permettre de voir tous les commandes du bot.(Auto-destruction du message dans 20s.)");
+          msg.channel.send(aideembed).then(message => {message.delete(12000)}); 
+        break;
+
+        case 'reportmembre':
+          let reportmembreembed = new Discord.RichEmbed()
+          .setDescription("Réponse de la commande :")
+          .setColor("#15f153")
+          .addField(":white_check_mark: Exemple : !reportmembre @Pseudo message", "👮Permettre de signaler un membre aux Administrateurs.(Auto-destruction du message dans 20s.)");
+          msg.channel.send(reportmembreembed).then(message => {message.delete(12000)}); 
+        break;
+
+        case 'reportbug':
+          let reportbugembed = new Discord.RichEmbed()
+          .setDescription("Réponse de la commande :")
+          .setColor("#15f153")
+          .addField(":white_check_mark: Exemple : !reportbug message_du_bug.", "👮Permettre d'envoyer un signalement de bug aux Administrateurs.(Auto-destruction du message dans 20s.)");
+          msg.channel.send(reportbugembed).then(message => {message.delete(12000)});  
+        break;
+
+        case 'serverinfo':
+          let serverinfoembed = new Discord.RichEmbed()
+          .setDescription("Réponse de la commande :")
+          .setColor("#15f153")
+          .addField(":white_check_mark: Exemple : !serverinfo", "👮Permettre de voir les informations du serveur.(Auto-destruction du message dans 20s.)");
+          msg.channel.send(serverinfoembed).then(message => {message.delete(12000)});
+        break;
+
+        case 'jeux':
+          let jeuxembed = new Discord.RichEmbed()
+          .setDescription("Réponse de la commande :")
+          .setColor("#15f153")
+          .addField(":white_check_mark: Exemple : !jeux [message avec le nom du jeux, quel type de jeux etc...]", "👮Permettre de proposée vos jeux pour les streams.(Auto-destruction du message dans 20s.)");
+          msg.channel.send(jeuxembed).then(message => {message.delete(12000)});
+        break;
+
+        case 'mascotte':
+          let mascotteembed = new Discord.RichEmbed()
+          .setDescription("Réponse de la commande :")
+          .setColor("#15f153")
+          .addField(":white_check_mark: Exemple : !mascotte", "👮Pour avoir le rôle 'Apprenti Mascotte' ou le retirer.(Auto-destruction du message dans 20s.)");
+          msg.channel.send(mascotteembed).then(message => {message.delete(12000)});
+        break;
+
+        default:
+          let defaultembed = new Discord.RichEmbed()
+          .setDescription("Réponse de la commande :")
+          .setColor("#bc0000")
+          .addField(":x: Je ne trouve pas la commande.", "👮Merci de contacter un Administrateur.(Auto-destruction du message dans 20s.)")
+          msg.channel.send(defaultembed).then(message => {message.delete(12000)});
+ 
+    }
+        msg.delete().catch(O_o=>{}); 
 }
-*/
