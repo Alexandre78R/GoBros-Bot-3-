@@ -79,6 +79,7 @@ function getCmdFunction(cmd) {
         'overwatch': cmds.overwatch,
         'reactaddrole': cmds.reactaddrole,
         'cmdsaidee': cmds.cmdsaidee,
+        'aide_cmd': cmds.aide_cmd,
     }
     return COMMANDS[cmd] ? COMMANDS[cmd] : () => {};
 }
