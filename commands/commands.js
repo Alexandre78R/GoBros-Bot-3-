@@ -33,7 +33,6 @@ module.exports = {
     'overwatch': overwatch,
     'reactaddrole': reactaddrole,
     'cmdsaidee': cmdsaidee,
-    //'botinfo': botinfo,
     'aide_cmd': aide_cmd,
 } 
 
@@ -693,33 +692,6 @@ function cmdsaidee (message){
     return;
 
 }
-/*
-function botinfo (message) { en construction
-
- if(message.author.bot) return;
-  if(message.channel.type === "dm") return;
-
-  let messageArray = message.content.split(" ");
-  let cmd = messageArray[0];
-  let args = messageArray.slice(1);
-
-       if (message.length == 1){
-           if (message[0].charAt(0) == config.prefix) 
-               message[0] = message[0].slice(1);
-
-      }
-        let bicon = message.member.user.bot.displayAvatarURL;
-        let botembed = new Discord.RichEmbed()
-        .setDescription("Equal Information")
-        .setColor("#255684")
-        .setThumbnail(bicon)
-        .addField("Bot Name:", message.member.user.bot.username)
-        .addField("Created On:", message.member.user.bot.createdAt);
-      //  .addField("Bot version", bot.config.version);
-        message.channel.send(botembed);
-
-    return;
-}*/
 
 function aide_cmd(msg, cmd) { 
 
