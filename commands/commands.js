@@ -16,7 +16,6 @@ const cmdsaideeconsole = require('../utils/generate').cmdsaidee();
 const stripIndent = require('strip-indent');
 const os = require('os');
 const Discord = require("discord.js");
-const OverwatchAPI = require('./overwatch.js');
 //const bot = new Discord.Client({disableEveryone: true});
 
 module.exports = {
@@ -30,7 +29,6 @@ module.exports = {
     'serverinfo': serverinfo,
     'jeux': jeux,
     'mascotte': mascotte,
-    'overwatch': overwatch,
     'reactaddrole': reactaddrole,
     'cmdsaidee': cmdsaidee,
     'aide_cmd': aide_cmd,
@@ -549,28 +547,6 @@ function mascotte (msg) {
     msg.reply(roleadd)
   }
 }
-
-  function overwatch(msg) {
-       if (msg.length == 1){
-           if (msg[0].charAt(0) == config.prefix) 
-               msg[0] = msg[0].slice(1);
-
- }
-    if (msg.content.indexOf('#') > -1) {
-      OverwatchAPI(msg.content, (err, data) => {
-        if (err) {
-          msg.reply("An error occured :(");
-          return console.error(err + ': ' + data);
-        }
-
-        msg.reply(data);
-        console.log('!overwtach');
-      });
-    } else {
-        const helpText = '\n Ce bot récupérera vos statistiques Overwatch \n Entrez "!overwatch" et votre Battle.net Battle.net pour recevoir vos stats \n Ex: !overwatch Utilisateur#1234 \n\n Options par défaut: Région: us, Plate-forme: pc \n Pour modifier ces options, ajoutez votre message avec les options suivantes\n\n Plate-forme: Platform=[Platform] \n Options: pc, xbl, psn \n\n Région: region=[region] \n Options: us, eu, kr, cn, global \n\n\n Une requête complète pourrait ressembler à ceci:!overwatch Utilisateur#1234 platform = pc region = eu';
-        msg.reply(helpText);
-    }
-  }
 
 function reactaddrole (message){ // !reactaddrole 123 :smiley: @role  encore de développement !
 
