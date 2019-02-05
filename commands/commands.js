@@ -787,8 +787,8 @@ function addrole (message){
     .setColor("#bc0000")
     .addField(":x: Le nom de se Membre n'est pas trouvable.", "👮 Merci de refaire la commande avec le nom d'un Membre trouvable.")
 
-    let rMembre = message.guild.member(message.mentions.users.first()) || message.guild.members.get(args[0]);
-    if (!rMembre) return message.channel.send(addroleErrorMembreIntrouvable);
+    let roleMembre = message.guild.member(message.mentions.users.first()) || message.guild.members.get(args[0]);
+    if (!roleMembre) return message.channel.send(addroleErrorMembreIntrouvable);
     message.delete().catch(O_o=>{});
 
     let roleError = new Discord.RichEmbed()
@@ -814,14 +814,14 @@ function addrole (message){
     .setColor("#bc0000")
     .addField(`:x: Ce Membre à déjà le rôle " ${getRole.name} ".`, "👮 Merci de lui donner un autre rôle.")
 
-    if (rMembre.roles.has(getRole.id)) return message.channel.send(roleErrorUnique);
-        rMembre.addRole(getRole.id);
+    if (roleMembre.roles.has(getRole.id)) return message.channel.send(roleErrorUnique);
+        roleMembre.addRole(getRole.id);
         message.delete().catch(O_o=>{});
 
     let addRoleMembre = new Discord.RichEmbed()
     .setDescription("Réponse de la commande :")
     .setColor("#15f153")
-    .addField(`:white_check_mark: Le rôle ${getRole.name} a été donner à ${rMembre.user} !`, "👮 Le rôle a été bien donner.")
+    .addField(`:white_check_mark: Le rôle ${getRole.name} a été donner à ${roleMembre.user} !`, "👮 Le rôle a été bien donner.")
 
     message.channel.send(addRoleMembre);
     message.delete().catch(O_o=>{});
