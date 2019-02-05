@@ -32,6 +32,7 @@ module.exports = {
     'reactaddrole': reactaddrole,
     'cmdsaidee': cmdsaidee,
     'aide_cmd': aide_cmd,
+    'addrole': addrole,
 } 
 
 function aide (message) {
@@ -548,7 +549,7 @@ function mascotte (msg) {
   }
 }
 
-function reactaddrole (message){ // !reactaddrole 123 :smiley: @role  encore de développement !
+function reactaddrole (message){ // !reactaddrole idmessage :smiley: @role  encore en développement !
 
 if(message.author.bot) return;
   if(message.channel.type === "dm") return;
@@ -744,7 +745,84 @@ function aide_cmd(msg, cmd) {
           .setColor("#bc0000")
           .addField(":x: Je ne trouve pas la commande.", "👮Merci de contacter un Administrateur.(Auto-destruction du message dans 20s.)")
           msg.channel.send(defaultembed).then(message => {message.delete(12000)});
- 
     }
         msg.delete().catch(O_o=>{}); 
+}
+
+function addrole (message){
+
+  let messageArray = message.content.split(" ");
+  let cmd = messageArray[0];
+  let argsMembre = messageArray.slice(0);
+  let argsRole = messageArray.slice(1);
+
+  if(message.author.bot) return;
+    if(message.channel.type === "dm") return;
+
+         if (message.length == 1){
+             if (message[0].charAt(0) == config.prefix) 
+                 message[0] = message[0].slice(1);
+
+  } 
+
+    let addrolePerm = new Discord.RichEmbed()
+    .setDescription("Réponse de la commande :")
+    .setColor("#bc0000")
+    .addField(":x: Tu n'as pas le droit de donner de rôle !", "👮 Bien essayer en tous cas.")
+
+    if(!message.member.hasPermission("MANAGE_ROLES")) return message.channel.send(addrolePerm);
+    message.delete().catch(O_o=>{});  
+
+    let addroleErrorMembre = new Discord.RichEmbed()
+    .setDescription("Réponse de la commande :")
+    .setColor("#bc0000")
+    .addField(":x: Vous n'avez pas mit un nom de Membre.", "👮 Merci de refaire la commande avec le nom d'un Membre.")
+
+    let membreError = argsMembre.join(" ").slice(22);
+    if (!membreError) return message.channel.send(addroleErrorMembre);
+    message.delete().catch(O_o=>{});
+
+    let addroleErrorMembreIntrouvable = new Discord.RichEmbed()
+    .setDescription("Réponse de la commande :")
+    .setColor("#bc0000")
+    .addField(":x: Le nom de se Membre n'est pas trouvable.", "👮 Merci de refaire la commande avec le nom d'un Membre trouvable.")
+
+    let rMembre = message.guild.member(message.mentions.users.first()) || message.guild.members.get(args[0]);
+    if (!rMembre) return message.channel.send(addroleErrorMembreIntrouvable);
+    message.delete().catch(O_o=>{});
+
+    let roleError = new Discord.RichEmbed()
+    .setDescription("Réponse de la commande :")
+    .setColor("#bc0000")
+    .addField(":x: Vous n'avez pas mit le nom du Role.", "👮 Merci de refaire la commande avec le nom d'un Role.")
+
+    let role = argsRole.join(" ").slice(22);
+    if (!role) return message.channel.send(roleError);
+    message.delete().catch(O_o=>{});
+
+    let roleErrorIntrovable = new Discord.RichEmbed()
+    .setDescription("Réponse de la commande :")
+    .setColor("#bc0000")
+    .addField(":x: Le nom de se Membre est introuvable.", "👮 Merci de refaire la commande avec le nom d'un Mmebre trouvable.")
+   
+    let getRole = message.guild.roles.find(`name`, role);
+    if (!getRole) return message.channel.send(roleErrorIntrovable);
+    message.delete().catch(O_o=>{});
+
+    let roleErrorUnique = new Discord.RichEmbed()
+    .setDescription("Réponse de la commande :")
+    .setColor("#bc0000")
+    .addField(`:x: Ce Membre à déjà le rôle " ${getRole.name} ".`, "👮 Merci de lui donner un autre rôle.")
+
+    if (rMembre.roles.has(getRole.id)) return message.channel.send(roleErrorUnique);
+        rMembre.addRole(getRole.id);
+        message.delete().catch(O_o=>{});
+
+    let addRoleMembre = new Discord.RichEmbed()
+    .setDescription("Réponse de la commande :")
+    .setColor("#15f153")
+    .addField(`:white_check_mark: Le rôle ${getRole.name} a été donner à ${rMembre.user} !`, "👮 Le rôle a été bien donner.")
+
+    message.channel.send(addRoleMembre);
+    message.delete().catch(O_o=>{});
 }
