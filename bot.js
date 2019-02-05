@@ -79,6 +79,7 @@ function getCmdFunction(cmd) {
         'reactaddrole': cmds.reactaddrole,
         'cmdsaidee': cmds.cmdsaidee,
         'aide_cmd': cmds.aide_cmd,
+        'addrole': cmds.addrole,
     }
     return COMMANDS[cmd] ? COMMANDS[cmd] : () => {};
 }
