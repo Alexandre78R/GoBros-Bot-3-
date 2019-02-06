@@ -33,6 +33,7 @@ module.exports = {
     'cmdsaidee': cmdsaidee,
     'aide_cmd': aide_cmd,
     'addrole': addrole,
+    'delrole': delrole,
 } 
 
 function aide (message) {
@@ -749,7 +750,7 @@ function aide_cmd(msg, cmd) {
         msg.delete().catch(O_o=>{}); 
 }
 
-function addrole (message){
+function addrole (message){ // !addrole @pseudo nom_du_role
 
   let messageArray = message.content.split(" ");
   let cmd = messageArray[0];
@@ -803,7 +804,7 @@ function addrole (message){
     let roleErrorIntrovable = new Discord.RichEmbed()
     .setDescription("Réponse de la commande :")
     .setColor("#bc0000")
-    .addField(":x: Le nom de se Membre est introuvable.", "👮 Merci de refaire la commande avec le nom d'un Mmebre trouvable.")
+    .addField(":x: Le nom de se rôle est introuvable.", "👮 Merci de refaire la commande avec le nom d'un rôle trouvable.")
    
     let getRole = message.guild.roles.find(`name`, role);
     if (!getRole) return message.channel.send(roleErrorIntrovable);
@@ -824,5 +825,83 @@ function addrole (message){
     .addField(`:white_check_mark: Le rôle ${getRole.name} a été donner à ${roleMembre.user} !`, "👮 Le rôle a été bien donner.")
 
     message.channel.send(addRoleMembre);
+    message.delete().catch(O_o=>{});
+}
+
+function delrole (message){ // !delrole @pseudo nom_du_role
+
+  let messageArray = message.content.split(" ");
+  let cmd = messageArray[0];
+  let argsMembre = messageArray.slice(0);
+  let argsRole = messageArray.slice(1);
+
+  if(message.author.bot) return;
+    if(message.channel.type === "dm") return;
+
+         if (message.length == 1){
+             if (message[0].charAt(0) == config.prefix) 
+                 message[0] = message[0].slice(1);
+
+  } 
+
+    let delrolePerm = new Discord.RichEmbed()
+    .setDescription("Réponse de la commande :")
+    .setColor("#bc0000")
+    .addField(":x: Tu n'as pas le droit de donner de rôle !", "👮 Bien essayer en tous cas.")
+
+    if(!message.member.hasPermission("MANAGE_ROLES")) return message.channel.send(delrolePerm);
+    message.delete().catch(O_o=>{});  
+
+    let delroleErrorMembre = new Discord.RichEmbed()
+    .setDescription("Réponse de la commande :")
+    .setColor("#bc0000")
+    .addField(":x: Vous n'avez pas mit un nom de Membre.", "👮 Merci de refaire la commande avec le nom d'un Membre.")
+
+    let membreError = argsMembre.join(" ").slice(22);
+    if (!membreError) return message.channel.send(delroleErrorMembre);
+    message.delete().catch(O_o=>{});
+
+    let delroleErrorMembreIntrouvable = new Discord.RichEmbed()
+    .setDescription("Réponse de la commande :")
+    .setColor("#bc0000")
+    .addField(":x: Le nom de se Membre n'est pas trouvable.", "👮 Merci de refaire la commande avec le nom d'un Membre trouvable.")
+
+    let roleMembre = message.guild.member(message.mentions.users.first()) || message.guild.members.get(args[0]);
+    if (!roleMembre) return message.channel.send(delroleErrorMembreIntrouvable);
+    message.delete().catch(O_o=>{});
+
+    let roleError = new Discord.RichEmbed()
+    .setDescription("Réponse de la commande :")
+    .setColor("#bc0000")
+    .addField(":x: Vous n'avez pas mit le nom du Role.", "👮 Merci de refaire la commande avec le nom d'un Role.")
+
+    let role = argsRole.join(" ").slice(22);
+    if (!role) return message.channel.send(roleError);
+    message.delete().catch(O_o=>{});
+
+    let roleErrorIntrovable = new Discord.RichEmbed()
+    .setDescription("Réponse de la commande :")
+    .setColor("#bc0000")
+    .addField(":x: Le nom de se rôle est introuvable.", "👮 Merci de refaire la commande avec le nom d'un rôle trouvable.")
+   
+    let getRole = message.guild.roles.find(`name`, role);
+    if (!getRole) return message.channel.send(roleErrorIntrovable);
+    message.delete().catch(O_o=>{});
+
+    let roleErrorUnique = new Discord.RichEmbed()
+    .setDescription("Réponse de la commande :")
+    .setColor("#bc0000")
+    .addField(`:x: Ce Membre n'a pas le rôle " ${getRole.name} ".`, "👮 Merci de lui retirer un autre rôle.")
+
+    if (!roleMembre.roles.has(getRole.id)) return message.channel.send(roleErrorUnique);
+        roleMembre.removeRole(getRole.id);
+        message.delete().catch(O_o=>{});
+
+    let delRoleMembre = new Discord.RichEmbed()
+    .setDescription("Réponse de la commande :")
+    .setColor("#15f153")
+    .addField(`:white_check_mark: Le rôle ${getRole.name} a été retirer à ${roleMembre.user} !`, "👮 Le rôle a été bien retirer.")
+
+    message.channel.send(delRoleMembre);
     message.delete().catch(O_o=>{});
 }
