@@ -80,6 +80,7 @@ function getCmdFunction(cmd) {
         'cmdsaidee': cmds.cmdsaidee,
         'aide_cmd': cmds.aide_cmd,
         'addrole': cmds.addrole,
+        'delrole': cmds.delrole,
     }
     return COMMANDS[cmd] ? COMMANDS[cmd] : () => {};
 }
