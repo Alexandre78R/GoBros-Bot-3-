@@ -10,7 +10,6 @@ const colors = require('colors');
 const express = require("express");
 const app = express();
 const { Client, Util } = require('discord.js');
-const { TOKEN, PREFIX, GOOGLE_API_KEY } = require('./config/config');
 let cooldown = new Set();
 let cdseconds = 5;
 
