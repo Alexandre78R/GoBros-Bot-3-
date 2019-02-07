@@ -1,39 +1,27 @@
 const config = require('../config/config.json');
 const nameconsole = require('../utils/generate').name();
+const cmdsconsole = require('../utils/generate').cmds();
 const aideconsole = require('../utils/generate').aide();
-const aide_modoconsole = require('../utils/generate').aide_modo();
-const kickconsole = require('../utils/generate').kick();
-const banconsole = require('../utils/generate').ban();
 const reportmconsole = require('../utils/generate').reportm();
 const reportbconsole = require('../utils/generate').reportb();
 const serverconsole = require('../utils/generate').server();
 const jeuxconsole = require('../utils/generate').jeux();
 const mascotteconsole = require('../utils/generate').mascotte();
-const overwatchconsole = require('../utils/generate').overwatch();
-const reactaddroleconsole = require('../utils/generate').reactaddrole();
 const cmdsaideeconsole = require('../utils/generate').cmdsaidee();
-//const rp = require('request-promise');
+const aide_cmdconsole = require('../utils/generate').aide_cmd();
 const stripIndent = require('strip-indent');
 const os = require('os');
 const Discord = require("discord.js");
-//const bot = new Discord.Client({disableEveryone: true});
 
 module.exports = {
     'aide': aide,
-    'aide_modo': aide_modo,
-    'clean': clean,
-    'kick': kick,
-    'ban': ban,
     'reportmembre': reportmembre,
     'reportbug': reportbug,
     'serverinfo': serverinfo,
     'jeux': jeux,
     'mascotte': mascotte,
-    'reactaddrole': reactaddrole,
     'cmdsaidee': cmdsaidee,
     'aide_cmd': aide_cmd,
-    'addrole': addrole,
-    'delrole': delrole,
 } 
 
 function aide (message) {
