@@ -4,6 +4,7 @@ const Discord = require('discord.js');
 const client = new Discord.Client();
 const config = require('./config/config.json');
 const cmds = require('./commands/commands.js');
+const cmds_admin = require('./commands/commands_admin.js');
 const prompt = require('prompt');
 const colors = require('colors'); 
 const express = require("express");
@@ -67,20 +68,20 @@ client.on('message', msg => {
 function getCmdFunction(cmd) {
     const COMMANDS = {
         'aide': cmds.aide,
-        'aide_modo': cmds.aide_modo,
-        'clean': cmds.clean,
-        'kick': cmds.kick,
-        'ban': cmds.ban,
+        'aide_modo': cmds_admin.aide_modo,
+        'clean': cmds_admin.clean,
+        'kick': cmds_admin.kick,
+        'ban': cmds_admin.ban,
         'reportmembre': cmds.reportmembre,
         'reportbug': cmds.reportbug,
         'serverinfo': cmds.serverinfo,
         'jeux': cmds.jeux,
         'mascotte': cmds.mascotte,
-        'reactaddrole': cmds.reactaddrole,
+        'reactaddrole': cmds_admin.reactaddrole,
         'cmdsaidee': cmds.cmdsaidee,
         'aide_cmd': cmds.aide_cmd,
-        'addrole': cmds.addrole,
-        'delrole': cmds.delrole,
+        'addrole': cmds_admin.addrole,
+        'delrole': cmds_admin.delrole,
     }
     return COMMANDS[cmd] ? COMMANDS[cmd] : () => {};
 }
