@@ -18,15 +18,19 @@ module.exports = {
     'server': server,
     'jeux': jeux,
     'mascotte': mascotte,
-    'overwatch': overwatch,
     'reactaddrole': reactaddrole,
     'cmdsaidee': cmdsaidee,
+    'aide_cmd': aide_cmd,
+    'addrole': addrole,
+    'delrole': delrole,
+    'cmds': cmds,
+    'cmds_admin': cmds_admin,
 }
 
 function name() {
-		console.log("-----------------------------------");
-        console.log("----------- GoBrosTV Bot ----------");
-        console.log("-----------------------------------");
+		console.log("---------------------------------");
+        console.log("---------- GoBrosTV Bot ---------");
+        console.log("---------------------------------");
 }
 
 function aide() {
@@ -79,11 +83,6 @@ function mascotte() {
         console.log("Chargement de la commande !mascotte (OK)");
 }
 
-function overwatch() {
-        console.log("Chargement de la commande  !overwatch...");
-        console.log("Chargement de la commande !overwatch (OK)");
-}
-
 function reactaddrole() {
         console.log("Chargement de la commande  !reactaddrole...");
         console.log("Chargement de la commande !reactaddrole (OK)");
@@ -92,4 +91,30 @@ function reactaddrole() {
 function cmdsaidee() {
         console.log("Chargement de la commande  !cmdsaidee...");
         console.log("Chargement de la commande !cmdsaidee (OK)");
+}
+
+function aide_cmd(){
+        console.log("Chargement de la commande  !aide_cmd...");
+        console.log("Chargement de la commande !aide_cmd (OK)");
+}
+
+function addrole(){
+        console.log("Chargement de la commande  !addrole...");
+        console.log("Chargement de la commande !addrole (OK)");
+}
+
+function delrole(){
+        console.log("Chargement de la commande  !delrole...");
+        console.log("Chargement de la commande !delrole (OK)");
+}
+
+function cmds(){
+        console.log("--------- Les Commandes : --------");
+        console.log("----------------------------------");
+}
+
+function cmds_admin(){
+        console.log("------------------------------------");
+        console.log("------ Les Commandes Admins : ------");
+        console.log("------------------------------------");
 }
