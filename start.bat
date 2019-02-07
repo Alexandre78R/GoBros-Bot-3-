@@ -1,2 +1,2 @@
-title Jeux-multi.bot 1.0
+title GoBros Bot 3.0
 call node bot
