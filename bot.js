@@ -9,6 +9,8 @@ const prompt = require('prompt');
 const colors = require('colors'); 
 const express = require("express");
 const app = express();
+const stripIndent = require('strip-indent');
+const os = require('os');
 const { Client, Util } = require('discord.js');
 let cooldown = new Set();
 let cdseconds = 5;
@@ -62,6 +64,15 @@ client.on('message', msg => {
 
     let cmd = msg.content.split(/\s+/)[0].slice(config.prefix.length).toLowerCase();
     getCmdFunction(cmd)(msg);
+});
+
+client.on("channelCreate", channel => { //Fonction se déclenchant à chaque fois qu'un channel est créé et envoyant un message de log
+    let channelCreateEmbed = new Discord.RichEmbed()
+    .setDescription("Log Canal créer :")
+    .setColor("#15f153")
+     .addField("Nom du canal : **", `${channel.name}`);
+    let reportschannel = channel.guild.channels.find(`name`, "📝log-serveur");
+    reportschannel.send(channelCreateEmbed);
 });
 
 function getCmdFunction(cmd) {
