@@ -70,9 +70,52 @@ client.on("channelCreate", channel => {
     let channelCreateEmbed = new Discord.RichEmbed()
     .setDescription("Log Canal créer :")
     .setColor("#15f153")
-     .addField("Nom du canal : **", `${channel.name}`);
-    let reportschannel = channel.guild.channels.find(`name`, "📝log-serveur");
-    reportschannel.send(channelCreateEmbed);
+    .addField("Nom du canal :", `${channel.name}`)
+    .setTimestamp();
+    let createChannel = channel.guild.channels.find(`name`, "📝log-serveur");
+    createChannel.send(channelCreateEmbed);
+});
+
+
+client.on("channelDelete", channel => { 
+    let channelDeleteEmbed = new Discord.RichEmbed()
+    .setDescription("Log Canal supprimée :")
+    .setColor("#15f153")
+    .addField("Nom du canal :", `${channel.name}`)
+    .setTimestamp();
+    let deleteChannel = channel.guild.channels.find(`name`, "📝log-serveur");
+    deleteChannel.send(channelDeleteEmbed);
+});
+
+client.on("emojiCreate", emoji => { 
+    let emojiCreateEmbed = new Discord.RichEmbed()
+    .setDescription("Log Emoji créer :")
+    .setColor("#15f153")
+    .addField("Nom du Emoji :", `${emoji.name}`)
+    .setTimestamp();
+    let createEmoji = channel.guild.channels.find(`name`, "📝log-serveur");
+    createEmoji.send(emojiCreateEmbed);
+});
+
+client.on("emojiDelete", emoji => { 
+    let emojiDeleteEmbed = new Discord.RichEmbed()
+    .setDescription("Log Emoji supprimée :")
+    .setColor("#15f153")
+    .addField("Nom du Emoji :", `${emoji.name}`)
+    .setTimestamp();
+    let deleteEmoji = channel.guild.channels.find(`name`, "📝log-serveur");
+    deleteEmoji.send(emojiDeleteEmbed);
+});
+
+client.on("messageDelete", message => { 
+    let messageDeleteEmbed = new Discord.RichEmbed()
+    .setDescription("Log Message supprimée :")
+    .setColor("#15f153")
+    .addField("Message supprimée par :", `${message.author.username}`)
+    .addField("Contenant du message :", `${message.content}`)
+    .setTimestamp();
+    let deleteMessage = message.guild.channels.find(`name`, "📝log-serveur");
+    deleteMessage.send(messageDeleteEmbed);
 });
 
 function getCmdFunction(cmd) {
