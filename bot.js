@@ -66,7 +66,7 @@ client.on('message', msg => {
     getCmdFunction(cmd)(msg);
 });
 
-client.on("channelCreate", channel => { 
+client.on("channelCreate", channel => { // Historique channel create
     let channelCreateEmbed = new Discord.RichEmbed()
     .setDescription("Log Canal créer :")
     .setColor("#15f153")
@@ -77,7 +77,7 @@ client.on("channelCreate", channel => {
 });
 
 
-client.on("channelDelete", channel => { 
+client.on("channelDelete", channel => { // Historique channel delete
     let channelDeleteEmbed = new Discord.RichEmbed()
     .setDescription("Log Canal supprimée :")
     .setColor("#15f153")
@@ -87,7 +87,7 @@ client.on("channelDelete", channel => {
     deleteChannel.send(channelDeleteEmbed);
 });
 
-client.on("emojiCreate", emoji => { 
+client.on("emojiCreate", emoji => { // Historique message emoji Create
     let emojiCreateEmbed = new Discord.RichEmbed()
     .setDescription("Log Emoji créer :")
     .setColor("#15f153")
@@ -97,7 +97,7 @@ client.on("emojiCreate", emoji => {
     createEmoji.send(emojiCreateEmbed);
 });
 
-client.on("emojiDelete", emoji => { 
+client.on("emojiDelete", emoji => { // Historique emoji delete
     let emojiDeleteEmbed = new Discord.RichEmbed()
     .setDescription("Log Emoji supprimée :")
     .setColor("#15f153")
@@ -107,7 +107,7 @@ client.on("emojiDelete", emoji => {
     deleteEmoji.send(emojiDeleteEmbed);
 });
 
-client.on("messageDelete", message => { 
+client.on("messageDelete", message => { // Historique message delete
     let messageDeleteEmbed = new Discord.RichEmbed()
     .setDescription("Log Message supprimée :")
     .setColor("#15f153")
