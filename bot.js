@@ -66,7 +66,7 @@ client.on('message', msg => {
     getCmdFunction(cmd)(msg);
 });
 
-client.on("channelCreate", channel => { //Fonction se déclenchant à chaque fois qu'un channel est créé et envoyant un message de log
+client.on("channelCreate", channel => { 
     let channelCreateEmbed = new Discord.RichEmbed()
     .setDescription("Log Canal créer :")
     .setColor("#15f153")
