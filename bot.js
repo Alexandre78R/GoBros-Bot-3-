@@ -121,12 +121,13 @@ client.on("messageDelete", message => {
     let errorMessageDeleteEmbed = new Discord.RichEmbed() 
     .setDescription("Log Rôle Créer :")
     .setColor("#15f153")
-    .addField("Message :", `Impssible de récupérée à cause de la commande clean !`)
+    .addField("Message :", `Impossible de récupérée à cause de la commande clean ou la structure du message !`)
     .setTimestamp();
     let errorMessageDeletechannel = message.guild.channels.find(`name`, "📝log-serveur");
     errorMessageDeletechannel.send(errorMessageDeleteEmbed);
   }
 });
+
 
 
 function getCmdFunction(cmd) {
