@@ -92,7 +92,7 @@ function clean (message) {
             message.delete().catch(O_o=>{});
 
 
-            message.channel.sendMessage(messageyes);
+            message.channel.sendMessage(messageyes).then(message => {message.delete(6000)});
             console.log('Suppression des messages réussie. Nombre total de messages supprimés '+messagesDeleted)
           })
           .catch(err => {
