@@ -119,7 +119,7 @@ client.on("messageDelete", message => {
     deleteMessage.send(messageDeleteEmbed);
     } catch (e) {
     let errorMessageDeleteEmbed = new Discord.RichEmbed() 
-    .setDescription("Log Rôle Créer :")
+    .setDescription("Log Message supprimée :")
     .setColor("#15f153")
     .addField("Message :", `Impossible de récupérée à cause de la commande clean ou la structure du message !`)
     .setTimestamp();
@@ -127,8 +127,6 @@ client.on("messageDelete", message => {
     errorMessageDeletechannel.send(errorMessageDeleteEmbed);
   }
 });
-
-
 
 function getCmdFunction(cmd) {
     const COMMANDS = {
