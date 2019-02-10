@@ -67,37 +67,91 @@ client.on('message', msg => {
 });
 
 client.on("channelCreate", channel => { 
+ 
+  try{
+  
     let channelCreateEmbed = new Discord.RichEmbed()
     .setDescription("Log Canal créer :")
     .setColor("#15f153")
     .addField("Nom du canal :", `${channel.name}`)
     .setTimestamp();
+   
     let createChannel = channel.guild.channels.find(`name`, "📝log-serveur");
     createChannel.send(channelCreateEmbed);
-});
+ 
+  }catch (e){
+   
+    let errorChannelCreateEmbed = new Discord.RichEmbed()
+    .setDescription("Log Canal créer :")
+    .setColor("#15f153")
+    .addField("Nom du canal :", `Impossible de récupérer cette information.`)
+    .setTimestamp();
+   
+    let erreurCreateChannel = channel.guild.channels.find(`name`, "📝log-serveur");
+    erreurCreateChannel.send(errorChannelCreateEmbed);
+    
+    }
+}); 
 
 
 client.on("channelDelete", channel => { 
+  
+    try {
+   
     let channelDeleteEmbed = new Discord.RichEmbed()
     .setDescription("Log Canal supprimée :")
     .setColor("#15f153")
     .addField("Nom du canal :", `${channel.name}`)
     .setTimestamp();
+    
     let deleteChannel = channel.guild.channels.find(`name`, "📝log-serveur");
     deleteChannel.send(channelDeleteEmbed);
+ 
+    }catch (e){
+   
+    let errorChannelDeleteEmbed = new Discord.RichEmbed()
+    .setDescription("Log Canal supprimée :")
+    .setColor("#15f153")
+    .addField("Nom du canal :", `Impossible de récupérer cette information.`)
+    .setTimestamp();
+    
+    let erreurDeleteChannel = channel.guild.channels.find(`name`, "📝log-serveur");
+    erreurDeleteChannel.send(errorChannelDeleteEmbed);
+    
+    }
 });
 
 client.on("emojiCreate", emoji => { 
+    
+    try{
+   
     let emojiCreateEmbed = new Discord.RichEmbed()
     .setDescription("Log Emoji créer :")
     .setColor("#15f153")
     .addField("Nom de l'Emoji :", `${emoji.name}`)
     .setTimestamp();
+    
     let createEmoji = emoji.guild.channels.find(`name`, "📝log-serveur");
     createEmoji.send(emojiCreateEmbed);
+   
+    }catch (e){
+    
+    let errorEmojiCreateEmbed = new Discord.RichEmbed()
+    .setDescription("Log Emoji créer :")
+    .setColor("#15f153")
+    .addField("Nom de l'Emoji :", `Impossible de récupérer cette information.`)
+    .setTimestamp();
+   
+    let errorCreateEmoji = emoji.guild.channels.find(`name`, "📝log-serveur");
+    errorCreateEmoji.send(errorEmojiCreateEmbed);
+   
+    }
 });
 
 client.on("emojiDelete", emoji => { 
+
+    try{
+
     let emojiDeleteEmbed = new Discord.RichEmbed()
     .setDescription("Log Emoji supprimée :")
     .setColor("#15f153")
@@ -105,28 +159,48 @@ client.on("emojiDelete", emoji => {
     .setTimestamp();
     let deleteEmoji = emoji.guild.channels.find(`name`, "📝log-serveur");
     deleteEmoji.send(emojiDeleteEmbed);
+
+    }catch (e){
+
+    let errorEmojiDeleteEmbed = new Discord.RichEmbed()
+    .setDescription("Log Emoji supprimée :")
+    .setColor("#15f153")
+    .addField("Nom de l'Emoji :", `Impossible de récupérer cette information.`)
+    .setTimestamp();
+    
+    let errorDeleteEmoji = emoji.guild.channels.find(`name`, "📝log-serveur");
+    errorDeleteEmoji.send(errorEmojiDeleteEmbed);
+
+    }
 });
 
 client.on("messageDelete", message => { 
     try{
+
     let messageDeleteEmbed = new Discord.RichEmbed()
     .setDescription("Log Message supprimée :")
     .setColor("#15f153")
     .addField("Message  par :", `${message.author}`)
     .addField("Contenant du message :", `${message.content}`)
     .setTimestamp();
+
     let deleteMessage = message.guild.channels.find(`name`, "📝log-serveur");
     deleteMessage.send(messageDeleteEmbed);
+
     } catch (e) {
+
     let errorMessageDeleteEmbed = new Discord.RichEmbed() 
     .setDescription("Log Message supprimée :")
     .setColor("#15f153")
     .addField("Message :", `Impossible de récupérée à cause de la commande clean ou la structure du message !`)
     .setTimestamp();
+
     let errorMessageDeletechannel = message.guild.channels.find(`name`, "📝log-serveur");
     errorMessageDeletechannel.send(errorMessageDeleteEmbed);
-  }
+ 
+    }
 });
+
 
 function getCmdFunction(cmd) {
     const COMMANDS = {
