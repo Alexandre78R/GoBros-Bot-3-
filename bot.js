@@ -128,7 +128,11 @@ client.on("emojiCreate", emoji => {
     let emojiCreateEmbed = new Discord.RichEmbed()
     .setTitle("Log emoji créer :")
     .setColor("#15f153")
-    .addField("Nom de l'Emoji :", `${emoji.name}`)
+    .addField("Nom de l'Emoji :", `${emoji.name}`, true)
+    .addField("ID de l'Emoji :", `${emoji.id}`, true)
+    .addField("Code de l'Emoji :", `${emoji.identifier}`, true)
+    .addField("Url de l'Emoji :", `${emoji.url}`, true)
+    .addField("Animation de l'Emoji :", `${emoji.animated}`, true)
     .setTimestamp();
     
     let createEmoji = emoji.guild.channels.find(`name`, "📝log-serveur");
@@ -155,7 +159,11 @@ client.on("emojiDelete", emoji => {
     let emojiDeleteEmbed = new Discord.RichEmbed()
     .setTitle("Log emoji supprimée :")
     .setColor("#15f153")
-    .addField("Nom de l'Emoji :", `${emoji.name}`)
+    .addField("Nom de l'Emoji :", `${emoji.name}`, true)
+    .addField("ID de l'Emoji :", `${emoji.id}`, true)
+    .addField("Code de l'Emoji :", `${emoji.identifier}`, true)
+    .addField("Url de l'Emoji :", `${emoji.url}`, true)
+    .addField("Animation de l'Emoji :", `${emoji.animated}`, true)
     .setTimestamp();
     let deleteEmoji = emoji.guild.channels.find(`name`, "📝log-serveur");
     deleteEmoji.send(emojiDeleteEmbed);
