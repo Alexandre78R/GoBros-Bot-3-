@@ -196,7 +196,7 @@ client.on("roleCreate", role => {
     let errorRoleCreateEmbed = new Discord.RichEmbed()
     .setTitle("Log rôle créer :")
     .setColor("#15f153")
-    .addField("Nom du Rôle :", `Impossible de récupérer cette information.`)
+    .addField("Nom du rôle :", `Impossible de récupérer cette information.`)
     .setTimestamp();
     
     let errorCreateRole = role.guild.channels.find(`name`, "📝log-serveur");
@@ -212,7 +212,12 @@ client.on("roleDelete", role => {
     let roleDeleteEmbed = new Discord.RichEmbed()
     .setTitle("Log rôle supprimée :")
     .setColor("#15f153")
-    .addField("Nom du rôle :", `${role.name}`)
+    .addField("Nom du rôle :", `${role.name}`, true)
+    .addField("ID du rôle :", `${role.id}`, true)
+    .addField("Coleur du rôle :", `${role.color}`,true)
+    .addField("Position du rôle :", `${role.calculatedPosition}`, true)
+    .addField("Permissions du rôle :", `${role.permissions}`, true)
+    .addField("Rôle memtionabble :", `${role.mentionable}`, true)
     .setTimestamp();
     let deleteRole = role.guild.channels.find(`name`, "📝log-serveur");
     deleteRole.send(roleDeleteEmbed);
