@@ -196,11 +196,41 @@ client.on("roleCreate", role => {
     let errorRoleCreateEmbed = new Discord.RichEmbed()
     .setTitle("Log rôle créer :")
     .setColor("#15f153")
-    .addField("Nom du rôle :", `Impossible de récupérer cette information.`)
+    .addField("Nom du Rôle :", `Impossible de récupérer cette information.`)
     .setTimestamp();
     
     let errorCreateRole = role.guild.channels.find(`name`, "📝log-serveur");
     errorCreateRole.send(errorRoleCreateEmbed);
+
+    }
+});
+
+client.on("roleUpdate", role => { 
+
+    try{
+
+    let roleUpdateEmbed = new Discord.RichEmbed()
+    .setTitle("Log rôle update :")
+    .setColor("#15f153")
+    .addField("Nom du rôle :", `${role.name}`, true)
+    .addField("ID du rôle :", `${role.id}`, true)
+    .addField("Coleur du rôle :", `${role.color}`,true)
+    .addField("Permissions du rôle :", `${role.permissions}`, true)
+    .addField("Rôle memtionabble :", `${role.mentionable}`, true)
+    .setTimestamp();
+    let updateRole = role.guild.channels.find(`name`, "📝log-serveur");
+    updateRole.send(roleUpdateEmbed);
+
+    }catch (e){
+
+    let errorRoleDeleteEmbed = new Discord.RichEmbed()
+    .setTitle("Log rôle supprimée :")
+    .setColor("#15f153")
+    .addField("Nom du Rôle :", `Impossible de récupérer cette information.`)
+    .setTimestamp();
+    
+    let errorDeleteRole = role.guild.channels.find(`name`, "📝log-serveur");
+    errorDeleteRole.send(errorRoleDeleteEmbed);
 
     }
 });
