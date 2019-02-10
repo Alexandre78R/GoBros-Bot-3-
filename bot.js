@@ -71,7 +71,7 @@ client.on("channelCreate", channel => {
   try{
   
     let channelCreateEmbed = new Discord.RichEmbed()
-    .setDescription("Log Canal créer :")
+    .setTitle("Log Canal créer :")
     .setColor("#15f153")
     .addField("Nom du canal :", `${channel.name}`)
     .setTimestamp();
@@ -82,7 +82,7 @@ client.on("channelCreate", channel => {
   }catch (e){
    
     let errorChannelCreateEmbed = new Discord.RichEmbed()
-    .setDescription("Log Canal créer :")
+    .setTitle("Log Canal créer :")
     .setColor("#15f153")
     .addField("Nom du canal :", `Impossible de récupérer cette information.`)
     .setTimestamp();
@@ -99,7 +99,7 @@ client.on("channelDelete", channel => {
     try {
    
     let channelDeleteEmbed = new Discord.RichEmbed()
-    .setDescription("Log Canal supprimée :")
+    .setTitle("Log canal supprimée :")
     .setColor("#15f153")
     .addField("Nom du canal :", `${channel.name}`)
     .setTimestamp();
@@ -110,7 +110,7 @@ client.on("channelDelete", channel => {
     }catch (e){
    
     let errorChannelDeleteEmbed = new Discord.RichEmbed()
-    .setDescription("Log Canal supprimée :")
+    .setTitle("Log canal supprimée :")
     .setColor("#15f153")
     .addField("Nom du canal :", `Impossible de récupérer cette information.`)
     .setTimestamp();
@@ -126,7 +126,7 @@ client.on("emojiCreate", emoji => {
     try{
    
     let emojiCreateEmbed = new Discord.RichEmbed()
-    .setDescription("Log Emoji créer :")
+    .setTitle("Log emoji créer :")
     .setColor("#15f153")
     .addField("Nom de l'Emoji :", `${emoji.name}`)
     .setTimestamp();
@@ -137,7 +137,7 @@ client.on("emojiCreate", emoji => {
     }catch (e){
     
     let errorEmojiCreateEmbed = new Discord.RichEmbed()
-    .setDescription("Log Emoji créer :")
+    .setTitle("Log emoji créer :")
     .setColor("#15f153")
     .addField("Nom de l'Emoji :", `Impossible de récupérer cette information.`)
     .setTimestamp();
@@ -153,7 +153,7 @@ client.on("emojiDelete", emoji => {
     try{
 
     let emojiDeleteEmbed = new Discord.RichEmbed()
-    .setDescription("Log Emoji supprimée :")
+    .setTitle("Log emoji supprimée :")
     .setColor("#15f153")
     .addField("Nom de l'Emoji :", `${emoji.name}`)
     .setTimestamp();
@@ -163,7 +163,7 @@ client.on("emojiDelete", emoji => {
     }catch (e){
 
     let errorEmojiDeleteEmbed = new Discord.RichEmbed()
-    .setDescription("Log Emoji supprimée :")
+    .setTitle("Log emoji supprimée :")
     .setColor("#15f153")
     .addField("Nom de l'Emoji :", `Impossible de récupérer cette information.`)
     .setTimestamp();
@@ -174,11 +174,68 @@ client.on("emojiDelete", emoji => {
     }
 });
 
+client.on("roleCreate", role => { 
+
+    try{
+
+    let roleCreateEmbed = new Discord.RichEmbed()
+    .setTitle("Log rôle créer :")
+    .setColor("#15f153")
+    .addField("Nom du rôle :", `${role.name}`, true)
+    .addField("ID du rôle :", `${role.id}`, true)
+    .addField("Coleur du rôle :", `${role.color}`,true)
+    .addField("Position du rôle :", `${role.calculatedPosition}`, true)
+    .addField("Permissions du rôle :", `${role.permissions}`, true)
+    .addField("Rôle memtionabble :", `${role.mentionable}`, true)
+    .setTimestamp();
+    let deleteRole = role.guild.channels.find(`name`, "📝log-serveur");
+    deleteRole.send(roleCreateEmbed);
+
+    }catch (e){
+
+    let errorRoleCreateEmbed = new Discord.RichEmbed()
+    .setTitle("Log rôle créer :")
+    .setColor("#15f153")
+    .addField("Nom du Rôle :", `Impossible de récupérer cette information.`)
+    .setTimestamp();
+    
+    let errorCreateRole = role.guild.channels.find(`name`, "📝log-serveur");
+    errorCreateRole.send(errorRoleCreateEmbed);
+
+    }
+});
+
+client.on("roleDelete", role => { 
+
+    try{
+
+    let roleDeleteEmbed = new Discord.RichEmbed()
+    .setTitle("Log rôle supprimée :")
+    .setColor("#15f153")
+    .addField("Nom du rôle :", `${role.name}`)
+    .setTimestamp();
+    let deleteRole = role.guild.channels.find(`name`, "📝log-serveur");
+    deleteRole.send(roleDeleteEmbed);
+
+    }catch (e){
+
+    let errorRoleDeleteEmbed = new Discord.RichEmbed()
+    .setTitle("Log rôle supprimée :")
+    .setColor("#15f153")
+    .addField("Nom du Rôle :", `Impossible de récupérer cette information.`)
+    .setTimestamp();
+    
+    let errorDeleteRole = role.guild.channels.find(`name`, "📝log-serveur");
+    errorDeleteRole.send(errorRoleDeleteEmbed);
+
+    }
+});
+
 client.on("messageDelete", message => { 
     try{
 
     let messageDeleteEmbed = new Discord.RichEmbed()
-    .setDescription("Log Message supprimée :")
+    .setTitle("Log Message supprimée :")
     .setColor("#15f153")
     .addField("Message  par :", `${message.author}`)
     .addField("Contenant du message :", `${message.content}`)
@@ -190,7 +247,7 @@ client.on("messageDelete", message => {
     } catch (e) {
 
     let errorMessageDeleteEmbed = new Discord.RichEmbed() 
-    .setDescription("Log Message supprimée :")
+    .setTitle("Log Message supprimée :")
     .setColor("#15f153")
     .addField("Message :", `Impossible de récupérée à cause de la commande clean ou la structure du message !`)
     .setTimestamp();
