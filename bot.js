@@ -94,6 +94,33 @@ client.on("channelCreate", channel => {
     }
 }); 
 
+client.on("channelUpdate", channel => { 
+  
+    try {
+   
+    let channelUpdateEmbed = new Discord.RichEmbed()
+    .setTitle("Log canal supprimée :")
+    .setColor("#15f153")
+    .addField("Nom du canal :", `${channel.name}`)
+    .addField("ID du canal :", `${channel.id}`)
+    .setTimestamp();
+    
+    let updateChannel = channel.guild.channels.find(`name`, "📝log-serveur");
+    updateChannel.send(channelUpdateEmbed);
+ 
+    }catch (e){
+   
+    let errorChannelUpdateEmbed = new Discord.RichEmbed()
+    .setTitle("Log canal supprimée :")
+    .setColor("#15f153")
+    .addField("Nom du canal :", `Impossible de récupérer cette information.`)
+    .setTimestamp();
+    
+    let erreurUpdateChannel = channel.guild.channels.find(`name`, "📝log-serveur");
+    erreurUpdateChannel.send(errorChannelUpdateEmbed);
+    
+    }
+});
 
 client.on("channelDelete", channel => { 
   
