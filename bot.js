@@ -74,6 +74,7 @@ client.on("channelCreate", channel => {
     .setTitle("Log Canal créer :")
     .setColor("#15f153")
     .addField("Nom du canal :", `${channel.name}`)
+    .addField("ID du canal :", `${channel.id}`)
     .setTimestamp();
    
     let createChannel = channel.guild.channels.find(`name`, "📝log-serveur");
@@ -102,6 +103,7 @@ client.on("channelDelete", channel => {
     .setTitle("Log canal supprimée :")
     .setColor("#15f153")
     .addField("Nom du canal :", `${channel.name}`)
+    .addField("ID du canal :", `${channel.id}`)
     .setTimestamp();
     
     let deleteChannel = channel.guild.channels.find(`name`, "📝log-serveur");
