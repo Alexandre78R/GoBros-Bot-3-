@@ -264,7 +264,7 @@ function ban (message) { // !ban @membre-a-ban raison
     return;
 }
 
-function reactaddrole (message){ // !reactaddrole idmessage :smiley: @role  encore en développement !
+function reactaddrole (message){ // !reactaddrole idmessage :smiley: @role  en cours de développement !
 
 if(message.author.bot) return;
   if(message.channel.type === "dm") return;
@@ -274,62 +274,8 @@ if(message.author.bot) return;
                message[0] = message[0].slice(1);
 
       } 
-
-    let messageArray = message.content.split(" ");
-    let cmd = messageArray[0];
-    let argsid = messageArray.slice(1, 2);
-    let argsemoji = messageArray.slice(2, 3);
-    let argsrole = messageArray.slice(3);
-
-    let errorid = new Discord.RichEmbed()
-    .setDescription("Réponse de la commande :")
-    .setColor("#bc0000")
-    .addField(":x: ERROR ID", "👮 ERROR ID")
-   // message.delete().catch(O_o=>{});
-
-    let erroremoji = new Discord.RichEmbed()
-    .setDescription("Réponse de la commande :")
-    .setColor("#bc0000")
-    .addField(":x: ERROR EMOJI", "👮 ERROR EMOJI")
-  //  message.delete().catch(O_o=>{});
-
-    let errorrole = new Discord.RichEmbed()
-    .setDescription("Réponse de la commande :")
-    .setColor("#bc0000")
-    .addField(":x: ERROR ROLE", "👮 ERROR ROLE")
-   // message.delete().catch(O_o=>{});
-
-    let id = message.guild.members.get([1]) || argsid.join(" ");
-    if(!id) return message.channel.send(errorid); 
-
-    let emoji = message.guild.members.get([2]) || argsemoji.join(" ");
-    if(!emoji) return message.channel.send(erroremoji); 
-
-    let role = message.guild.members.get([3]) || argsrole.join(" ");
-    if(!role) return message.channel.send(errorrole); 
-
-    let reportEmbed = new Discord.RichEmbed()
-    .setDescription("Info réaction role:")
-    .setColor("#15f153")
-    .addField("ID :", id)
-    .addField("EMOJI :", emoji)
-    .addField("ROLE :", role);
-
-     // message.reaction.get(emoji);
     
-
-    let canalerror = new Discord.RichEmbed()
-    .setDescription("Réponse de la commande :")
-    .setColor("#bc0000")
-    .addField(":x: Je ne trouve pas le canal d'envoi.", "👮Merci de contacter un Administrateur.")
-    //message.delete().catch(O_o=>{});
-
-    let reportschannel = message.guild.channels.find(`name`, "test-dev");
-    if(!reportschannel) return message.channel.send(canalerror);
-
-    //message.delete().catch(O_o=>{}); 
-    reportschannel.send(reportEmbed);
-    return;
+    message.reply('Commande en développement');
 }
 
 function addrole (message){ // !addrole @pseudo nom_du_role
@@ -487,3 +433,4 @@ function delrole (message){ // !delrole @pseudo nom_du_role
     message.channel.send(delRoleMembre);
     message.delete().catch(O_o=>{});
 }
+
