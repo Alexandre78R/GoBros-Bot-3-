@@ -22,6 +22,7 @@ module.exports = {
     'mascotte': mascotte,
     'cmdsaidee': cmdsaidee,
     'aide_cmd': aide_cmd,
+    'avatar' : avatar,
 } 
 
 function aide (message) {
@@ -424,4 +425,23 @@ function aide_cmd(msg, cmd) {
           msg.channel.send(defaultembed).then(message => {message.delete(12000)});
     }
         msg.delete().catch(O_o=>{}); 
+}
+
+function avatar (msg) {
+
+    if (msg.length == 1) { 
+        if (msg[0].charAt(0) == config.prefix) 
+            msg[0] = msg[0].slice(1);
+    }
+
+    let avatarEmbed = new Discord.RichEmbed()
+    .setTitle(`Ton image de profil.`)  
+    .setColor("#15f153")
+    .setImage(`${msg.author.avatarURL}`)
+    .setURL(`${msg.author.avatarURL}`)
+    .setDescription(`[Lien direct vers l'image](${msg.author.avatarURL})`)
+    .setFooter(`Par ${msg.author.username}`);
+
+    msg.channel.send(avatarEmbed);
+    msg.delete().catch(O_o=>{});
 }
