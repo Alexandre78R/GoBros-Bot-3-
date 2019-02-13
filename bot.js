@@ -66,6 +66,18 @@ client.on('message', msg => {
     getCmdFunction(cmd)(msg);
 });
 
+client.on('message', msg => { // Systèmme de message interdit.
+  if (msg.content === '<message supprimé>') {
+   let defaultembed = new Discord.RichEmbed()
+    .setDescription("Réponse de la commande :")
+    .setColor("#bc0000")
+    .addField(":x: Vous avez utilisé un mot interdit. ' <message supprimé> ' !", "👮Merci de ne plus écrire ' <message supprimé> '.(Auto-destruction du message dans 20s.)")
+   
+    msg.channel.send(defaultembed).then(message => {message.delete(12000)});
+    msg.delete().catch(O_o=>{}); 
+  }
+});
+
 client.on("channelCreate", channel => { 
  
   try{
