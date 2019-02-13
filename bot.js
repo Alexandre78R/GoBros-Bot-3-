@@ -307,7 +307,7 @@ client.on("messageDelete", message => {
     try{
 
     let messageDeleteEmbed = new Discord.RichEmbed()
-    .setTitle("Log Message supprimée :")
+    .setTitle("Log Message Block supprimée :")
     .setColor("#15f153")
     .addField("Message  par :", `${message.author}`)
     .addField("Contenant du message :", `${message.content}`)
@@ -319,7 +319,7 @@ client.on("messageDelete", message => {
     } catch (e) {
 
     let errorMessageDeleteEmbed = new Discord.RichEmbed() 
-    .setTitle("Log Message supprimée :")
+    .setTitle("Log Message Block supprimée :")
     .setColor("#15f153")
     .addField("Message :", `Impossible de récupérée à cause de la commande clean ou la structure du message !`)
     .setTimestamp();
@@ -348,6 +348,7 @@ function getCmdFunction(cmd) {
         'aide_cmd': cmds.aide_cmd,
         'addrole': cmds_admin.addrole,
         'delrole': cmds_admin.delrole,
+        'avatar': cmds.avatar,
     }
     return COMMANDS[cmd] ? COMMANDS[cmd] : () => {};
 }
