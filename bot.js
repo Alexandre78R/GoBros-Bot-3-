@@ -68,23 +68,42 @@ client.on('message', msg => {
 
 client.on('message', msg => { // Systèmme de message interdit.
 
-    if (msg.content === '<message supprimé>') {
+    if (msg.content.includes('<message supprimé>')) {
        
-       let permEmbed = new Discord.RichEmbed()
-    .setDescription("Réponse de la commande :")
-    .setColor("#15f153")
-    .addField(`:white_check_mark: ${msg.author.username}, vous s'avez la permission pour dire ce mot.`, "👮Ce message s'autodétruira dans 10s.");
-    if(msg.member.hasPermission("MANAGE_MESSAGES")) return msg.channel.send(permEmbed).then(msg => {msg.delete(6000)}); 
-    //msg.channel.send(permEmbed).then(message => {message.delete(6000)});
+        let permEmbed = new Discord.RichEmbed()
+        .setDescription("Réponse de la commande :")
+        .setColor("#15f153")
+        .addField(`:white_check_mark: ${msg.author.username}, vous s'avez la permission pour dire ce mot.`, "👮Ce message s'autodétruira dans 10s.");
+        if(msg.member.hasPermission("MANAGE_MESSAGES")) return msg.channel.send(permEmbed).then(msg => {msg.delete(6000)}); 
+        //msg.channel.send(permEmbed).then(message => {message.delete(6000)});
 
-    let defaultembed = new Discord.RichEmbed()
-    .setDescription("Réponse de la commande :")
-    .setColor("#bc0000")
-    .addField(":x: Vous avez utilisé un mot interdit. ' <message supprimé> ' !", "👮Merci de ne plus écrire ' <message supprimé> '.(Auto-destruction du message dans 20s.)")
-    .setDescription(msg.delete().catch(O_o=>{}));
-    if(!msg.member.hasPermission("MANAGE_MESSAGES")) return msg.channel.send(defaultembed).then(message => {message.delete(12000)}); 
+        let defaultembed = new Discord.RichEmbed()
+        .setDescription("Réponse de la commande :")
+        .setColor("#bc0000")
+        .addField(":x: Vous avez utilisé un mot interdit. ' <message supprimé> ' !", "👮Merci de ne plus écrire ' <message supprimé> '.(Auto-destruction du message dans 20s.)")
+        .setDescription(msg.delete().catch(O_o=>{}));
+        if(!msg.member.hasPermission("MANAGE_MESSAGES")) return msg.channel.send(defaultembed).then(message => {message.delete(12000)}); 
 
     }
+
+    else if (msg.content.includes('<message supprime>')) {
+
+        let mspermEmbed = new Discord.RichEmbed()
+        .setDescription("Réponse de la commande :")
+        .setColor("#15f153")
+        .addField(`:white_check_mark: ${msg.author.username}, vous s'avez la permission pour dire ce mot.`, "👮Ce message s'autodétruira dans 10s.");
+        if(msg.member.hasPermission("MANAGE_MESSAGES")) return msg.channel.send(mspermEmbed).then(msg => {msg.delete(6000)}); 
+        //msg.channel.send(permEmbed).then(message => {message.delete(6000)});
+
+        let msdefaultembed = new Discord.RichEmbed()
+        .setDescription("Réponse de la commande :")
+        .setColor("#bc0000")
+        .addField(":x: Vous avez utilisé un mot interdit. '<message supprime> ' !", "👮Merci de ne plus écrire ' <message supprime> '.(Auto-destruction du message dans 20s.)")
+        .setDescription(msg.delete().catch(O_o=>{}));
+        if(!msg.member.hasPermission("MANAGE_MESSAGES")) return msg.channel.send(msdefaultembed).then(message => {message.delete(12000)});  
+   
+    }
+
 });
 
 client.on("channelCreate", channel => { 
