@@ -66,9 +66,21 @@ client.on('message', msg => {
     getCmdFunction(cmd)(msg);
 });
 
+function checkcharacter (msg,str) { // Vérifie pour les caractères majuscules et miniscules.
+    return (msg.content.includes(str) || msg.content.includes(str.toUpperCase()) || msg.content.includes(str.toLowerCase())) 
+}
+
+client.on('message', message => { // En cours de développement.
+  if(checkcharacter(message,'Bonjour') || checkcharacter(message,'Salut') || checkcharacter(message,'Hey') || checkcharacter(message,'Coucou') ||
+    checkcharacter(message,'Bien') || checkcharacter(message,'Yo') || checkcharacter(message,'Hola') || checkcharacter(message,'Cc'))
+  {
+        message.channel.send('Bonjour')
+    };
+});
+
 client.on('message', msg => { // Systèmme de message interdit.
 
-    if (msg.content.includes('<message supprimé>')) {
+     if (msg.content.includes('<message supprimé>')) {
        
         let permEmbed = new Discord.RichEmbed()
         .setDescription("Réponse de la commande :")
