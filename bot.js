@@ -66,15 +66,15 @@ client.on('message', msg => {
     getCmdFunction(cmd)(msg);
 });
 
-function checkcharacter (msg,str) { // Vérifie pour les caractères majuscules et miniscules.
-    return (msg.content.includes(str) || msg.content.includes(str.toUpperCase()) || msg.content.includes(str.toLowerCase())) 
+function checkcharacter (msg, str) { // Vérifie pour les caractères majuscules et miniscules.
+    return (msg.content.includes(str) || msg.content.includes(str.toUpperCase()) || msg.content.includes(str.toLowerCase()));
 }
 
 client.on('message', message => { // En cours de développement.
   if(checkcharacter(message,'Bonjour') || checkcharacter(message,'Salut') || checkcharacter(message,'Hey') || checkcharacter(message,'Coucou') ||
     checkcharacter(message,'Bien') || checkcharacter(message,'Yo') || checkcharacter(message,'Hola') || checkcharacter(message,'Cc'))
   {
-        message.channel.send('Bonjour')
+        return message.channel.send('Bonjour');
     };
 });
 
@@ -363,6 +363,9 @@ client.on("messageDelete", message => {
     .setColor("#15f153")
     .addField("Message  par :", `${message.author}`)
     .addField("Contenant du message :", `${message.content}`)
+    .addField("Mention du message :", `${message.mentions}`)
+    .addField("Epingler le message :", `${message.pinned}`)
+    .addField("Editable le message :", `${message.editable}`)
     .setTimestamp();
 
     let deleteMessage = message.guild.channels.find(`name`, "📝log-serveur");
@@ -382,6 +385,35 @@ client.on("messageDelete", message => {
     }
 });
 
+client.on("messageUpdate", message => { 
+    try{
+
+    let messageUpdateEmbed = new Discord.RichEmbed()
+    .setTitle("Log Message Block supprimée :")
+    .setColor("#15f153")
+    .addField("Message  par :", `${message.author}`)
+    .addField("Contenant du message :", `${message.content}`)
+    .addField("Mention du message :", `${message.mentions}`)
+    .addField("Epingler le message :", `${message.pinned}`)
+    .addField("Editable le message :", `${message.editable}`)
+    .setTimestamp();
+
+    let updateMessage = message.guild.channels.find(`name`, "📝log-serveur");
+    updateMessage.send(messageUpdateEmbed);
+
+    } catch (e) {
+
+    let errorMessageUpdateEmbed = new Discord.RichEmbed() 
+    .setTitle("Log Message Block supprimée :")
+    .setColor("#15f153")
+    .addField("Message :", `Impossible de récupérée à cause de la commande clean ou la structure du message !`)
+    .setTimestamp();
+
+    let errorMessageUpdatechannel = message.guild.channels.find(`name`, "📝log-serveur");
+    errorMessageUpdatechannel.send(errorMessageUpdateEmbed);
+ 
+    }
+});
 
 function getCmdFunction(cmd) {
     const COMMANDS = {
