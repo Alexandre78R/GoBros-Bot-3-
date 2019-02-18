@@ -65,7 +65,7 @@ client.on('message', msg => {
     let cmd = msg.content.split(/\s+/)[0].slice(config.prefix.length).toLowerCase();
     getCmdFunction(cmd)(msg);
 });
-
+/*
 function checkcharacter (msg, str) { // Vérifie pour les caractères majuscules et miniscules.
     return (msg.content.includes(str) || msg.content.includes(str.toUpperCase()) || msg.content.includes(str.toLowerCase()));
 }
@@ -76,7 +76,7 @@ client.on('message', message => { // En cours de développement.
   {
         return message.channel.send('Bonjour');
     };
-});
+});*/
 
 client.on('message', msg => { // Systèmme de message interdit.
 
@@ -132,16 +132,9 @@ client.on("channelCreate", channel => {
     let createChannel = channel.guild.channels.find(`name`, "📝log-serveur");
     createChannel.send(channelCreateEmbed);
  
-  }catch (e){
+    }catch (e){
    
-    let errorChannelCreateEmbed = new Discord.RichEmbed()
-    .setTitle("Log Canal créer :")
-    .setColor("#15f153")
-    .addField("Nom du canal :", `Impossible de récupérer cette information.`)
-    .setTimestamp();
-   
-    let erreurCreateChannel = channel.guild.channels.find(`name`, "📝log-serveur");
-    erreurCreateChannel.send(errorChannelCreateEmbed);
+    console.log(`Impossible de récupéré la création du channel !`);
     
     }
 }); 
@@ -162,14 +155,7 @@ client.on("channelUpdate", channel => {
  
     }catch (e){
    
-    let errorChannelUpdateEmbed = new Discord.RichEmbed()
-    .setTitle("Log canal supprimée :")
-    .setColor("#15f153")
-    .addField("Nom du canal :", `Impossible de récupérer cette information.`)
-    .setTimestamp();
-    
-    let erreurUpdateChannel = channel.guild.channels.find(`name`, "📝log-serveur");
-    erreurUpdateChannel.send(errorChannelUpdateEmbed);
+    console.log(`Impossible de récupéré la modification du channel !`);
     
     }
 });
@@ -190,14 +176,7 @@ client.on("channelDelete", channel => {
  
     }catch (e){
    
-    let errorChannelDeleteEmbed = new Discord.RichEmbed()
-    .setTitle("Log canal supprimée :")
-    .setColor("#15f153")
-    .addField("Nom du canal :", `Impossible de récupérer cette information.`)
-    .setTimestamp();
-    
-    let erreurDeleteChannel = channel.guild.channels.find(`name`, "📝log-serveur");
-    erreurDeleteChannel.send(errorChannelDeleteEmbed);
+    console.log(`Impossible de récupéré la supression du channel !`);
     
     }
 });
@@ -403,16 +382,9 @@ client.on("messageUpdate", message => {
 
     } catch (e) {
 
-    let errorMessageUpdateEmbed = new Discord.RichEmbed() 
-    .setTitle("Log Message Block supprimée :")
-    .setColor("#15f153")
-    .addField("Message :", `Impossible de récupérée à cause de la commande clean ou la structure du message !`)
-    .setTimestamp();
-
-    let errorMessageUpdatechannel = message.guild.channels.find(`name`, "📝log-serveur");
-    errorMessageUpdatechannel.send(errorMessageUpdateEmbed);
- 
-    }
+    console.log(`Impossible de récupéré la modification du message !`);
+    
+    } 
 });
 
 function getCmdFunction(cmd) {
@@ -433,6 +405,7 @@ function getCmdFunction(cmd) {
         'addrole': cmds_admin.addrole,
         'delrole': cmds_admin.delrole,
         'avatar': cmds.avatar,
+        'messageprivate': cmds_admin.messageprivate,
     }
     return COMMANDS[cmd] ? COMMANDS[cmd] : () => {};
 }
