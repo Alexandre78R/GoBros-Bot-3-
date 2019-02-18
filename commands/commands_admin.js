@@ -18,6 +18,7 @@ module.exports = {
     'reactaddrole': reactaddrole,
     'addrole': addrole,
     'delrole': delrole,
+    'messageprivate': messageprivate,
 } 
 
 function aide_modo (message) {
@@ -274,7 +275,62 @@ if(message.author.bot) return;
                message[0] = message[0].slice(1);
 
       } 
-    
+/*
+    let messageArray = message.content.split(" ");
+    let cmd = messageArray[0];
+    let argsid = messageArray.slice(1, 2);
+    let argsemoji = messageArray.slice(2, 3);
+    let argsrole = messageArray.slice(3);
+
+    let errorid = new Discord.RichEmbed()
+    .setDescription("Réponse de la commande :")
+    .setColor("#bc0000")
+    .addField(":x: ERROR ID", "👮 ERROR ID")
+   // message.delete().catch(O_o=>{});
+
+    let erroremoji = new Discord.RichEmbed()
+    .setDescription("Réponse de la commande :")
+    .setColor("#bc0000")
+    .addField(":x: ERROR EMOJI", "👮 ERROR EMOJI")
+  //  message.delete().catch(O_o=>{});
+
+    let errorrole = new Discord.RichEmbed()
+    .setDescription("Réponse de la commande :")
+    .setColor("#bc0000")
+    .addField(":x: ERROR ROLE", "👮 ERROR ROLE")
+   // message.delete().catch(O_o=>{});
+
+    let id = message.guild.members.get([1]) || argsid.join(" ");
+    if(!id) return message.channel.send(errorid); 
+
+    let emoji = argsemoji.join(" ");
+    if(!emoji) return message.channel.send(erroremoji); 
+
+    let role = argsrole.join(" ");
+    if(!role) return message.channel.send(errorrole); 
+
+    let reportEmbed = new Discord.RichEmbed()
+    .setDescription("Info réaction role:")
+    .setColor("#15f153")
+    .addField("ID :", id)
+    .addField("EMOJI :", emoji)
+    .addField("ROLE :", role);
+   
+    let canalerror = new Discord.RichEmbed()
+    .setDescription("Réponse de la commande :")
+    .setColor("#bc0000")
+    .addField(":x: Je ne trouve pas le canal d'envoi.", "👮Merci de contacter un Administrateur.")
+    //message.delete().catch(O_o=>{});
+
+    let reportschannel = message.guild.channels.find(`name`, "test-dev");
+    if(!reportschannel) return message.channel.send(canalerror);
+
+    //message.delete().catch(O_o=>{}); 
+    reportschannel.send(reportEmbed).then(msg => {msg.react(":x:")});
+    message.react(":x:");
+
+    return;*/
+
     message.reply('Commande en développement');
 }
 
@@ -434,3 +490,61 @@ function delrole (message){ // !delrole @pseudo nom_du_role
     message.delete().catch(O_o=>{});
 }
 
+function messageprivate (message) { // en cours développement 
+
+  let messageArray = message.content.split(" ");
+  let cmd = messageArray[0];
+  let argsMembre = messageArray.slice(1);
+  let argsMessage = messageArray.slice(2);
+ 
+  if(message.author.bot) return;
+    if(message.channel.type === "dm") return;
+
+         if (message.length == 1){
+             if (message[0].charAt(0) == config.prefix) 
+                 message[0] = message[0].slice(1);
+
+  } 
+
+    let messagePrvatePerm = new Discord.RichEmbed()
+    .setDescription("Réponse de la commande :")
+    .setColor("#bc0000")
+    .addField(":x: Tu n'as pas le droit de donner d'envoyer unn message '!", "👮 Bien essayer en tous cas.")
+
+    if(!message.member.hasPermission("MANAGE_MESSAGES")) return message.channel.send(messagePrvatePerm);
+
+    let messagePrvateErrorMembre = new Discord.RichEmbed()
+    .setDescription("Réponse de la commande :")
+    .setColor("#bc0000")
+    .addField(":x: Vous n'avez pas mit un nom de Membre.", "👮 Merci de refaire la commande avec le nom d'un Membre.")
+
+    let membreError = argsMembre.join(" ").slice(22);
+    if (!membreError) return message.channel.send(messagePrvateErrorMembre);
+   // message.delete().catch(O_o=>{});
+
+    let messagePrvateErrorMembreIntrouvable = new Discord.RichEmbed()
+    .setDescription("Réponse de la commande :")
+    .setColor("#bc0000")
+    .addField(":x: Le nom de se Membre n'est pas trouvable.", "👮 Merci de refaire la commande avec le nom d'un Membre trouvable.")
+
+    let messageMembre = message.guild.member(message.mentions.users.first()) || message.guild.members.get(args[2]);
+    if (!messageMembre) return message.channel.send(messagePrvateErrorMembreIntrouvable);
+    //message.delete().catch(O_o=>{});
+
+    let messageError = new Discord.RichEmbed()
+    .setDescription("Réponse de la commande :")
+    .setColor("#bc0000")
+    .addField(":x: Vous n'avez pas mit le message", "👮 Merci de refaire la commande avec le message.")
+
+    let messageEmbed = argsMessage.join(" ").slice();
+    if (!messageEmbed) return message.channel.send(messageError);
+    //message.delete().catch(O_o=>{});
+
+    let messagePrvateMembre = new Discord.RichEmbed()
+    .setDescription(`Message de ${message.author.username} :`)
+    .setColor("#15f153")
+    .addField(messageEmbed, "👮 Cordialement l'équie du Discord de GoBrosTv.")
+
+     messageMembre.send(messagePrvateMembre);
+     message.delete().catch(O_o=>{});
+}
