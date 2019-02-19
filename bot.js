@@ -200,14 +200,7 @@ client.on("emojiCreate", emoji => {
    
     }catch (e){
     
-    let errorEmojiCreateEmbed = new Discord.RichEmbed()
-    .setTitle("Log emoji créer :")
-    .setColor("#15f153")
-    .addField("Nom de l'Emoji :", `Impossible de récupérer cette information.`)
-    .setTimestamp();
-   
-    let errorCreateEmoji = emoji.guild.channels.find(`name`, "📝log-serveur");
-    errorCreateEmoji.send(errorEmojiCreateEmbed);
+    console.log(`Impossible de récupéré la création de l'emoji !`);
    
     }
 });
@@ -230,14 +223,7 @@ client.on("emojiDelete", emoji => {
 
     }catch (e){
 
-    let errorEmojiDeleteEmbed = new Discord.RichEmbed()
-    .setTitle("Log emoji supprimée :")
-    .setColor("#15f153")
-    .addField("Nom de l'Emoji :", `Impossible de récupérer cette information.`)
-    .setTimestamp();
-    
-    let errorDeleteEmoji = emoji.guild.channels.find(`name`, "📝log-serveur");
-    errorDeleteEmoji.send(errorEmojiDeleteEmbed);
+    console.log(`Impossible de récupéré la supression de l'emoji !`);
 
     }
 });
@@ -261,14 +247,7 @@ client.on("roleCreate", role => {
 
     }catch (e){
 
-    let errorRoleCreateEmbed = new Discord.RichEmbed()
-    .setTitle("Log rôle créer :")
-    .setColor("#15f153")
-    .addField("Nom du Rôle :", `Impossible de récupérer cette information.`)
-    .setTimestamp();
-    
-    let errorCreateRole = role.guild.channels.find(`name`, "📝log-serveur");
-    errorCreateRole.send(errorRoleCreateEmbed);
+    console.log(`Impossible de récupéré la créations du rôle !`);
 
     }
 });
@@ -291,14 +270,7 @@ client.on("roleUpdate", role => {
 
     }catch (e){
 
-    let errorRoleDeleteEmbed = new Discord.RichEmbed()
-    .setTitle("Log rôle supprimée :")
-    .setColor("#15f153")
-    .addField("Nom du Rôle :", `Impossible de récupérer cette information.`)
-    .setTimestamp();
-    
-    let errorDeleteRole = role.guild.channels.find(`name`, "📝log-serveur");
-    errorDeleteRole.send(errorRoleDeleteEmbed);
+    console.log(`Impossible de récupéré la mise à jour du rôle !`);
 
     }
 });
@@ -322,14 +294,7 @@ client.on("roleDelete", role => {
 
     }catch (e){
 
-    let errorRoleDeleteEmbed = new Discord.RichEmbed()
-    .setTitle("Log rôle supprimée :")
-    .setColor("#15f153")
-    .addField("Nom du Rôle :", `Impossible de récupérer cette information.`)
-    .setTimestamp();
-    
-    let errorDeleteRole = role.guild.channels.find(`name`, "📝log-serveur");
-    errorDeleteRole.send(errorRoleDeleteEmbed);
+    console.log(`Impossible de récupéré la supression du rôle !`);
 
     }
 });
@@ -352,14 +317,7 @@ client.on("messageDelete", message => {
 
     } catch (e) {
 
-    let errorMessageDeleteEmbed = new Discord.RichEmbed() 
-    .setTitle("Log Message Block supprimée :")
-    .setColor("#15f153")
-    .addField("Message :", `Impossible de récupérée à cause de la commande clean ou la structure du message !`)
-    .setTimestamp();
-
-    let errorMessageDeletechannel = message.guild.channels.find(`name`, "📝log-serveur");
-    errorMessageDeletechannel.send(errorMessageDeleteEmbed);
+    console.log(`Impossible de récupéré la supression du message !`);
  
     }
 });
@@ -382,7 +340,7 @@ client.on("messageUpdate", message => {
 
     } catch (e) {
 
-    console.log(`Impossible de récupéré la modification du message !`);
+    console.log(`Impossible de récupéré la mise à jour du message !`);
     
     } 
 });
