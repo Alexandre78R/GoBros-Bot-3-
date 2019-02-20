@@ -406,7 +406,7 @@ function addrole (message){ // !addrole @pseudo nom_du_role
     let addRoleMembre = new Discord.RichEmbed()
     .setDescription("Réponse de la commande :")
     .setColor("#15f153")
-    .addField(`:white_check_mark: Le rôle ${getRole.name} a été donner à ${roleMembre.user} !`, "👮 Le rôle a été bien donner.")
+    .addField(`:white_check_mark: Le rôle ${getRole.name} a été donner à ${roleMembre.user.username} !`, "👮 Le rôle a été bien donner.")
 
     message.channel.send(addRoleMembre);
     message.delete().catch(O_o=>{});
@@ -484,7 +484,7 @@ function delrole (message){ // !delrole @pseudo nom_du_role
     let delRoleMembre = new Discord.RichEmbed()
     .setDescription("Réponse de la commande :")
     .setColor("#15f153")
-    .addField(`:white_check_mark: Le rôle ${getRole.name} a été retirer à ${roleMembre.user} !`, "👮 Le rôle a été bien retirer.")
+    .addField(`:white_check_mark: Le rôle ${getRole.name} a été retirer à ${roleMembre.user.username} !`, "👮 Le rôle a été bien retirer.")
 
     message.channel.send(delRoleMembre);
     message.delete().catch(O_o=>{});
@@ -509,7 +509,7 @@ function messageprivate (message) { // en cours développement
     let messagePrvatePerm = new Discord.RichEmbed()
     .setDescription("Réponse de la commande :")
     .setColor("#bc0000")
-    .addField(":x: Tu n'as pas le droit de donner d'envoyer unn message '!", "👮 Bien essayer en tous cas.")
+    .addField(":x: Tu n'as pas le droit de donner d'envoyer unn message !", "👮 Bien essayer en tous cas.")
 
     if(!message.member.hasPermission("MANAGE_MESSAGES")) return message.channel.send(messagePrvatePerm);
 
