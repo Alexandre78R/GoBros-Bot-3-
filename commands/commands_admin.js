@@ -37,7 +37,7 @@ function aide_modo (message) {
       }
 
       let aide_modoPerm = new Discord.RichEmbed()
-      .setDescription("Réponse de la commande :")
+      .setTitle("Réponse de la commande :")
       .setColor("#bc0000")
       .addField(":x: Tu n'as pas le droit de utilisé cette commande.", "👮 Bien essayer en tous cas.")
       message.delete().catch(O_o=>{});
@@ -68,7 +68,7 @@ function clean (message) {
 
       }    
           let cleanPerm = new Discord.RichEmbed()
-          .setDescription("Réponse de la commande :")
+          .setTitle("Réponse de la commande :")
           .setColor("#bc0000")
           .addField(":x: Tu n'as pas le droit de suprimer des messages !", "👮 Bien essayer en tous cas.")
           message.delete().catch(O_o=>{});
@@ -86,7 +86,7 @@ function clean (message) {
             messagesDeleted = messages.array().length;
 
             let messageyes = new Discord.RichEmbed()
-            .setDescription("Réponse de la commande :")
+            .setTitle("Réponse de la commande :")
             .setColor("#15f153")
             .addField(":white_check_mark: Suppression des messages réussie. Nombre total de messages supprimés:", +messagesDeleted)
             //.addField(":white_check_mark: Suppression des messages réussie. Nombre total de messages supprimés:" +messagesDeleted "!", ${message.author})
@@ -119,7 +119,7 @@ function kick (message) { // !reportbug @membre-a-kick raison
       } 
 
     let kickPerm = new Discord.RichEmbed()
-    .setDescription("Réponse de la commande :")
+    .setTitle("Réponse de la commande :")
     .setColor("#bc0000")
     .addField(":x: Tu n'as pas le droit de kick !", "👮 Bien essayer en tous cas.")
     message.delete().catch(O_o=>{});
@@ -128,7 +128,7 @@ function kick (message) { // !reportbug @membre-a-kick raison
     if(!message.member.hasPermission("MANAGE_MESSAGES")) return message.channel.send(kickPerm);  
 
     let errMention = new Discord.RichEmbed()
-    .setDescription("Réponse de la commande :")
+    .setTitle("Réponse de la commande :")
     .setColor("#bc0000")
     .addField(":x: Merci de mentionné un pseudo !", "👮Merci de refaire la commande avec une mention de un pseudo.")
     message.delete().catch(O_o=>{});
@@ -137,7 +137,7 @@ function kick (message) { // !reportbug @membre-a-kick raison
     if(!kUser) return message.channel.send(errMention);
 
     let kickErrorMessage = new Discord.RichEmbed()
-    .setDescription("Réponse de la commande :")
+    .setTitle("Réponse de la commande :")
     .setColor("#bc0000")
     .addField(":x: Vous n’avez pas mis de message en expliquant le kick.", "👮Merci de refaire la commande avec un message.")
     message.delete().catch(O_o=>{});
@@ -146,7 +146,7 @@ function kick (message) { // !reportbug @membre-a-kick raison
     if(!kReason) return message.channel.send(kickErrorMessage) || message.delete(3600).catch(O_o=>{}); 
 
     let kickError = new Discord.RichEmbed()
-    .setDescription("Réponse de la commande :")
+    .setTitle("Réponse de la commande :")
     .setColor("#bc0000")
     .addField(":x: Cette personne ne peut pas être kick !", "👮Merci de vérifié le profil.")
     message.delete().catch(O_o=>{});
@@ -154,7 +154,7 @@ function kick (message) { // !reportbug @membre-a-kick raison
     if(kUser.hasPermission("MANAGE_MESSAGES")) return message.channel.send(kickError);
 
     let kickEmbed = new Discord.RichEmbed()
-    .setDescription("Info du Kick :")
+    .setTitle("Info du Kick :")
     .setColor("#e56b00")
     .addField("Membre kick :", `${kUser}> ID : ${kUser.id}`)
     .addField("Kick par :", `<@${message.author.id}> ID : ${message.author.id}`)
@@ -163,7 +163,7 @@ function kick (message) { // !reportbug @membre-a-kick raison
     .addField("Raison :", kReason);
 
     let kickCanalErro = new Discord.RichEmbed()
-    .setDescription("Réponse de la commande :")
+    .setTitle("Réponse de la commande :")
     .setColor("#bc0000")
     .addField(":x: Je ne trouve pas le canal d'envoi.", "👮Merci de contacter un Administrateur.")
     message.delete().catch(O_o=>{});
@@ -172,7 +172,7 @@ function kick (message) { // !reportbug @membre-a-kick raison
     if(!kickChannel) return message.channel.send(kickCanalErro);
 
     let kickValid = new Discord.RichEmbed()
-    .setDescription("Réponse de la commande :")
+    .setTitle("Réponse de la commande :")
     .setColor("#15f153")
     .addField(":white_check_mark: L'utilisateur a été kick !", "👮Ce kick a été sauvegarder.");
     message.channel.send(kickValid);
@@ -199,7 +199,7 @@ function ban (message) { // !ban @membre-a-ban raison
 
       }   
     let banPerm = new Discord.RichEmbed()
-    .setDescription("Réponse de la commande :")
+    .setTitle("Réponse de la commande :")
     .setColor("#bc0000")
     .addField(":x: Tu n'as pas le droit de ban !", "👮 Bien essayer en tous cas.")
     message.delete().catch(O_o=>{});
@@ -207,7 +207,7 @@ function ban (message) { // !ban @membre-a-ban raison
     if(!message.member.hasPermission("MANAGE_MESSAGES")) return message.channel.send(banPerm);  
 
     let errMention = new Discord.RichEmbed()
-    .setDescription("Réponse de la commande :")
+    .setTitle("Réponse de la commande :")
     .setColor("#bc0000")
     .addField(":x: Merci de mentionné un pseudo !", "👮Merci de refaire la commande avec une mention de un pseudo.")
     message.delete().catch(O_o=>{});
@@ -216,7 +216,7 @@ function ban (message) { // !ban @membre-a-ban raison
     if(!bUser) return message.channel.send(errMention);
 
     let banErrorMessage = new Discord.RichEmbed()
-    .setDescription("Réponse de la commande :")
+    .setTitle("Réponse de la commande :")
     .setColor("#bc0000")
     .addField(":x: Vous n’avez pas mis de message en expliquant le ban.", "👮Merci de refaire la commande avec un message.")
     message.delete().catch(O_o=>{});
@@ -225,7 +225,7 @@ function ban (message) { // !ban @membre-a-ban raison
     if(!bReason) return message.channel.send(banErrorMessage) || message.delete(3600).catch(O_o=>{});
 
     let banError = new Discord.RichEmbed()
-    .setDescription("Réponse de la commande :")
+    .setTitle("Réponse de la commande :")
     .setColor("#bc0000")
     .addField(":x: Cette personne ne peut pas être ban !", "👮Merci de vérifié le profil.")
     message.delete().catch(O_o=>{});
@@ -234,7 +234,7 @@ function ban (message) { // !ban @membre-a-ban raison
 
 
     let banEmbed = new Discord.RichEmbed()
-    .setDescription("Info du Ban :")
+    .setTitle("Info du Ban :")
     .setColor("#bc0000")
     .addField("Membre Banni :", `${bUser}> ID : ${bUser.id}`)
     .addField("Banni par :", `<@${message.author.id}> ID : ${message.author.id}`)
@@ -243,7 +243,7 @@ function ban (message) { // !ban @membre-a-ban raison
     .addField("Raison :", bReason);
 
     let banCanalErro = new Discord.RichEmbed()
-    .setDescription("Réponse de la commande :")
+    .setTitle("Réponse de la commande :")
     .setColor("#bc0000")
     .addField(":x: Je ne trouve pas le canal d'envoi.", "👮Merci de contacter un Administrateur.")
     message.delete().catch(O_o=>{});
@@ -252,7 +252,7 @@ function ban (message) { // !ban @membre-a-ban raison
     if(!incidentchannel) return message.channel.send(banCanalErro);
 
     let banValid = new Discord.RichEmbed()
-    .setDescription("Réponse de la commande :")
+    .setTitle("Réponse de la commande :")
     .setColor("#15f153")
     .addField(":white_check_mark: L'utilisateur a été banni !", "👮Ce bannisement a été sauvegarder.");
     message.channel.send(banValid);
@@ -351,7 +351,7 @@ function addrole (message){ // !addrole @pseudo nom_du_role
   } 
 
     let addrolePerm = new Discord.RichEmbed()
-    .setDescription("Réponse de la commande :")
+    .setTitle("Réponse de la commande :")
     .setColor("#bc0000")
     .addField(":x: Tu n'as pas le droit de donner de rôle !", "👮 Bien essayer en tous cas.")
 
@@ -359,7 +359,7 @@ function addrole (message){ // !addrole @pseudo nom_du_role
     message.delete().catch(O_o=>{});  
 
     let addroleErrorMembre = new Discord.RichEmbed()
-    .setDescription("Réponse de la commande :")
+    .setTitle("Réponse de la commande :")
     .setColor("#bc0000")
     .addField(":x: Vous n'avez pas mit un nom de Membre.", "👮 Merci de refaire la commande avec le nom d'un Membre.")
 
@@ -368,7 +368,7 @@ function addrole (message){ // !addrole @pseudo nom_du_role
     message.delete().catch(O_o=>{});
 
     let addroleErrorMembreIntrouvable = new Discord.RichEmbed()
-    .setDescription("Réponse de la commande :")
+    .setTitle("Réponse de la commande :")
     .setColor("#bc0000")
     .addField(":x: Le nom de se Membre n'est pas trouvable.", "👮 Merci de refaire la commande avec le nom d'un Membre trouvable.")
 
@@ -377,7 +377,7 @@ function addrole (message){ // !addrole @pseudo nom_du_role
     message.delete().catch(O_o=>{});
 
     let roleError = new Discord.RichEmbed()
-    .setDescription("Réponse de la commande :")
+    .setTitle("Réponse de la commande :")
     .setColor("#bc0000")
     .addField(":x: Vous n'avez pas mit le nom du Role.", "👮 Merci de refaire la commande avec le nom d'un Role.")
 
@@ -386,7 +386,7 @@ function addrole (message){ // !addrole @pseudo nom_du_role
     message.delete().catch(O_o=>{});
 
     let roleErrorIntrovable = new Discord.RichEmbed()
-    .setDescription("Réponse de la commande :")
+    .setTitle("Réponse de la commande :")
     .setColor("#bc0000")
     .addField(":x: Le nom de se rôle est introuvable.", "👮 Merci de refaire la commande avec le nom d'un rôle trouvable.")
    
@@ -395,7 +395,7 @@ function addrole (message){ // !addrole @pseudo nom_du_role
     message.delete().catch(O_o=>{});
 
     let roleErrorUnique = new Discord.RichEmbed()
-    .setDescription("Réponse de la commande :")
+    .setTitle("Réponse de la commande :")
     .setColor("#bc0000")
     .addField(`:x: Ce Membre à déjà le rôle " ${getRole.name} ".`, "👮 Merci de lui donner un autre rôle.")
 
@@ -404,7 +404,7 @@ function addrole (message){ // !addrole @pseudo nom_du_role
         message.delete().catch(O_o=>{});
 
     let addRoleMembre = new Discord.RichEmbed()
-    .setDescription("Réponse de la commande :")
+    .setTitle("Réponse de la commande :")
     .setColor("#15f153")
     .addField(`:white_check_mark: Le rôle ${getRole.name} a été donner à ${roleMembre.user.username} !`, "👮 Le rôle a été bien donner.")
 
@@ -429,7 +429,7 @@ function delrole (message){ // !delrole @pseudo nom_du_role
   } 
 
     let delrolePerm = new Discord.RichEmbed()
-    .setDescription("Réponse de la commande :")
+    .setTitle("Réponse de la commande :")
     .setColor("#bc0000")
     .addField(":x: Tu n'as pas le droit de donner de rôle !", "👮 Bien essayer en tous cas.")
 
@@ -437,7 +437,7 @@ function delrole (message){ // !delrole @pseudo nom_du_role
     message.delete().catch(O_o=>{});  
 
     let delroleErrorMembre = new Discord.RichEmbed()
-    .setDescription("Réponse de la commande :")
+    .setTitle("Réponse de la commande :")
     .setColor("#bc0000")
     .addField(":x: Vous n'avez pas mit un nom de Membre.", "👮 Merci de refaire la commande avec le nom d'un Membre.")
 
@@ -446,7 +446,7 @@ function delrole (message){ // !delrole @pseudo nom_du_role
     message.delete().catch(O_o=>{});
 
     let delroleErrorMembreIntrouvable = new Discord.RichEmbed()
-    .setDescription("Réponse de la commande :")
+    .setTitle("Réponse de la commande :")
     .setColor("#bc0000")
     .addField(":x: Le nom de se Membre n'est pas trouvable.", "👮 Merci de refaire la commande avec le nom d'un Membre trouvable.")
 
@@ -455,7 +455,7 @@ function delrole (message){ // !delrole @pseudo nom_du_role
     message.delete().catch(O_o=>{});
 
     let roleError = new Discord.RichEmbed()
-    .setDescription("Réponse de la commande :")
+    .setTitle("Réponse de la commande :")
     .setColor("#bc0000")
     .addField(":x: Vous n'avez pas mit le nom du Role.", "👮 Merci de refaire la commande avec le nom d'un Role.")
 
@@ -464,7 +464,7 @@ function delrole (message){ // !delrole @pseudo nom_du_role
     message.delete().catch(O_o=>{});
 
     let roleErrorIntrovable = new Discord.RichEmbed()
-    .setDescription("Réponse de la commande :")
+    .setTitle("Réponse de la commande :")
     .setColor("#bc0000")
     .addField(":x: Le nom de se rôle est introuvable.", "👮 Merci de refaire la commande avec le nom d'un rôle trouvable.")
    
@@ -473,7 +473,7 @@ function delrole (message){ // !delrole @pseudo nom_du_role
     message.delete().catch(O_o=>{});
 
     let roleErrorUnique = new Discord.RichEmbed()
-    .setDescription("Réponse de la commande :")
+    .setTitle("Réponse de la commande :")
     .setColor("#bc0000")
     .addField(`:x: Ce Membre n'a pas le rôle " ${getRole.name} ".`, "👮 Merci de lui retirer un autre rôle.")
 
@@ -482,7 +482,7 @@ function delrole (message){ // !delrole @pseudo nom_du_role
         message.delete().catch(O_o=>{});
 
     let delRoleMembre = new Discord.RichEmbed()
-    .setDescription("Réponse de la commande :")
+    .setTitle("Réponse de la commande :")
     .setColor("#15f153")
     .addField(`:white_check_mark: Le rôle ${getRole.name} a été retirer à ${roleMembre.user.username} !`, "👮 Le rôle a été bien retirer.")
 
@@ -507,14 +507,14 @@ function messageprivate (message) { // en cours développement
   } 
 
     let messagePrvatePerm = new Discord.RichEmbed()
-    .setDescription("Réponse de la commande :")
+    .setTitle("Réponse de la commande :")
     .setColor("#bc0000")
     .addField(":x: Tu n'as pas le droit de donner d'envoyer unn message !", "👮 Bien essayer en tous cas.")
 
     if(!message.member.hasPermission("MANAGE_MESSAGES")) return message.channel.send(messagePrvatePerm);
 
     let messagePrvateErrorMembre = new Discord.RichEmbed()
-    .setDescription("Réponse de la commande :")
+    .setTitle("Réponse de la commande :")
     .setColor("#bc0000")
     .addField(":x: Vous n'avez pas mit un nom de Membre.", "👮 Merci de refaire la commande avec le nom d'un Membre.")
 
@@ -523,7 +523,7 @@ function messageprivate (message) { // en cours développement
    // message.delete().catch(O_o=>{});
 
     let messagePrvateErrorMembreIntrouvable = new Discord.RichEmbed()
-    .setDescription("Réponse de la commande :")
+    .setTitle("Réponse de la commande :")
     .setColor("#bc0000")
     .addField(":x: Le nom de se Membre n'est pas trouvable.", "👮 Merci de refaire la commande avec le nom d'un Membre trouvable.")
 
@@ -532,18 +532,24 @@ function messageprivate (message) { // en cours développement
     //message.delete().catch(O_o=>{});
 
     let messageError = new Discord.RichEmbed()
-    .setDescription("Réponse de la commande :")
+    .setTitle("Réponse de la commande :")
     .setColor("#bc0000")
     .addField(":x: Vous n'avez pas mit le message", "👮 Merci de refaire la commande avec le message.")
 
     let messageEmbed = argsMessage.join(" ").slice();
     if (!messageEmbed) return message.channel.send(messageError);
     //message.delete().catch(O_o=>{});
+    
+    let messageErrorCaractere = new Discord.RichEmbed()
+    .setTitle("Réponse de la commande :")
+    .setColor("#bc0000")
+    .addField(":x: Le message est trop gros. ", "👮 Merci de refaire la commande avec un message plus court.")
 
     let messagePrvateMembre = new Discord.RichEmbed()
-    .setDescription(`Message de ${message.author.username} :`)
+    .setTitle(`Message de ${message.author.username} :`)
     .setColor("#15f153")
-    .addField(messageEmbed, "👮 Cordialement l'équie du Discord de GoBrosTv.")
+    .setDescription(messageEmbed)
+    .setFooter("👮 Cordialement l'équie du Discord de GoBrosTv.");
 
      messageMembre.send(messagePrvateMembre);
      message.delete().catch(O_o=>{});
