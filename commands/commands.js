@@ -71,7 +71,7 @@ function reportmembre (message) { // !reportmembre @membre-a-report citer-la-rai
       } 
 
     let errmention = new Discord.RichEmbed()
-    .setDescription("Réponse de la commande :")
+    .setTitle("Info Report du Bug :")
     .setColor("#bc0000")
     .addField(":x: Merci de mentionné un pseudo !", "👮Merci de refaire la commande avec une mention de un pseudo.")
     message.delete().catch(O_o=>{});
@@ -80,7 +80,7 @@ function reportmembre (message) { // !reportmembre @membre-a-report citer-la-rai
     if(!mention) return message.channel.send(errmention);
 
     let reponsebfembed = new Discord.RichEmbed()
-    .setDescription("Réponse de la commande :")
+    .setTitle("Réponse de la commande :")
     .setColor("#bc0000")
     .addField(":x: Vous n’avez pas mis de message en expliquant le bug.", "👮Merci de refaire la commande avec un message.")
     message.delete().catch(O_o=>{});
@@ -89,7 +89,7 @@ function reportmembre (message) { // !reportmembre @membre-a-report citer-la-rai
     if(!rreason) return message.channel.send(reponsebfembed) || message.delete(3600).catch(O_o=>{}); 
 
     let reportEmbed = new Discord.RichEmbed()
-    .setDescription("Info Report du Bug :")
+    .setTitle("Info Report du Bug :")
     .setColor("#15f153")
     .addField("Report par :", `<@${message.author}> ID : ${message.author.id}`)
     .addField("Canal :", message.channel)
@@ -97,7 +97,7 @@ function reportmembre (message) { // !reportmembre @membre-a-report citer-la-rai
     .addField("Raison :", rreason);
 
     let canalerror = new Discord.RichEmbed()
-    .setDescription("Réponse de la commande :")
+    .setTitle("Réponse de la commande :")
     .setColor("#bc0000")
     .addField(":x: Je ne trouve pas le canal d'envoi.", "👮Merci de contacter un Administrateur.")
     message.delete().catch(O_o=>{});
@@ -106,7 +106,7 @@ function reportmembre (message) { // !reportmembre @membre-a-report citer-la-rai
     if(!reportschannel) return message.channel.send(canalerror);
 
     let reponsebvembed = new Discord.RichEmbed()
-    .setDescription("Réponse de la commande :")
+    .setTitle("Réponse de la commande :")
     .setColor("#15f153")
     .addField(":white_check_mark: Merci d'avoir report ce membre.", "👮Ce report sera vérifié par l'équipe du discord.");
     message.channel.send(reponsebvembed);
@@ -133,7 +133,7 @@ function reportbug (message) { // !reportbug @membre-qui-report citer-le-bug
       } 
 
     let reponsebfembed = new Discord.RichEmbed()
-    .setDescription("Réponse de la commande :")
+    .setTitle("Réponse de la commande :")
     .setColor("#bc0000")
     .addField(":x: Vous n’avez pas mis de message en expliquant le bug.", "👮Merci de refaire la commande avec un message.")
     message.delete().catch(O_o=>{});
@@ -142,7 +142,7 @@ function reportbug (message) { // !reportbug @membre-qui-report citer-le-bug
     if(!rreason) return message.channel.send(reponsebfembed) || message.delete(3600).catch(O_o=>{}); 
 
     let reportEmbed = new Discord.RichEmbed()
-    .setDescription("Info Report du Bug :")
+    .setTitle("Info Report du Bug :")
     .setColor("#15f153")
     .addField("Report par :", `<@${message.author}> ID : ${message.author.id}`)
     .addField("Canal :", message.channel)
@@ -150,7 +150,7 @@ function reportbug (message) { // !reportbug @membre-qui-report citer-le-bug
     .addField("Raison :", rreason);
 
     let canalerror = new Discord.RichEmbed()
-    .setDescription("Réponse de la commande :")
+    .setTitle("Réponse de la commande :")
     .setColor("#bc0000")
     .addField(":x: Je ne trouve pas le canal d'envoi.", "👮Merci de contacter un Administrateur.")
     message.delete().catch(O_o=>{});
@@ -159,7 +159,7 @@ function reportbug (message) { // !reportbug @membre-qui-report citer-le-bug
     if(!reportschannel) return message.channel.send(canalerror);
 
     let reponsebvembed = new Discord.RichEmbed()
-    .setDescription("Réponse de la commande :")
+    .setTitle("Réponse de la commande :")
     .setColor("#15f153")
     .addField(":white_check_mark: Merci d'avoir report le bug.", "👮Ce report sera vérifié par l'équipe du discord.");
     message.channel.send(reponsebvembed);
@@ -231,7 +231,7 @@ function jeux (message) { // !reportbug @membre-qui-report citer-le-bug
       } 
 
     let reponsebfembed = new Discord.RichEmbed()
-    .setDescription("Réponse de la commande :")
+    .setTitle("Réponse de la commande :")
     .setColor("#bc0000")
     .addField(":x: Vous n’avez pas mis de nom de jeu.", "👮Merci de refaire la commande avec un nom de jeu.")
     message.delete().catch(O_o=>{});
@@ -240,7 +240,7 @@ function jeux (message) { // !reportbug @membre-qui-report citer-le-bug
     if(!rreason) return message.channel.send(reponsebfembed) || message.delete(3600).catch(O_o=>{}); 
 
     let reportEmbed = new Discord.RichEmbed()
-    .setDescription("Info aidée de jeux :")
+    .setTitle("Info aidée de jeux :")
     .setColor("#15f153")
     .addField("Jeux proposée :", `<@${message.author}>`)
     .addField("Canal :", message.channel)
@@ -248,7 +248,7 @@ function jeux (message) { // !reportbug @membre-qui-report citer-le-bug
     .addField("Jeux :", rreason);
 
     let canalerror = new Discord.RichEmbed()
-    .setDescription("Réponse de la commande :")
+    .setTitle("Réponse de la commande :")
     .setColor("#bc0000")
     .addField(":x: Je ne trouve pas le canal d'envoi.", "👮Merci de contacter un Administrateur.")
     message.delete().catch(O_o=>{});
@@ -257,7 +257,7 @@ function jeux (message) { // !reportbug @membre-qui-report citer-le-bug
     if(!reportschannel) return message.channel.send(canalerror);
 
     let reponsebvembed = new Discord.RichEmbed()
-    .setDescription("Réponse de la commande :")
+    .setTitle("Réponse de la commande :")
     .setColor("#15f153")
     .addField(":white_check_mark: Merci d'avoir proposée ce jeu.", "👮Votre proposition sera afficher dans le canal #📢liste-de-jeu.");
     message.channel.send(reponsebvembed);
@@ -277,7 +277,7 @@ function mascotte (msg) {
     }
 
     let roledel = new Discord.RichEmbed()
-    .setDescription("Réponse de la commande :")
+    .setTitle("Réponse de la commande :")
     .setColor("#15f153")
     .addField(":white_check_mark: Ton rôle a été retiré.", "👮Pour le récupérer, re taper là même commande.");
 
@@ -287,7 +287,7 @@ function mascotte (msg) {
     }
     else {
     let roleadd = new Discord.RichEmbed()
-    .setDescription("Réponse de la commande :")
+    .setTitle("Réponse de la commande :")
     .setColor("#15f153")
     .addField(":white_check_mark: Hey, je m'appelle AtomikAlex et je suis là ' Mascotte ' du serveur. Mais vue que je suis gentil je vais t'assigné un titre spécial.", "👮Pour le retirer, re taper là même commande. ");
     msg.member.addRole(role)
@@ -311,7 +311,7 @@ function cmdsaidee (message){
       } 
 
     let reponsebfembed = new Discord.RichEmbed()
-    .setDescription("Réponse de la commande :")
+    .setTitle("Réponse de la commande :")
     .setColor("#bc0000")
     .addField(":x: Vous n’avez pas mis de nom de commandes et des détailles sur cette commandes.", "👮Merci de refaire la commande avec nom de la commande plus les détailles.")
     message.delete().catch(O_o=>{});
@@ -320,7 +320,7 @@ function cmdsaidee (message){
     if(!rreason) return message.channel.send(reponsebfembed) || message.delete(3600).catch(O_o=>{}); 
 
     let reportEmbed = new Discord.RichEmbed()
-    .setDescription("Info commande proposée :")
+    .setTitle("Info commande proposée :")
     .setColor("#15f153")
     .addField("Commande proposée :", `<@${message.author}>`)
     .addField("Canal :", message.channel)
@@ -328,7 +328,7 @@ function cmdsaidee (message){
     .addField("Commande :", rreason);
 
     let canalerror = new Discord.RichEmbed()
-    .setDescription("Réponse de la commande :")
+    .setTitle("Réponse de la commande :")
     .setColor("#bc0000")
     .addField(":x: Je ne trouve pas le canal d'envoi.", "👮Merci de contacter un Administrateur.")
     message.delete().catch(O_o=>{});
@@ -337,7 +337,7 @@ function cmdsaidee (message){
     if(!reportschannel) return message.channel.send(canalerror);
 
     let reponsebvembed = new Discord.RichEmbed()
-    .setDescription("Réponse de la commande :")
+    .setTitle("Réponse de la commande :")
     .setColor("#15f153")
     .addField(":white_check_mark: Merci d'avoir proposée cette commande.", "👮Votre proposition sera regarder par les Administrateur.");
     message.channel.send(reponsebvembed);
@@ -359,7 +359,7 @@ function aide_cmd(msg, cmd) {
     }
 
     let errorembed = new Discord.RichEmbed()
-    .setDescription("Réponse de la commande :")
+    .setTitle("Réponse de la commande :")
     .setColor("#bc0000")
     .addField(":x: Vous n'avez pas mit de nom de commande.", "👮Merci de refaire la commande avec le nom d'une commande.(Auto-destruction du message dans 20s.)")
 
@@ -371,7 +371,7 @@ function aide_cmd(msg, cmd) {
     
         case 'aide':
           let aideembed = new Discord.RichEmbed()
-          .setDescription("Réponse de la commande :")
+          .setTitle("Réponse de la commande :")
           .setColor("#15f153")
           .addField(":white_check_mark: Exemple : !aide", "👮Permettre de voir tous les commandes du bot.(Auto-destruction du message dans 20s.)");
           msg.channel.send(aideembed).then(message => {message.delete(12000)}); 
@@ -379,7 +379,7 @@ function aide_cmd(msg, cmd) {
 
         case 'reportmembre':
           let reportmembreembed = new Discord.RichEmbed()
-          .setDescription("Réponse de la commande :")
+          .setTitle("Réponse de la commande :")
           .setColor("#15f153")
           .addField(":white_check_mark: Exemple : !reportmembre @Pseudo message", "👮Permettre de signaler un membre aux Administrateurs.(Auto-destruction du message dans 20s.)");
           msg.channel.send(reportmembreembed).then(message => {message.delete(12000)}); 
@@ -387,7 +387,7 @@ function aide_cmd(msg, cmd) {
 
         case 'reportbug':
           let reportbugembed = new Discord.RichEmbed()
-          .setDescription("Réponse de la commande :")
+          .setTitle("Réponse de la commande :")
           .setColor("#15f153")
           .addField(":white_check_mark: Exemple : !reportbug message_du_bug.", "👮Permettre d'envoyer un signalement de bug aux Administrateurs.(Auto-destruction du message dans 20s.)");
           msg.channel.send(reportbugembed).then(message => {message.delete(12000)});  
@@ -395,7 +395,7 @@ function aide_cmd(msg, cmd) {
 
         case 'serverinfo':
           let serverinfoembed = new Discord.RichEmbed()
-          .setDescription("Réponse de la commande :")
+          .setTitle("Réponse de la commande :")
           .setColor("#15f153")
           .addField(":white_check_mark: Exemple : !serverinfo", "👮Permettre de voir les informations du serveur.(Auto-destruction du message dans 20s.)");
           msg.channel.send(serverinfoembed).then(message => {message.delete(12000)});
@@ -403,7 +403,7 @@ function aide_cmd(msg, cmd) {
 
         case 'jeux':
           let jeuxembed = new Discord.RichEmbed()
-          .setDescription("Réponse de la commande :")
+          .setTitle("Réponse de la commande :")
           .setColor("#15f153")
           .addField(":white_check_mark: Exemple : !jeux [message avec le nom du jeux, quel type de jeux etc...]", "👮Permettre de proposée vos jeux pour les streams.(Auto-destruction du message dans 20s.)");
           msg.channel.send(jeuxembed).then(message => {message.delete(12000)});
@@ -411,7 +411,7 @@ function aide_cmd(msg, cmd) {
 
         case 'mascotte':
           let mascotteembed = new Discord.RichEmbed()
-          .setDescription("Réponse de la commande :")
+          .setTitle("Réponse de la commande :")
           .setColor("#15f153")
           .addField(":white_check_mark: Exemple : !mascotte", "👮Pour avoir le rôle 'Apprenti Mascotte' ou le retirer.(Auto-destruction du message dans 20s.)");
           msg.channel.send(mascotteembed).then(message => {message.delete(12000)});
@@ -419,7 +419,7 @@ function aide_cmd(msg, cmd) {
 
         default:
           let defaultembed = new Discord.RichEmbed()
-          .setDescription("Réponse de la commande :")
+          .setTitle("Réponse de la commande :")
           .setColor("#bc0000")
           .addField(":x: Je ne trouve pas la commande.", "👮Merci de contacter un Administrateur.(Auto-destruction du message dans 20s.)")
           msg.channel.send(defaultembed).then(message => {message.delete(12000)});
