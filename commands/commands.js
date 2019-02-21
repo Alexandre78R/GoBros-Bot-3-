@@ -49,6 +49,7 @@ function aide (message) {
     .addField("!jeux", "Permettre de proposée vos jeux pour les streams.")
     .addField("!mascotte", "Pour avoir le rôle 'Apprenti Mascotte' ou le retirer.")
     .addField("!aide_cmd", "Permettre de vous aidez pour l'utilisation des commandes.")
+    .addField("!avatar", "Permettre de voir votre photo de profils et avoir le lien.")
     message.channel.send(aideembed);
 
     return;
