@@ -441,7 +441,7 @@ function avatar (msg) {
     .setImage(`${msg.author.avatarURL}`)
     .setURL(`${msg.author.avatarURL}`)
     .setDescription(`[Lien direct vers l'image](${msg.author.avatarURL})`)
-    .setFooter(`Par ${msg.author.username}`);
+    .setAuthor(`Par ${msg.author.username} - Informations`, msg.author.avatarURL);
 
     msg.channel.send(avatarEmbed);
     msg.delete().catch(O_o=>{});
