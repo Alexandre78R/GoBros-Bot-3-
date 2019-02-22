@@ -54,6 +54,9 @@ function aide_modo (message) {
     .addField("!clean", "Suprime des messages en grande quantité.")
     .addField("!kick", "Kick un utilisateur // EX : !kick @nom_de_la_personne_a_kick raison.")
     .addField("!ban", "Ban un utilisateur // EX : !ban @nom_de_la_personne_a_ban raison.")
+    .addField("!addrole", "Donne un rôle à un membre. // EX : !addrole @nom_de_la_personne_a_ban rôle (PAS DE MENTION POUR LE ROLE).")
+    .addField("!delrole", "Retire un rôle à un membre. // EX : !delrole @nom_de_la_personne_a_ban rôle (PAS DE MENTION POUR LE ROLE).")
+    .addField("!messageprivate", "Envoi un message privé à un membre. // EX : !messageprivate @nom_de_la_personne_a_ban message.")    
 
     message.channel.send(aideembed);
 
