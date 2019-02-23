@@ -65,7 +65,7 @@ client.on('message', msg => {
     let cmd = msg.content.split(/\s+/)[0].slice(config.prefix.length).toLowerCase();
     getCmdFunction(cmd)(msg);
 });
-/*
+/* En cours de modification.
 function checkcharacter (msg, str) { // Vérifie pour les caractères majuscules et miniscules.
     return (msg.content.includes(str) || msg.content.includes(str.toUpperCase()) || msg.content.includes(str.toLowerCase()));
 }
@@ -77,6 +77,27 @@ client.on('message', message => { // En cours de développement.
         return message.channel.send('Bonjour');
     };
 });*/
+/* en dev
+function checkcharacter (message, str) { // Vérifie pour les caractères majuscules et miniscules.
+    // if (message.content.includes(str) || message.content.includes(str.toUpperCase()) || message.content.includes(str.toLowerCase())){
+
+        let msg = str;
+        if(message.content.includes(str) || message.content.includes(str.toUpperCase()) || message.content.includes(str.toLowerCase())) msg++; 
+         message.channel.send(msg);
+        }
+
+
+client.on('message', msgs => { // En cours de développement.
+    
+     if (checkcharacter(msgs ,('Bonjour'))) {
+        
+        let msg =  msgs.channel.send('Bonjour');;
+        if(msgs) msg++; 
+         message.channel.send(msg);
+    }
+
+});
+*/
 
 client.on('message', msg => { // Systèmme de message interdit.
 
@@ -317,6 +338,8 @@ client.on("messageDelete", message => {
 
     } catch (e) {
 
+    let messageDeleteFichier = client.channels.get(config.discord.logChannel);
+    messageDeleteFichier.send(`Impossible de récupéré la supression du message !`);
     console.log(`Impossible de récupéré la supression du message !`);
  
     }
