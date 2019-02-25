@@ -354,7 +354,8 @@ function getCmdFunction(cmd) {
         'delrole_admin': cmds_admin.delrole_admin,
         'avatar': cmds.avatar,
         'messageprivate': cmds_admin.messageprivate,
-        'role': cmds.role,
+        'addrole': cmds.addrole,
+        'delrole': cmds.delrole,
     }
     return COMMANDS[cmd] ? COMMANDS[cmd] : () => {};
 }
