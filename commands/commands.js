@@ -23,6 +23,7 @@ module.exports = {
     'cmdsaidee': cmdsaidee,
     'aide_cmd': aide_cmd,
     'avatar' : avatar,
+    'role' : role,
 } 
 
 function aide (message) {
@@ -445,4 +446,80 @@ function avatar (msg) {
 
     msg.channel.send(avatarEmbed);
     msg.delete().catch(O_o=>{});
+}
+
+function addrole (msg) {
+
+    let args = msg.content.split(/\s+/).slice(1);
+    let messageArray = msg.content.split(" ");
+
+    if (args.length == 1) { 
+        if (args[0].charAt(0) == config.prefix) 
+            args[0] = args[0].slice(1);
+    }
+
+    let errorembed = new Discord.RichEmbed()
+    .setTitle("Réponse de la commande :")
+    .setColor("#bc0000")
+    .addField(":x: Vous n'avez pas mit le nom du rôle.", "👮Merci de refaire la commande avec le nom du rôle.(Auto-destruction du message dans 20s.)")
+
+    let role = msg.guild.members.get([0]) || args.join(" ");
+    if(!role) return msg.channel.send(errorembed).then(message => {message.delete(12000)});
+    msg.delete().catch(O_o=>{});  
+
+    switch (role) {
+    
+        case 'Summoners War':
+          let swembed = new Discord.RichEmbed()
+          .setTitle("Réponse de la commande :")
+          .setColor("#15f153")
+          .addField(":white_check_mark: Vous avez reçus le rôle : Summoners War !", "👮Bravo vous avez obtenu un rôle !(Auto-destruction du message dans 20s.)");
+          msg.channel.send(swembed).then(message => {message.delete(12000)}); 
+          msg.guild.roles.find(`name`, "Summoners War");
+        break;
+
+        case 'Marvel Strike Force':
+          let msfembed = new Discord.RichEmbed()
+          .setTitle("Réponse de la commande :")
+          .setColor("#15f153")
+          .addField(":white_check_mark: Vous avez reçus le rôle : Marvel Strike Force !", "👮Bravo vous avez obtenu un rôle !(Auto-destruction du message dans 20s.)");
+          msg.channel.send(msfembed).then(message => {message.delete(12000)}); 
+          msg.guild.roles.find(`name`, "Summoners War");
+        break;
+
+        case 'Marvel Future Fight':
+          let mffembed = new Discord.RichEmbed()
+          .setTitle("Réponse de la commande :")
+          .setColor("#15f153")
+          .addField(":white_check_mark: Vous avez reçus le rôle : Marvel Future Fight !", "👮Bravo vous avez obtenu un rôle !(Auto-destruction du message dans 20s.)");
+          msg.channel.send(mffembed).then(message => {message.delete(12000)});  
+          msg.guild.roles.find(`name`, "Marvel Strike Force");
+        break;
+
+        case 'Heroes of the Storm':
+          let hotsembed = new Discord.RichEmbed()
+          .setTitle("Réponse de la commande :")
+          .setColor("#15f153")
+          .addField(":white_check_mark: Vous avez reçus le rôle : Heroes of the Storm !", "👮Bravo vous avez obtenu un rôle !(Auto-destruction du message dans 20s.)");
+          msg.channel.send(hotsembed).then(message => {message.delete(12000)});
+          msg.guild.roles.find(`name`, "Heroes of the Storm");
+        break;
+
+        case 'Monster Hunter World':
+          let mhwembed = new Discord.RichEmbed()
+          .setTitle("Réponse de la commande :")
+          .setColor("#15f153")
+          .addField(":white_check_mark: Vous avez reçus le rôle : Monster Hunter World !", "👮Bravo vous avez obtenu un rôle !(Auto-destruction du message dans 20s.)");
+          msg.channel.send(mhwembed).then(message => {message.delete(12000)});
+          msg.guild.roles.find(`name`, "Monster Hunter World");
+        break;
+
+        default:
+          let defaultembed = new Discord.RichEmbed()
+          .setTitle("Réponse de la commande :")
+          .setColor("#bc0000")
+          .addField(":x: Je ne trouve pas le rôle.", "👮Merci de contacter un Administrateur.(Auto-destruction du message dans 20s.)")
+          msg.channel.send(defaultembed).then(message => {message.delete(12000)});
+    }
+        msg.delete().catch(O_o=>{}); 
 }
