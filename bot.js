@@ -350,10 +350,11 @@ function getCmdFunction(cmd) {
         'reactaddrole': cmds_admin.reactaddrole,
         'cmdsaidee': cmds.cmdsaidee,
         'aide_cmd': cmds.aide_cmd,
-        'addrole': cmds_admin.addrole,
-        'delrole': cmds_admin.delrole,
+        'addrole_admin': cmds_admin.addrole_admin,
+        'delrole_admin': cmds_admin.delrole_admin,
         'avatar': cmds.avatar,
         'messageprivate': cmds_admin.messageprivate,
+        'role': cmds.role,
     }
     return COMMANDS[cmd] ? COMMANDS[cmd] : () => {};
 }
