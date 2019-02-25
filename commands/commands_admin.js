@@ -16,8 +16,8 @@ module.exports = {
     'kick': kick,
     'ban': ban,
     'reactaddrole': reactaddrole,
-    'addrole': addrole,
-    'delrole': delrole,
+    'addrole_admin': addrole_admin,
+    'delrole_admin': delrole_admin,
     'messageprivate': messageprivate,
 } 
 
@@ -54,8 +54,8 @@ function aide_modo (message) {
     .addField("!clean", "Suprime des messages en grande quantité.")
     .addField("!kick", "Kick un utilisateur // EX : !kick @nom_de_la_personne_a_kick raison.")
     .addField("!ban", "Ban un utilisateur // EX : !ban @nom_de_la_personne_a_ban raison.")
-    .addField("!addrole", "Donne un rôle à un membre. // EX : !addrole @nom_de_la_personne_a_ban rôle (PAS DE MENTION POUR LE ROLE).")
-    .addField("!delrole", "Retire un rôle à un membre. // EX : !delrole @nom_de_la_personne_a_ban rôle (PAS DE MENTION POUR LE ROLE).")
+    .addField("!addrole_admin", "Donne un rôle à un membre. // EX : !addrole_admin @nom_de_la_personne_a_ban rôle (PAS DE MENTION POUR LE ROLE).")
+    .addField("!delrole_admin", "Retire un rôle à un membre. // EX : !delrole_admin @nom_de_la_personne_a_ban rôle (PAS DE MENTION POUR LE ROLE).")
     .addField("!messageprivate", "Envoi un message privé à un membre. // EX : !messageprivate @nom_de_la_personne_a_ban message.")    
 
     message.channel.send(aideembed);
@@ -335,7 +335,7 @@ if(message.author.bot) return;
     message.reply('Commande en développement');
 }
 
-function addrole (message){ // !addrole @pseudo nom_du_role
+function addrole_admin (message){ // !addrole @pseudo nom_du_role
 
   let messageArray = message.content.split(" ");
   let cmd = messageArray[0];
@@ -413,7 +413,7 @@ function addrole (message){ // !addrole @pseudo nom_du_role
     message.delete().catch(O_o=>{});
 }
 
-function delrole (message){ // !delrole @pseudo nom_du_role
+function delrole_admin (message){ // !delrole @pseudo nom_du_role
 
   let messageArray = message.content.split(" ");
   let cmd = messageArray[0];
