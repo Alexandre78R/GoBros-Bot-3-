@@ -476,7 +476,7 @@ function addrole (msg) {
           .setColor("#15f153")
           .addField(":white_check_mark: Vous avez reçus le rôle : Summoners War !", "👮Bravo vous avez obtenu un rôle !(Auto-destruction du message dans 20s.)");
           msg.channel.send(swembed).then(message => {message.delete(12000)}); 
-          msg.guild.roles.find(`name`, "Summoners War");
+          msg.member.addRole('525127518156750850');
         break;
 
         case 'Marvel Strike Force':
@@ -485,7 +485,7 @@ function addrole (msg) {
           .setColor("#15f153")
           .addField(":white_check_mark: Vous avez reçus le rôle : Marvel Strike Force !", "👮Bravo vous avez obtenu un rôle !(Auto-destruction du message dans 20s.)");
           msg.channel.send(msfembed).then(message => {message.delete(12000)}); 
-          msg.guild.roles.find(`name`, "Summoners War");
+          msg.member.addRole('Marvel Strike Force');
         break;
 
         case 'Marvel Future Fight':
@@ -494,7 +494,7 @@ function addrole (msg) {
           .setColor("#15f153")
           .addField(":white_check_mark: Vous avez reçus le rôle : Marvel Future Fight !", "👮Bravo vous avez obtenu un rôle !(Auto-destruction du message dans 20s.)");
           msg.channel.send(mffembed).then(message => {message.delete(12000)});  
-          msg.guild.roles.find(`name`, "Marvel Strike Force");
+          msg.member.addRole('Marvel Future Fight');
         break;
 
         case 'Heroes of the Storm':
@@ -503,7 +503,7 @@ function addrole (msg) {
           .setColor("#15f153")
           .addField(":white_check_mark: Vous avez reçus le rôle : Heroes of the Storm !", "👮Bravo vous avez obtenu un rôle !(Auto-destruction du message dans 20s.)");
           msg.channel.send(hotsembed).then(message => {message.delete(12000)});
-          msg.guild.roles.find(`name`, "Heroes of the Storm");
+          msg.member.addRole('Heroes of the Storm');
         break;
 
         case 'Monster Hunter World':
@@ -512,7 +512,7 @@ function addrole (msg) {
           .setColor("#15f153")
           .addField(":white_check_mark: Vous avez reçus le rôle : Monster Hunter World !", "👮Bravo vous avez obtenu un rôle !(Auto-destruction du message dans 20s.)");
           msg.channel.send(mhwembed).then(message => {message.delete(12000)});
-          msg.guild.roles.find(`name`, "Monster Hunter World");
+          msg.member.addRole('Monster Hunter World');
         break;
 
         default:
@@ -551,8 +551,8 @@ function delrole (msg) {
           .setTitle("Réponse de la commande :")
           .setColor("#15f153")
           .addField(":white_check_mark: Vous avez retiré le rôle :  Summoners War !", "👮Bravo vous avez retiré un rôle !(Auto-destruction du message dans 20s.)");
-          msg.channel.send(swembed).then(message => {message.delete(12000)}); 
-          msg.guild.roles.find(`name`, "Summoners War");
+          messageMembre.send(swembed).then(message => {message.delete(12000)}); 
+          msg.guild.roles.find(`name`, "525127518156750850");
         break;
 
         case 'Marvel Strike Force':
@@ -560,8 +560,8 @@ function delrole (msg) {
           .setTitle("Réponse de la commande :")
           .setColor("#15f153")
           .addField(":white_check_mark: Vous avez retiré le rôle :  Marvel Strike Force !", "👮Bravo vous avez retiré un rôle !(Auto-destruction du message dans 20s.)");
-          msg.channel.send(msfembed).then(message => {message.delete(12000)}); 
-          msg.guild.roles.find(`name`, "Summoners War");
+          messageMembre.send(msfembed).then(message => {message.delete(12000)}); 
+          msg.guild.roles.find(`name`, "525338096439525402");
         break;
 
         case 'Marvel Future Fight':
@@ -569,8 +569,8 @@ function delrole (msg) {
           .setTitle("Réponse de la commande :")
           .setColor("#15f153")
           .addField(":white_check_mark: Vous avez retiré le rôle :  Marvel Future Fight !", "👮Bravo vous avez retiré un rôle !(Auto-destruction du message dans 20s.)");
-          msg.channel.send(mffembed).then(message => {message.delete(12000)});  
-          msg.guild.roles.find(`name`, "Marvel Strike Force");
+          messageMembre.send(mffembed).then(message => {message.delete(12000)});  
+          msg.guild.roles.find(`name`, "525338309556174848");
         break;
 
         case 'Heroes of the Storm':
@@ -578,8 +578,8 @@ function delrole (msg) {
           .setTitle("Réponse de la commande :")
           .setColor("#15f153")
           .addField(":white_check_mark: Vous avez retiré le rôle :  Heroes of the Storm !", "👮Bravo vous avez retiré un rôle !(Auto-destruction du message dans 20s.)");
-          msg.channel.send(hotsembed).then(message => {message.delete(12000)});
-          msg.guild.roles.find(`name`, "Heroes of the Storm");
+          messageMembre.send(hotsembed).then(message => {message.delete(12000)});
+          msg.guild.roles.find(`name`, "525338811761295370");
         break;
 
         case 'Monster Hunter World':
@@ -587,8 +587,8 @@ function delrole (msg) {
           .setTitle("Réponse de la commande :")
           .setColor("#15f153")
           .addField(":white_check_mark: Vous avez retiré le rôle : Monster Hunter World !", "👮Bravo vous avez retiré un rôle !(Auto-destruction du message dans 20s.)");
-          msg.channel.send(mhwembed).then(message => {message.delete(12000)});
-          msg.guild.roles.find(`name`, "Monster Hunter World");
+          messageMembre.send(mhwembed).then(message => {message.delete(12000)});
+          msg.guild.roles.find(`name`, "541667683205120030");
         break;
 
         default:
