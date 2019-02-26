@@ -538,10 +538,10 @@ function delrole (msg) {
     let errorembed = new Discord.RichEmbed()
     .setTitle("Réponse de la commande :")
     .setColor("#bc0000")
-    .addField(":x: Vous n'avez pas mit le nom du rôle.", "👮Merci de refaire la commande avec le nom du rôle.(Auto-destruction du message dans 20s.)")
+    .addField(":x: Vous n'avez pas mit le nom du rôle.", "👮Merci de refaire la commande avec le nom du rôle.")
 
     let role = msg.guild.members.get([0]) || args.join(" ");
-    if(!role) return msg.channel.send(errorembed).then(message => {message.delete(12000)});
+    if(!role) return msg.channel.send(errorembed);
     msg.delete().catch(O_o=>{});  
 
     switch (role) {
@@ -550,8 +550,8 @@ function delrole (msg) {
           let swembed = new Discord.RichEmbed()
           .setTitle("Réponse de la commande :")
           .setColor("#15f153")
-          .addField(":white_check_mark: Vous avez retiré le rôle :  Summoners War !", "👮Bravo vous avez retiré un rôle !(Auto-destruction du message dans 20s.)");
-          messageMembre.send(swembed).then(message => {message.delete(12000)}); 
+          .addField(":white_check_mark: Vous avez retiré le rôle :  Summoners War !", "👮Bravo vous avez retiré un rôle !");
+          messageMembre.send(swembed); 
           msg.guild.roles.find(`name`, "525127518156750850");
         break;
 
@@ -559,8 +559,8 @@ function delrole (msg) {
           let msfembed = new Discord.RichEmbed()
           .setTitle("Réponse de la commande :")
           .setColor("#15f153")
-          .addField(":white_check_mark: Vous avez retiré le rôle :  Marvel Strike Force !", "👮Bravo vous avez retiré un rôle !(Auto-destruction du message dans 20s.)");
-          messageMembre.send(msfembed).then(message => {message.delete(12000)}); 
+          .addField(":white_check_mark: Vous avez retiré le rôle :  Marvel Strike Force !", "👮Bravo vous avez retiré un rôle !");
+          messageMembre.send(msfembed); 
           msg.guild.roles.find(`name`, "525338096439525402");
         break;
 
@@ -568,8 +568,8 @@ function delrole (msg) {
           let mffembed = new Discord.RichEmbed()
           .setTitle("Réponse de la commande :")
           .setColor("#15f153")
-          .addField(":white_check_mark: Vous avez retiré le rôle :  Marvel Future Fight !", "👮Bravo vous avez retiré un rôle !(Auto-destruction du message dans 20s.)");
-          messageMembre.send(mffembed).then(message => {message.delete(12000)});  
+          .addField(":white_check_mark: Vous avez retiré le rôle :  Marvel Future Fight !", "👮Bravo vous avez retiré un rôle !");
+          messageMembre.send(mffembed);  
           msg.guild.roles.find(`name`, "525338309556174848");
         break;
 
@@ -577,8 +577,8 @@ function delrole (msg) {
           let hotsembed = new Discord.RichEmbed()
           .setTitle("Réponse de la commande :")
           .setColor("#15f153")
-          .addField(":white_check_mark: Vous avez retiré le rôle :  Heroes of the Storm !", "👮Bravo vous avez retiré un rôle !(Auto-destruction du message dans 20s.)");
-          messageMembre.send(hotsembed).then(message => {message.delete(12000)});
+          .addField(":white_check_mark: Vous avez retiré le rôle :  Heroes of the Storm !", "👮Bravo vous avez retiré un rôle !");
+          messageMembre.send(hotsembed);
           msg.guild.roles.find(`name`, "525338811761295370");
         break;
 
@@ -586,8 +586,8 @@ function delrole (msg) {
           let mhwembed = new Discord.RichEmbed()
           .setTitle("Réponse de la commande :")
           .setColor("#15f153")
-          .addField(":white_check_mark: Vous avez retiré le rôle : Monster Hunter World !", "👮Bravo vous avez retiré un rôle !(Auto-destruction du message dans 20s.)");
-          messageMembre.send(mhwembed).then(message => {message.delete(12000)});
+          .addField(":white_check_mark: Vous avez retiré le rôle : Monster Hunter World !", "👮Bravo vous avez retiré un rôle !");
+          messageMembre.send(mhwembed);
           msg.guild.roles.find(`name`, "541667683205120030");
         break;
 
@@ -595,8 +595,8 @@ function delrole (msg) {
           let defaultembed = new Discord.RichEmbed()
           .setTitle("Réponse de la commande :")
           .setColor("#bc0000")
-          .addField(":x: Je ne trouve pas le rôle.", "👮Merci de contacter un Administrateur.(Auto-destruction du message dans 20s.)")
-          msg.channel.send(defaultembed).then(message => {message.delete(12000)});
+          .addField(":x: Je ne trouve pas le rôle.", "👮Merci de contacter un Administrateur.")
+          msg.channel.send(defaultembed);
     }
         msg.delete().catch(O_o=>{}); 
 }
