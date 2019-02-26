@@ -525,7 +525,7 @@ function addrole (msg) {
         msg.delete().catch(O_o=>{}); 
 }
 
-function delrole (msg) {
+function delrole (msg) { // En construction
 
     let args = msg.content.split(/\s+/).slice(1);
     let messageArray = msg.content.split(" ");
@@ -547,56 +547,62 @@ function delrole (msg) {
     switch (role) {
     
         case 'Summoners War':
+          let messageMembre1 = msg.author.username;
           let swembed = new Discord.RichEmbed()
           .setTitle("Réponse de la commande :")
           .setColor("#15f153")
           .addField(":white_check_mark: Vous avez retiré le rôle :  Summoners War !", "👮Bravo vous avez retiré un rôle !");
-          messageMembre.send(swembed); 
+          messageMembre1.send(swembed); 
           msg.guild.roles.find(`name`, "525127518156750850");
         break;
 
         case 'Marvel Strike Force':
+          let messageMembre2 = msg.author.username;
           let msfembed = new Discord.RichEmbed()
           .setTitle("Réponse de la commande :")
           .setColor("#15f153")
           .addField(":white_check_mark: Vous avez retiré le rôle :  Marvel Strike Force !", "👮Bravo vous avez retiré un rôle !");
-          messageMembre.send(msfembed); 
+          messageMembre2.send(msfembed); 
           msg.guild.roles.find(`name`, "525338096439525402");
         break;
 
         case 'Marvel Future Fight':
+          let messageMembre3 = msg.author.username;
           let mffembed = new Discord.RichEmbed()
           .setTitle("Réponse de la commande :")
           .setColor("#15f153")
           .addField(":white_check_mark: Vous avez retiré le rôle :  Marvel Future Fight !", "👮Bravo vous avez retiré un rôle !");
-          messageMembre.send(mffembed);  
+          messageMembre3.send(mffembed);  
           msg.guild.roles.find(`name`, "525338309556174848");
         break;
 
         case 'Heroes of the Storm':
+          let messageMembre4 = msg.author.username;
           let hotsembed = new Discord.RichEmbed()
           .setTitle("Réponse de la commande :")
           .setColor("#15f153")
           .addField(":white_check_mark: Vous avez retiré le rôle :  Heroes of the Storm !", "👮Bravo vous avez retiré un rôle !");
-          messageMembre.send(hotsembed);
+          messageMembre4.send(hotsembed);
           msg.guild.roles.find(`name`, "525338811761295370");
         break;
 
         case 'Monster Hunter World':
+          let messageMembre5 = msg.author.username;
           let mhwembed = new Discord.RichEmbed()
           .setTitle("Réponse de la commande :")
           .setColor("#15f153")
           .addField(":white_check_mark: Vous avez retiré le rôle : Monster Hunter World !", "👮Bravo vous avez retiré un rôle !");
-          messageMembre.send(mhwembed);
+          messageMembre5.send(mhwembed);
           msg.guild.roles.find(`name`, "541667683205120030");
         break;
 
         default:
+          let messageMembre6 = msg.author.username;
           let defaultembed = new Discord.RichEmbed()
           .setTitle("Réponse de la commande :")
           .setColor("#bc0000")
           .addField(":x: Je ne trouve pas le rôle.", "👮Merci de contacter un Administrateur.")
-          msg.channel.send(defaultembed);
+          messageMembre6.send(defaultembed);
     }
         msg.delete().catch(O_o=>{}); 
 }
