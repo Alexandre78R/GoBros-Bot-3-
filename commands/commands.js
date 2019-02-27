@@ -52,6 +52,8 @@ function aide (message) {
     .addField("!mascotte", "Pour avoir le rôle 'Apprenti Mascotte' ou le retirer.")
     .addField("!aide_cmd", "Permettre de vous aidez pour l'utilisation des commandes.")
     .addField("!avatar", "Permettre de voir votre photo de profils et avoir le lien.")
+    .addField("!addrole", "Permettre de vous donner les rôles du Serveur EX : !addrole [Summoners War , Marvel Strike Force , etc...]")
+    .addField("!delrole", "Permettre de vous donner les rôles du Serveur EX : !delrole [Summoners War , Marvel Strike Force , etc...]")
     message.channel.send(aideembed);
 
     return;
@@ -468,14 +470,16 @@ function addrole (msg) {
     if(!role) return msg.channel.send(errorembed).then(message => {message.delete(12000)});
     msg.delete().catch(O_o=>{});  
 
+    let messageMembre = msg.author;
+
     switch (role) {
     
         case 'Summoners War':
           let swembed = new Discord.RichEmbed()
           .setTitle("Réponse de la commande :")
           .setColor("#15f153")
-          .addField(":white_check_mark: Vous avez reçus le rôle : Summoners War !", "👮Bravo vous avez obtenu un rôle !(Auto-destruction du message dans 20s.)");
-          msg.channel.send(swembed).then(message => {message.delete(12000)}); 
+          .addField(":white_check_mark: Vous avez reçus le rôle : Summoners War !", "👮Bravo vous avez obtenu un rôle !");
+          messageMembre.send(swembed);
           msg.member.addRole('525127518156750850');
         break;
 
@@ -483,8 +487,8 @@ function addrole (msg) {
           let msfembed = new Discord.RichEmbed()
           .setTitle("Réponse de la commande :")
           .setColor("#15f153")
-          .addField(":white_check_mark: Vous avez reçus le rôle : Marvel Strike Force !", "👮Bravo vous avez obtenu un rôle !(Auto-destruction du message dans 20s.)");
-          msg.channel.send(msfembed).then(message => {message.delete(12000)}); 
+          .addField(":white_check_mark: Vous avez reçus le rôle : Marvel Strike Force !", "👮Bravo vous avez obtenu un rôle !");
+          messageMembre.send(msfembed); 
           msg.member.addRole('Marvel Strike Force');
         break;
 
@@ -492,8 +496,8 @@ function addrole (msg) {
           let mffembed = new Discord.RichEmbed()
           .setTitle("Réponse de la commande :")
           .setColor("#15f153")
-          .addField(":white_check_mark: Vous avez reçus le rôle : Marvel Future Fight !", "👮Bravo vous avez obtenu un rôle !(Auto-destruction du message dans 20s.)");
-          msg.channel.send(mffembed).then(message => {message.delete(12000)});  
+          .addField(":white_check_mark: Vous avez reçus le rôle : Marvel Future Fight !", "👮Bravo vous avez obtenu un rôle !");
+          messageMembre.send(mffembed);  
           msg.member.addRole('Marvel Future Fight');
         break;
 
@@ -501,8 +505,8 @@ function addrole (msg) {
           let hotsembed = new Discord.RichEmbed()
           .setTitle("Réponse de la commande :")
           .setColor("#15f153")
-          .addField(":white_check_mark: Vous avez reçus le rôle : Heroes of the Storm !", "👮Bravo vous avez obtenu un rôle !(Auto-destruction du message dans 20s.)");
-          msg.channel.send(hotsembed).then(message => {message.delete(12000)});
+          .addField(":white_check_mark: Vous avez reçus le rôle : Heroes of the Storm !", "👮Bravo vous avez obtenu un rôle !");
+          messageMembre.send(hotsembed);
           msg.member.addRole('Heroes of the Storm');
         break;
 
@@ -510,8 +514,8 @@ function addrole (msg) {
           let mhwembed = new Discord.RichEmbed()
           .setTitle("Réponse de la commande :")
           .setColor("#15f153")
-          .addField(":white_check_mark: Vous avez reçus le rôle : Monster Hunter World !", "👮Bravo vous avez obtenu un rôle !(Auto-destruction du message dans 20s.)");
-          msg.channel.send(mhwembed).then(message => {message.delete(12000)});
+          .addField(":white_check_mark: Vous avez reçus le rôle : Monster Hunter World !", "👮Bravo vous avez obtenu un rôle !");
+          messageMembre.send(mhwembed);
           msg.member.addRole('Monster Hunter World');
         break;
 
@@ -519,8 +523,8 @@ function addrole (msg) {
           let defaultembed = new Discord.RichEmbed()
           .setTitle("Réponse de la commande :")
           .setColor("#bc0000")
-          .addField(":x: Je ne trouve pas le rôle.", "👮Merci de contacter un Administrateur.(Auto-destruction du message dans 20s.)")
-          msg.channel.send(defaultembed).then(message => {message.delete(12000)});
+          .addField(":x: Je ne trouve pas le rôle.", "👮Merci de contacter un Administrateur.")
+          messageMembre.send(defaultembed);
     }
         msg.delete().catch(O_o=>{}); 
 }
