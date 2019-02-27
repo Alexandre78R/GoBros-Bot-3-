@@ -461,16 +461,15 @@ function addrole (msg) {
             args[0] = args[0].slice(1);
     }
 
+    let messageMembre = msg.author;
+
     let errorembed = new Discord.RichEmbed()
     .setTitle("Réponse de la commande :")
     .setColor("#bc0000")
     .addField(":x: Vous n'avez pas mit le nom du rôle.", "👮Merci de refaire la commande avec le nom du rôle.(Auto-destruction du message dans 20s.)")
 
     let role = msg.guild.members.get([0]) || args.join(" ");
-    if(!role) return msg.channel.send(errorembed).then(message => {message.delete(12000)});
-    msg.delete().catch(O_o=>{});  
-
-    let messageMembre = msg.author;
+    if(!role) return messageMembre.send(errorembed);
 
     switch (role) {
     
@@ -539,16 +538,15 @@ function delrole (msg) { // En construction
             args[0] = args[0].slice(1);
     }
 
+    let messageMembre = msg.author;
+
     let errorembed = new Discord.RichEmbed()
     .setTitle("Réponse de la commande :")
     .setColor("#bc0000")
     .addField(":x: Vous n'avez pas mit le nom du rôle.", "👮Merci de refaire la commande avec le nom du rôle.")
 
     let role = msg.guild.members.get([0]) || args.join(" ");
-    if(!role) return msg.channel.send(errorembed);
-    msg.delete().catch(O_o=>{});  
-
-    let messageMembre = msg.author;
+    if(!role) return messageMembre.send(errorembed); 
 
     switch (role) {
     
