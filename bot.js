@@ -305,8 +305,6 @@ client.on("messageDelete", message => {
 
     } catch (e) {
 
-    let messageDeleteFichier = client.channels.get(config.discord.logChannel);
-    messageDeleteFichier.send(`Impossible de récupéré la supression du message !`);
     console.log(`Impossible de récupéré la supression du message !`);
  
     }
