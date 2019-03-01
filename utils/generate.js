@@ -18,7 +18,6 @@ module.exports = {
     'server': server,
     'jeux': jeux,
     'mascotte': mascotte,
-    'reactaddrole': reactaddrole,
     'cmdsaidee': cmdsaidee,
     'aide_cmd': aide_cmd,
     'addrole': addrole,
@@ -81,11 +80,6 @@ function jeux() {
 function mascotte() {
         console.log("Chargement de la commande  !mascotte...");
         console.log("Chargement de la commande !mascotte (OK)");
-}
-
-function reactaddrole() {
-        console.log("Chargement de la commande  !reactaddrole...");
-        console.log("Chargement de la commande !reactaddrole (OK)");
 }
 
 function cmdsaidee() {
