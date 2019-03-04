@@ -354,6 +354,8 @@ function getCmdFunction(cmd) {
         'messageprivate': cmds_admin.messageprivate,
         'addrole': cmds.addrole,
         'delrole': cmds.delrole,
+        'pari': cmds.pari,
+        'parihelp' : cmds.parihelp,
     }
     return COMMANDS[cmd] ? COMMANDS[cmd] : () => {};
 }
