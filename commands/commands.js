@@ -24,8 +24,10 @@ module.exports = {
     'aide_cmd': aide_cmd,
     'avatar' : avatar,
     'addrole' : addrole,
-    'delrole' : delrole,
-} 
+    'delrole' : delrole, 
+    'pari' : pari,
+    'parihelp' : parihelp, 
+ } 
 
 function aide (message) {
 
@@ -220,7 +222,7 @@ function serverinfo (message) {
     return;
 }
 
-function jeux (message) { // !reportbug @membre-qui-report citer-le-bug
+function jeux (message) { // !jeux @membre-qui-report citer-le-bug
   
  if(message.author.bot) return;
   if(message.channel.type === "dm") return;
@@ -604,3 +606,142 @@ function delrole (msg) { // En construction
     }
         msg.delete().catch(O_o=>{}); 
 }
+
+function pari (message) { // commande parie pour juste Apex Legend 
+
+ if(message.author.bot) return;
+  if(message.channel.type === "dm") return;
+
+  let messageArray = message.content.split(" ");
+  let cmd = messageArray[0];
+  let argsfrag = messageArray.slice(1, 2);
+  let argsdead = messageArray.slice(2, 3);
+  let argstop10 = messageArray.slice(3, 4);
+  let argstop2 = messageArray.slice(4, 5);
+  let argstop1 = messageArray.slice(5,6);
+  let argscrash = messageArray.slice(6);
+
+       if (message.length == 1){
+           if (message[0].charAt(0) == config.prefix) 
+               message[0] = message[0].slice(1);
+
+      } 
+
+    let fragEmbedError = new Discord.RichEmbed()
+    .setTitle("Réponse de la commande :")
+    .setColor("#bc0000")
+    .addField(":x: Vous n’avez pas mis le nombre de frags.", "👮Merci de refaire la commande avec le nombre de frags.")
+
+    let frags = message.guild.members.get([0]) || argsfrag.join(" ").slice();
+    if(!frags) return message.channel.send(fragEmbedError); 
+
+    let deadEmbedError = new Discord.RichEmbed()
+    .setTitle("Réponse de la commande :")
+    .setColor("#bc0000")
+    .addField(":x: Vous n’avez pas mis le nombre de mort.", "👮Merci de refaire la commande avec le nombre de mort.")
+
+    let dead = message.guild.members.get([0]) || argsdead.join(" ").slice();
+    if(!dead) return message.channel.send(deadEmbedError); 
+
+    let top10Error = new Discord.RichEmbed()
+    .setTitle("Réponse de la commande :")
+    .setColor("#bc0000")
+    .addField(":x: Vous n’avez pas mis le nombre de Top 10.", "👮Merci de refaire la commande avec le nombre de Top 10.")
+
+    let top10 = message.guild.members.get([0]) || argstop10.join(" ").slice();
+    if(!top10) return message.channel.send(top10Error); 
+
+    let top2Error = new Discord.RichEmbed()
+    .setTitle("Réponse de la commande :")
+    .setColor("#bc0000")
+    .addField(":x: Vous n’avez pas mis le nombre de Top 2.", "👮Merci de refaire la commande avec le nombre de Top 2.")
+
+    let top2 = message.guild.members.get([0]) || argstop2.join(" ").slice();
+    if(!top2) return message.channel.send(top2Error); 
+
+    let top1Error = new Discord.RichEmbed()
+    .setTitle("Réponse de la commande :")
+    .setColor("#bc0000")
+    .addField(":x: Vous n’avez pas mis le nombre de Top 1.", "👮Merci de refaire la commande avec le nombre de Top 1.")
+
+    let top1 = message.guild.members.get([0]) || argstop1.join(" ").slice();
+    if(!top1) return message.channel.send(top1Error); 
+
+    let crachEmbedError = new Discord.RichEmbed()
+    .setTitle("Réponse de la commande :")
+    .setColor("#bc0000")
+    .addField(":x: Vous n’avez pas mis le nombre de crash de partie.", "👮Merci de refaire la commande avec le nombre de crash de partie.")
+
+    let crash = message.guild.members.get([0]) || argscrash.join(" ").slice();
+    if(!crash) return message.channel.send(crachEmbedError); 
+
+    let pariEmbed = new Discord.RichEmbed()
+    .setTitle(`Info pari de ${message.author.username} :`)
+    .setColor("#15f153")
+    .addField("Pari par :", `${message.author}`)
+    .addField("Canal :", message.channel)
+    .addField("Pari proposée le  :", message.createdAt)
+    .addField("Nombre de frags :", frags)
+    .addField("Nombre de fois où je meurs :", dead)
+    .addField("Nombre de top 10 :", top10)
+    .addField("Nombre de top 2 :", top2)
+    .addField("Nombre de top 1 :", top1)
+    .addField("Nombre de crash :", crash);
+
+    let canalerror = new Discord.RichEmbed()
+    .setTitle("Réponse de la commande :")
+    .setColor("#bc0000")
+    .addField(":x: Je ne trouve pas le canal d'envoi.", "👮Merci de contacter un Administrateur.")
+
+    let reportschannel = message.guild.channels.find(`name`, "📢liste-de-pari");
+    if(!reportschannel) return message.channel.send(canalerror);
+
+    let reponsebvembed = new Discord.RichEmbed()
+    .setTitle("Réponse de la commande :")
+    .setColor("#15f153")
+    .addField(":white_check_mark: Merci d'avoir pari .", "👮Le pari seras affiché sur le canal #📢liste-de-pari .");
+
+    message.channel.send(reponsebvembed);
+    message.delete().catch(O_o=>{});    
+    reportschannel.send(pariEmbed);
+    return;
+}
+
+function parihelp (message) {
+
+ if(message.author.bot) return;
+  if(message.channel.type === "dm") return;
+
+  let messageArray = message.content.split(" ");
+  let cmd = messageArray[0];
+  let args = messageArray.slice(1);
+
+       if (message.length == 1){
+           if (message[0].charAt(0) == config.prefix) 
+               message[0] = message[0].slice(1);
+
+      }
+    let parihelpEmbed = new Discord.RichEmbed()
+    .setColor("#15f153")
+    .setTitle("Commant utilisé la commande pari :")
+    .setDescription(
+    `!pari A B C D E F
+
+     A = Nombre de Frag.
+
+     B = Nombre de fois je meurs.
+
+     C = Nombre de Top 10.
+
+     D = Nombre de Top 2.
+
+     E = Nombre de Top 1.
+
+     F = Nombre de crash.
+
+     Ex : !pari 10 20 300 4000 50000 600000 `)
+
+    message.channel.send(parihelpEmbed);
+
+    return;
+} 
