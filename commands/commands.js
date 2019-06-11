@@ -10,6 +10,8 @@ const mascotteconsole = require('../utils/generate').mascotte();
 const cmdsaideeconsole = require('../utils/generate').cmdsaidee();
 const aide_cmdconsole = require('../utils/generate').aide_cmd();
 const Discord = require("discord.js");
+const fortnitejs = require("fortnite");
+const fortnitebdd = new fortnitejs(config.fortnite)
 
 module.exports = {
     'aide': aide,
@@ -24,6 +26,7 @@ module.exports = {
     'pari' : pari,
     'parihelp' : parihelp, 
     'poudlard' : poudlard,
+    'fortnite' : fortnite,
  } 
 
 //TODO Liste des commandes disponible sur le bot pour tous les membres.
@@ -53,6 +56,7 @@ function aide (message) {
     .addField("!aide_cmd", "Permettre de vous aidez pour l'utilisation des commandes.")
     .addField("!avatar", "Permettre de voir votre photo de profils et avoir le lien.")
     .addField("!poudlard", "Permettre de vous choisir dnas une classe de Harry Potter")
+    .addField("!fortnite", "Pour voir vos stats sur fortnite !")
     message.channel.send(aideembed);
 
     return;
@@ -653,4 +657,324 @@ function poudlard (msg){
  }
    msg.delete().catch(O_o=>{});
 
+}
+
+//TODO Commande vos stats sur fornite.
+function fortnite (msg) {
+
+  if(msg.author.bot) return;
+    if(msg.channel.type === "dm") return;
+
+       if (msg.length == 1){
+           if (msg[0].charAt(0) == config.prefix)
+               msg[0] = msg[0].slice(1);
+
+      }
+
+  let messageArray = msg.content.split(" ");
+  let cmd = messageArray[0];
+  let args = messageArray.slice(1);
+
+let username = args[0];
+
+
+let errorpseudo = new Discord.RichEmbed()
+.setColor("#3498DB")
+.setTitle("Commant utilisé la commande fortnite :")
+.setDescription(
+`!fortnite [Nom du joueur] [plataform] [La cathégorie de stats] (Sans les crochets)
+
+- Nom du joueur : 
+Le nom du joueur que vous voulez voir les stats.
+
+- Platform : 
+Vous avez le choix entre 3 platform (Playstation, XBOX Live, PC) : 
+Pour PC vous devez rentrer : pc
+Pour XBOX Live vous devez rentrer : xbl
+Playstation vous devez rentrer : psn
+
+- Cathégorie de stat : 
+Vous avez le choix entre plusieur cathégorie (solo, duo, squad, global, actuel_solo, actuel_duo, actuel_squad, actuel_global)
+
+solo donne les stats en solo de tous les saisons.
+duo donne les stats en duo de tous les saisons.
+squad donne les stats en squad de tous les saisons.
+global donne la totalité des stats de (solo, duo, squad).
+
+actuel_solo donne les stats en solo de la saison en cours.
+actuel_duo donne les stats en duo de la saison en cours.
+actuel_squad donne les stats en squad de la saison en cours.
+actuel_global donne la totalité des stats de (actuel_solo, actuel_duo, actuel_squad).`)
+
+if(!username) return msg.channel.send(errorpseudo);
+
+let platform = args[1];
+
+
+let errorplatform = new Discord.RichEmbed()
+.setTitle("Réponse de la commande :")
+.setColor("#bc0000")
+.addField(":x: Vous n'avez pas rentrer votre platform ! ", "👮 Refaite la commande avec votre platfarm")
+
+if(!platform) return msg.channel.send(errorplatform)
+
+let data = fortnitebdd.user(username, platform).then(data => {
+
+let errorusernovalide = new Discord.RichEmbed()
+.setTitle("Réponse de la commande :")
+.setColor("#bc0000")
+.addField(":x: Ce nom de joueur est introuvable ! ", "👮 Refaite la commande avec un nom de joueur correct.")
+
+if(data.code == "404") return msg.channel.send(errorusernovalide);
+
+let errorstats = new Discord.RichEmbed()
+.setTitle("Réponse de la commande :")
+.setColor("#bc0000")
+.addField(":x: vous n'avez pas choisie la cathégorie de stats ! ", "👮 Refaite la commande avec la demande cathégorie.")
+
+let stats = args[2];
+if(!stats) return msg.channel.send(errorstats)
+
+console.log(data);
+
+switch (stats) {
+
+    case "actuel_solo":
+
+      let embed1 = new Discord.RichEmbed()
+      .setTitle("Réponse de la commande (Actuel Solo) :")
+      .setColor("#0000FF")
+      .addField("Score", data.stats.current_solo.score,true)
+      .addField("KD", data.stats.current_solo.kd,true)
+      .addField("Matches", data.stats.current_solo.matches, true)
+      .addField("Kills", data.stats.current_solo.kills, true)
+      .addField("Ration Kills", data.stats.current_solo.kills_per_match, true)
+      .addField("Ration Score", data.stats.current_solo.score_per_match, true)
+      .addField("Victoire", data.stats.current_solo.wins, true)
+      .addField("Top 3",  data.stats.current_solo.top_3, true)
+      .addField("Top 5", data.stats.current_solo.top_5, true)
+      .addField("Top 6", data.stats.current_solo.top_6, true)
+      .addField("Top 12", data.stats.current_solo.top_12, true)
+      .addField("Top 25", data.stats.current_solo.top_25, true)
+
+      msg.channel.send(embed1);
+
+    break;
+
+    case "actuel_duo":
+
+      let embed2 = new Discord.RichEmbed()
+      .setTitle("Réponse de la commande (Actuel Duo) :")
+      .setColor("#FFFFFF")
+      .addField("Score", data.stats.current_duo.score,true)
+      .addField("KD", data.stats.current_duo.kd,true)
+      .addField("Matches", data.stats.current_duo.matches, true)
+      .addField("Kills", data.stats.current_duo.kills, true)
+      .addField("Ration Kills", data.stats.current_duo.kills_per_match, true)
+      .addField("Ration Score", data.stats.current_duo.score_per_match, true)
+      .addField("Victoire", data.stats.current_duo.wins, true)
+      .addField("Top 3",  data.stats.current_duo.top_3, true)
+      .addField("Top 5", data.stats.current_duo.top_5, true)
+      .addField("Top 6", data.stats.current_duo.top_6, true)
+      .addField("Top 12", data.stats.current_duo.top_12, true)
+      .addField("Top 25", data.stats.current_duo.top_25, true)
+
+      msg.channel.send(embed2);
+
+    break;
+
+    case "actuel_squad":
+
+      let embed3 = new Discord.RichEmbed()
+      .setTitle("Réponse de la commande (Actuel Squad) :")
+      .setColor("#bc0000")
+      .addField("Score", data.stats.current_squad.score,true)
+      .addField("KD", data.stats.current_squad.kd,true)
+      .addField("Matches", data.stats.current_squad.matches, true)
+      .addField("Kills", data.stats.current_squad.kills, true)
+      .addField("Ration Kills", data.stats.current_squad.kills_per_match, true)
+      .addField("Ration Score", data.stats.current_squad.score_per_match, true)
+      .addField("Victoire", data.stats.current_squad.wins, true)
+      .addField("Top 3",  data.stats.current_squad.top_3, true)
+      .addField("Top 5", data.stats.current_squad.top_5, true)
+      .addField("Top 6", data.stats.current_squad.top_6, true)
+      .addField("Top 12", data.stats.current_squad.top_12, true)
+      .addField("Top 25", data.stats.current_squad.top_25, true)
+
+      msg.channel.send(embed3);
+
+    break;
+
+
+    case "solo":
+
+      let embed4 = new Discord.RichEmbed()
+      .setTitle("Réponse de la commande (Solo) :")
+      .setColor("#0000FF")
+      .addField("Score", data.stats.solo.score,true)
+      .addField("KD", data.stats.solo.kd,true)
+      .addField("Matches", data.stats.solo.matches, true)
+      .addField("Kills", data.stats.solo.kills, true)
+      .addField("Ration Kills", data.stats.solo.kills_per_match, true)
+      .addField("Ration Score", data.stats.solo.score_per_match, true)
+      .addField("Victoire", data.stats.solo.wins, true)
+      .addField("Top 3",  data.stats.solo.top_3, true)
+      .addField("Top 5", data.stats.solo.top_5, true)
+      .addField("Top 6", data.stats.solo.top_6, true)
+      .addField("Top 12", data.stats.solo.top_12, true)
+      .addField("Top 25", data.stats.solo.top_25, true)
+
+      msg.channel.send(embed4);
+
+    break;
+
+    case "duo":
+
+      let embed5 = new Discord.RichEmbed()
+      .setTitle("Réponse de la commande (Duo) :")
+      .setColor("#FFFFFF")
+      .addField("Score", data.stats.duo.score,true)
+      .addField("KD", data.stats.duo.kd,true)
+      .addField("Matches", data.stats.duo.matches, true)
+      .addField("Kills", data.stats.duo.kills, true)
+      .addField("Ration Kills", data.stats.duo.kills_per_match, true)
+      .addField("Ration Score", data.stats.duo.score_per_match, true)
+      .addField("Victoire", data.stats.duo.wins, true)
+      .addField("Top 3",  data.stats.duo.top_3, true)
+      .addField("Top 5", data.stats.duo.top_5, true)
+      .addField("Top 6", data.stats.duo.top_6, true)
+      .addField("Top 12", data.stats.duo.top_12, true)
+      .addField("Top 25", data.stats.duo.top_25, true)
+
+      msg.channel.send(embed5);
+
+    break;
+
+    case "squad":
+
+      let embed6 = new Discord.RichEmbed()
+      .setTitle("Réponse de la commande (Squad) :")
+      .setColor("#bc0000")
+      .addField("Score", data.stats.squad.score,true)
+      .addField("KD", data.stats.squad.kd,true)
+      .addField("Matches", data.stats.squad.matches, true)
+      .addField("Kills", data.stats.squad.kills, true)
+      .addField("Ration Kills", data.stats.squad.kills_per_match, true)
+      .addField("Ration Score", data.stats.squad.score_per_match, true)
+      .addField("Victoire", data.stats.squad.wins, true)
+      .addField("Top 3",  data.stats.squad.top_3, true)
+      .addField("Top 5", data.stats.squad.top_5, true)
+      .addField("Top 6", data.stats.squad.top_6, true)
+      .addField("Top 12", data.stats.squad.top_12, true)
+      .addField("Top 25", data.stats.squad.top_25, true)
+
+      msg.channel.send(embed6);
+
+    break;
+
+    case "global":
+
+       var global_score = (data.stats.solo.score + data.stats.duo.score + data.stats.squad.score);
+
+       
+      var global_matches = ( data.stats.solo.matches + data.stats.duo.matches + data.stats.squad.matches);
+
+      var global_kills =  ( data.stats.solo.kills + data.stats.duo.kills + data.stats.squad.kills);
+
+      var global_ration_score = Math.round(((data.stats.solo.score + data.stats.duo.score + data.stats.squad.score)/(data.stats.solo.matches + data.stats.duo.matches + data.stats.squad.matches))*100)/100;
+
+      var global_ration_kills = Math.round(((data.stats.solo.kills + data.stats.duo.kills + data.stats.squad.kills)/(data.stats.solo.matches + data.stats.duo.matches + data.stats.squad.matches))*100)/100;
+
+      var global_ration_kd = Math.round(((data.stats.solo.kills + data.stats.duo.kills + data.stats.squad.kills)/((data.stats.solo.matches + data.stats.duo.matches + data.stats.squad.matches)-(data.stats.solo.wins + data.stats.duo.wins + data.stats.squad.wins)))*100)/100;
+
+      var global_wins = (data.stats.solo.wins 	+ data.stats.duo.wins + data.stats.squad.wins);
+
+      var global_top_3 = (data.stats.solo.top_3 + data.stats.duo.top_3 + data.stats.squad.top_3);
+
+      var global_top_5 = (data.stats.solo.top_5 + data.stats.duo.top_5 + data.stats.squad.top_5);
+
+      var global_top_6 = (data.stats.solo.top_6 + data.stats.duo.top_6 + data.stats.squad.top_6);
+
+      var global_top_12 = (data.stats.solo.top_12 + data.stats.duo.top_12 + data.stats.squad.top_12);
+
+      var global_top_25 = (data.stats.solo.top_25 + data.stats.duo.top_25 + data.stats.squad.top_25);
+
+       let embed7 = new Discord.RichEmbed()
+      .setTitle("Réponse de la commande (global) :")
+      .setColor("#F3FF2B")
+      .addField("Score", global_score,true)
+      .addField("KD", global_ration_kd,true)
+      .addField("Matches", global_matches, true)
+      .addField("Kills", global_kills, true)
+      .addField("Ration Kills", global_ration_kills, true)
+      .addField("Ration Score", global_ration_score, true)
+      .addField("Victoire", global_wins, true)
+      .addField("Top 3",  global_top_3, true)
+      .addField("Top 5", global_top_5, true)
+      .addField("Top 6", global_top_6, true)
+      .addField("Top 12", global_top_12, true)
+      .addField("Top 25", global_top_25, true)
+
+
+      msg.channel.send(embed7);
+
+    break;
+
+    case "actuel_global":
+
+      var current_lifetime_score = (data.stats.current_solo.score + data.stats.current_duo.score + data.stats.current_squad.score);
+
+      var current_lifetime_matches = ( data.stats.current_solo.matches + data.stats.current_duo.matches + data.stats.current_squad.matches);
+
+      var current_lifetime_kills =  ( data.stats.current_solo.kills + data.stats.current_duo.kills + data.stats.current_squad.kills);
+
+      var current_lifetime_ration_score = Math.round(((data.stats.current_solo.score + data.stats.current_duo.score + data.stats.current_squad.score)/(data.stats.current_solo.matches + data.stats.current_duo.matches + data.stats.current_squad.matches))*100)/100;
+
+      var current_lifetime_ration_kills = Math.round(((data.stats.current_solo.kills + data.stats.current_duo.kills + data.stats.current_squad.kills)/(data.stats.current_solo.matches + data.stats.current_duo.matches + data.stats.current_squad.matches))*100)/100;
+
+      var current_lifetime_ration_kd = Math.round(((data.stats.current_solo.kills + data.stats.current_duo.kills + data.stats.current_squad.kills)/((data.stats.current_solo.matches + data.stats.current_duo.matches + data.stats.current_squad.matches)-(data.stats.current_solo.wins + data.stats.current_duo.wins + data.stats.current_squad.wins)))*100)/100;
+
+      var current_lifetime_wins = (data.stats.current_solo.wins 	+ data.stats.current_duo.wins + data.stats.current_squad.wins);
+
+      var current_lifetime_top_3 = (data.stats.current_solo.top_3 + data.stats.current_duo.top_3 + data.stats.current_squad.top_3);
+
+      var current_lifetime_top_5 = (data.stats.current_solo.top_5 + data.stats.current_duo.top_5 + data.stats.current_squad.top_5);
+
+      var current_lifetime_top_6 = (data.stats.current_solo.top_6 + data.stats.current_duo.top_6 + data.stats.current_squad.top_6);
+
+      var current_lifetime_top_12 = (data.stats.current_solo.top_12 + data.stats.current_duo.top_12 + data.stats.current_squad.top_12);
+
+      var current_lifetime_top_25 = (data.stats.current_solo.top_25 + data.stats.current_duo.top_25 + data.stats.current_squad.top_25);
+
+      
+      let embed8 = new Discord.RichEmbed()
+      .setTitle("Réponse de la commande (Actuel Global) :")
+      .setColor("#F3FF2B")
+      .addField("Score", current_lifetime_score,true)
+      .addField("KD", current_lifetime_ration_kd,true)
+      .addField("Matches", current_lifetime_matches, true)
+      .addField("Kills", current_lifetime_kills, true)
+      .addField("Ration Kills", current_lifetime_ration_kills, true)
+      .addField("Ration Score", current_lifetime_ration_score, true)
+      .addField("Victoire", current_lifetime_wins, true)
+      .addField("Top 3",  current_lifetime_top_3, true)
+      .addField("Top 5", current_lifetime_top_5, true)
+      .addField("Top 6", current_lifetime_top_6, true)
+      .addField("Top 12", current_lifetime_top_12, true)
+      .addField("Top 25", current_lifetime_top_25, true)
+
+      msg.channel.send(embed8);
+
+    break;
+
+    default :
+
+    let errorchamp = new Discord.RichEmbed()
+    .setTitle("Réponse de la commande :")
+    .setColor("#bc0000")
+    .addField(":x: La cathégorie que vous avez choisie n'exixte pas. ", "👮 Refaite la commande avec une cathégorie qui existe.")
+    msg.channel.send(errorchamp)
+
+    }
+  })
 }
