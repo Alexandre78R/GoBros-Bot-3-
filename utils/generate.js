@@ -20,7 +20,7 @@ module.exports = {
 }
 //TODO Chaque function correspond à nom de commande.
 function name() {
-		console.log("---------------------------------");
+	console.log("---------------------------------");
         console.log("---------- GoBrosTV Bot ---------");
         console.log("---------------------------------");
 }
