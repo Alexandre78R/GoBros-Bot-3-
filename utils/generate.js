@@ -1,3 +1,4 @@
+//TODO Récupération des noms de commandes pour les consoles log du démarage du bot. 
 module.exports = {
     'name': name,
     'aide': aide,
@@ -17,7 +18,7 @@ module.exports = {
     'cmds': cmds,
     'cmds_admin': cmds_admin,
 }
-
+//TODO Chaque function correspond à nom de commande.
 function name() {
 		console.log("---------------------------------");
         console.log("---------- GoBrosTV Bot ---------");
