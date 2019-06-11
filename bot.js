@@ -88,8 +88,6 @@ function getCmdFunction(cmd) {
         'delrole': cmds_admin.delrole,
         'avatar': cmds.avatar,
         'messageprivate': cmds_admin.messageprivate,
-        'addrole': cmds.addrole,
-        'delrole': cmds.delrole,
         'pari': cmds.pari,
         'parihelp' : cmds.parihelp,
     }

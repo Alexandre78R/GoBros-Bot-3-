@@ -9,8 +9,6 @@ const jeuxconsole = require('../utils/generate').jeux();
 const mascotteconsole = require('../utils/generate').mascotte();
 const cmdsaideeconsole = require('../utils/generate').cmdsaidee();
 const aide_cmdconsole = require('../utils/generate').aide_cmd();
-const stripIndent = require('strip-indent');
-const os = require('os');
 const Discord = require("discord.js");
 
 module.exports = {
@@ -23,12 +21,11 @@ module.exports = {
     'cmdsaidee': cmdsaidee,
     'aide_cmd': aide_cmd,
     'avatar' : avatar,
-    'addrole' : addrole,
-    'delrole' : delrole, 
     'pari' : pari,
     'parihelp' : parihelp, 
  } 
 
+//TODO Liste des commandes disponible sur le bot pour tous les membres.
 function aide (message) {
 
  if(message.author.bot) return;
@@ -61,7 +58,7 @@ function aide (message) {
     return;
 
 } 
-
+//TODO Commande report un membre 
 function reportmembre (message) { // !reportmembre @membre-a-report citer-la-raison
 
  if(message.author.bot) return;
@@ -123,7 +120,7 @@ function reportmembre (message) { // !reportmembre @membre-a-report citer-la-rai
     return;
 }
   
-
+//TODO Commande report d'un bug sur le serveur.
 function reportbug (message) { // !reportbug @membre-qui-report citer-le-bug
   
  if(message.author.bot) return;
@@ -175,7 +172,7 @@ function reportbug (message) { // !reportbug @membre-qui-report citer-le-bug
     reportschannel.send(reportEmbed);
     return;
 }
-
+//TODO Liste d'information sur le serveur
 function serverinfo (message) {
 
  if(message.author.bot) return;
@@ -221,7 +218,7 @@ function serverinfo (message) {
     message.channel.send(embed);
     return;
 }
-
+//TODO Commande pour proposer vos jeux.
 function jeux (message) { // !jeux @membre-qui-report citer-le-bug
   
  if(message.author.bot) return;
@@ -274,6 +271,7 @@ function jeux (message) { // !jeux @membre-qui-report citer-le-bug
     return;
 }
 
+//TODO Commande de récupération role mascotte
 function mascotte (msg) {
     let roleID = "534813925787828224";
     let role = msg.guild.roles.get(roleID);
@@ -302,6 +300,7 @@ function mascotte (msg) {
   }
 }
 
+//TODO Proposer des futurs commandes sur le bot.
 function cmdsaidee (message){
 
  if(message.author.bot) return;
@@ -355,6 +354,7 @@ function cmdsaidee (message){
 
 }
 
+//TODO Help d'une commande précise (Sert à rien vue il y a déjà la commande aide... x) )
 function aide_cmd(msg, cmd) { 
 
     let args = msg.content.split(/\s+/).slice(1);
@@ -434,6 +434,7 @@ function aide_cmd(msg, cmd) {
         msg.delete().catch(O_o=>{}); 
 }
 
+//TODO Affiche votre avatar avec le lien
 function avatar (msg) {
 
     if (msg.length == 1) { 
@@ -452,162 +453,8 @@ function avatar (msg) {
     msg.channel.send(avatarEmbed);
     msg.delete().catch(O_o=>{});
 }
-
-function addrole (msg) {
-
-    let args = msg.content.split(/\s+/).slice(1);
-    let messageArray = msg.content.split(" ");
-
-    if (args.length == 1) { 
-        if (args[0].charAt(0) == config.prefix) 
-            args[0] = args[0].slice(1);
-    }
-
-    let messageMembre = msg.author;
-
-    let errorembed = new Discord.RichEmbed()
-    .setTitle("Réponse de la commande :")
-    .setColor("#bc0000")
-    .addField(":x: Vous n'avez pas mit le nom du rôle.", "👮Merci de refaire la commande avec le nom du rôle.(Auto-destruction du message dans 20s.)")
-
-    let role = msg.guild.members.get([0]) || args.join(" ");
-    if(!role) return messageMembre.send(errorembed);
-
-    switch (role) {
-    
-        case 'Summoners War':
-          let swembed = new Discord.RichEmbed()
-          .setTitle("Réponse de la commande :")
-          .setColor("#15f153")
-          .addField(":white_check_mark: Vous avez reçus le rôle : Summoners War !", "👮Bravo vous avez obtenu un rôle !");
-          messageMembre.send(swembed);
-          msg.member.addRole('525127518156750850');
-        break;
-
-        case 'Marvel Strike Force':
-          let msfembed = new Discord.RichEmbed()
-          .setTitle("Réponse de la commande :")
-          .setColor("#15f153")
-          .addField(":white_check_mark: Vous avez reçus le rôle : Marvel Strike Force !", "👮Bravo vous avez obtenu un rôle !");
-          messageMembre.send(msfembed); 
-          msg.member.addRole('Marvel Strike Force');
-        break;
-
-        case 'Marvel Future Fight':
-          let mffembed = new Discord.RichEmbed()
-          .setTitle("Réponse de la commande :")
-          .setColor("#15f153")
-          .addField(":white_check_mark: Vous avez reçus le rôle : Marvel Future Fight !", "👮Bravo vous avez obtenu un rôle !");
-          messageMembre.send(mffembed);  
-          msg.member.addRole('Marvel Future Fight');
-        break;
-
-        case 'Heroes of the Storm':
-          let hotsembed = new Discord.RichEmbed()
-          .setTitle("Réponse de la commande :")
-          .setColor("#15f153")
-          .addField(":white_check_mark: Vous avez reçus le rôle : Heroes of the Storm !", "👮Bravo vous avez obtenu un rôle !");
-          messageMembre.send(hotsembed);
-          msg.member.addRole('Heroes of the Storm');
-        break;
-
-        case 'Monster Hunter World':
-          let mhwembed = new Discord.RichEmbed()
-          .setTitle("Réponse de la commande :")
-          .setColor("#15f153")
-          .addField(":white_check_mark: Vous avez reçus le rôle : Monster Hunter World !", "👮Bravo vous avez obtenu un rôle !");
-          messageMembre.send(mhwembed);
-          msg.member.addRole('Monster Hunter World');
-        break;
-
-        default:
-          let defaultembed = new Discord.RichEmbed()
-          .setTitle("Réponse de la commande :")
-          .setColor("#bc0000")
-          .addField(":x: Je ne trouve pas le rôle.", "👮Merci de contacter un Administrateur.")
-          messageMembre.send(defaultembed);
-    }
-        msg.delete().catch(O_o=>{}); 
-}
-
-function delrole (msg) { // En construction
-
-    let args = msg.content.split(/\s+/).slice(1);
-    let messageArray = msg.content.split(" ");
-
-    if (args.length == 1) { 
-        if (args[0].charAt(0) == config.prefix) 
-            args[0] = args[0].slice(1);
-    }
-
-    let messageMembre = msg.author;
-
-    let errorembed = new Discord.RichEmbed()
-    .setTitle("Réponse de la commande :")
-    .setColor("#bc0000")
-    .addField(":x: Vous n'avez pas mit le nom du rôle.", "👮Merci de refaire la commande avec le nom du rôle.")
-
-    let role = msg.guild.members.get([0]) || args.join(" ");
-    if(!role) return messageMembre.send(errorembed); 
-
-    switch (role) {
-    
-        case 'Summoners War':
-          let swembed = new Discord.RichEmbed()
-          .setTitle("Réponse de la commande :")
-          .setColor("#15f153")
-          .addField(":white_check_mark: Vous avez retiré le rôle :  Summoners War !", "👮Bravo vous avez retiré un rôle !");
-          messageMembre.send(swembed); 
-          msg.guild.roles.find(`name`, "525127518156750850");
-        break;
-
-        case 'Marvel Strike Force':
-          let msfembed = new Discord.RichEmbed()
-          .setTitle("Réponse de la commande :")
-          .setColor("#15f153")
-          .addField(":white_check_mark: Vous avez retiré le rôle :  Marvel Strike Force !", "👮Bravo vous avez retiré un rôle !");
-          messageMembre.send(msfembed); 
-          msg.guild.roles.find(`name`, "525338096439525402");
-        break;
-
-        case 'Marvel Future Fight':
-          let mffembed = new Discord.RichEmbed()
-          .setTitle("Réponse de la commande :")
-          .setColor("#15f153")
-          .addField(":white_check_mark: Vous avez retiré le rôle :  Marvel Future Fight !", "👮Bravo vous avez retiré un rôle !");
-          messageMembre.send(mffembed);  
-          msg.guild.roles.find(`name`, "525338309556174848");
-        break;
-
-        case 'Heroes of the Storm':
-          let hotsembed = new Discord.RichEmbed()
-          .setTitle("Réponse de la commande :")
-          .setColor("#15f153")
-          .addField(":white_check_mark: Vous avez retiré le rôle :  Heroes of the Storm !", "👮Bravo vous avez retiré un rôle !");
-          messageMembre.send(hotsembed);
-          msg.guild.roles.find(`name`, "525338811761295370");
-        break;
-
-        case 'Monster Hunter World':
-          let mhwembed = new Discord.RichEmbed()
-          .setTitle("Réponse de la commande :")
-          .setColor("#15f153")
-          .addField(":white_check_mark: Vous avez retiré le rôle : Monster Hunter World !", "👮Bravo vous avez retiré un rôle !");
-          messageMembre.send(mhwembed);
-          msg.guild.roles.find(`name`, "541667683205120030");
-        break;
-
-        default:
-          let defaultembed = new Discord.RichEmbed()
-          .setTitle("Réponse de la commande :")
-          .setColor("#bc0000")
-          .addField(":x: Je ne trouve pas le rôle.", "👮Merci de contacter un Administrateur.")
-          messageMembre.send(defaultembed);
-    }
-        msg.delete().catch(O_o=>{}); 
-}
-
-function pari (message) { // commande parie pour juste Apex Legend 
+//TODO Commande  pari pour le fun pour Apex Legend
+function pari (message) { // commande pari pour juste Apex Legend 
 
  if(message.author.bot) return;
   if(message.channel.type === "dm") return;
@@ -706,7 +553,7 @@ function pari (message) { // commande parie pour juste Apex Legend
     reportschannel.send(pariEmbed);
     return;
 }
-
+//TODO Détaile de l'ussage commande pari 
 function parihelp (message) {
 
  if(message.author.bot) return;
