@@ -1,4 +1,4 @@
-//const rp = require('request-promise');
+//TODO Liste des libaries du bot
 require('dotenv').config();
 const Discord = require('discord.js');
 const client = new Discord.Client();
@@ -8,29 +8,38 @@ const cmds_admin = require('./commands/commands_admin.js');
 const express = require("express");
 const app = express();
 
+//TODO Système de PORT aléatoire.
 app.set('port', (process.env.PORT || Math.floor(Math.random() * Math.floor(5000))))
 
 app.listen(app.get('port'), function(){
     console.log(`Le bot fonctionne sur le port : ${app.get('port')} `);
 })
 
+//TODO Gestions des commandes du bot.
 client.commands = new Discord.Collection();
+
+//TODO Console log du bot en cas WARN ou de ERROR.
 client.on('warn', console.warn);
 
 client.on('error', console.error);
 
+//TODO Prévention que le bot vien de s'éteindre pour x raison.
 client.on('disconnect', () => console.log('Je viens de me déconnecter, en m\'assurant que vous savez, je vais me reconnecter maintenant'));
 
+//TODO Re connexion automatique du bot en cas de crash.
 client.on('reconnecting', () => console.log('Je reconnecte maintenant !'));
 
+//TODO Affichage dans le profil du bot
 client.on('ready', () => {
   client.user.setPresence({ game: { name: "En développement By Alexandre78R", type : "STREAMING", url: "https://www.twitch.tv/go_bros"}});
   client.user.setStatus('offline'); // online (vert) idle (absant) offline (offline)
   console.log(`${client.user.tag} est connecté !`);
  });
 
+ //TODO Clé du bot de discord (A vous de renplire par la votre !)
 client.login("");
 
+//TODO Message de bienvenue dans un canal et en privé.
 client.on('guildMemberAdd', member => {
   member.guild.channels.find("name", "🎉bienvenue").send(`Hey ${member.user}, bienvenue sur le serveur de ${member.guild.name} :hugging: !`)
   member.createDM().then(channel => {
@@ -48,6 +57,7 @@ L'équipe du discord de ${member.guild.name}.`)
   }).catch(console.error);
   });
 
+  //TODO Gestion du prefix
 client.on('message', msg => {
     if (msg.author.bot || msg.channel.type != 'text')
         return;
@@ -59,6 +69,7 @@ client.on('message', msg => {
     getCmdFunction(cmd)(msg);
 });
 
+//TODO Gestion des commandes.
 function getCmdFunction(cmd) {
     const COMMANDS = {
         'aide': cmds.aide,
