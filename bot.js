@@ -235,6 +235,7 @@ function getCmdFunction(cmd) {
         'messageprivate': cmds_admin.messageprivate,
         'pari': cmds.pari,
         'parihelp' : cmds.parihelp,
+        'poudlard' : cmds.poudlard,
     }
     return COMMANDS[cmd] ? COMMANDS[cmd] : () => {};
 }

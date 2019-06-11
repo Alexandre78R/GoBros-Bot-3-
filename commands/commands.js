@@ -23,6 +23,7 @@ module.exports = {
     'avatar' : avatar,
     'pari' : pari,
     'parihelp' : parihelp, 
+    'poudlard' : poudlard,
  } 
 
 //TODO Liste des commandes disponible sur le bot pour tous les membres.
@@ -51,8 +52,7 @@ function aide (message) {
     .addField("!mascotte", "Pour avoir le rôle 'Apprenti Mascotte' ou le retirer.")
     .addField("!aide_cmd", "Permettre de vous aidez pour l'utilisation des commandes.")
     .addField("!avatar", "Permettre de voir votre photo de profils et avoir le lien.")
-    .addField("!addrole", "Permettre de vous donner les rôles du Serveur EX : !addrole [Summoners War , Marvel Strike Force , etc...]")
-    .addField("!delrole", "Permettre de vous donner les rôles du Serveur EX : !delrole [Summoners War , Marvel Strike Force , etc...]")
+    .addField("!poudlard", "Permettre de vous choisir dnas une classe de Harry Potter")
     message.channel.send(aideembed);
 
     return;
@@ -592,3 +592,65 @@ function parihelp (message) {
 
     return;
 } 
+
+//TODO Commande aléotoire pour vous placer dans une des 4 classe d'Hasrry potter
+function poudlard (msg){
+
+  let args = msg.content.split(/\s+/).slice(1);
+  let messageArray = msg.content.split(" ");
+
+  if (args.length == 1) {
+      if (args[0].charAt(0) == config.prefix)
+          args[0] = args[0].slice(1);
+  }
+
+ var calcul = Math.floor(Math.random() * Math.floor(5));
+
+  switch (calcul) {
+
+  case 1:
+     let griEmbed = new Discord.RichEmbed()
+    .setTitle("Réponse de la commande :")
+    .setColor("#15f153")
+//    .setImage("image/shield_gry.gif")
+    .addField(":white_check_mark: Vous avez reçus chez Gryffondor ! ", "👮Bravo à vous et bienvenue dans notre classe !");
+    msg.channel.send(griEmbed);
+  break;
+
+   case 2:
+     let serEmbed = new Discord.RichEmbed()
+    .setTitle("Réponse de la commande :")
+    .setColor("#15f153")
+//      .setImage("image/shield_sly.gif")
+    .addField(":white_check_mark: Vous avez reçus chez Serpentard ! ", "👮Bravo à vous et bienvenue dans notre classe !");
+    msg.channel.send(serEmbed);
+  break;
+
+   case 3:
+     let pouEmbed = new Discord.RichEmbed()
+    .setTitle("Réponse de la commande :")
+    .setColor("#15f153")
+  //  .setImage("image/shield_huf.gif")
+    .addField(":white_check_mark: Vous avez reçus chez Poufsouffle ! ", "👮Bravo à vous et bienvenue dans notre classe !");
+    msg.channel.send(pouEmbed);
+  break;
+
+   case 4:
+     let serdEmbed = new Discord.RichEmbed()
+    .setTitle("Réponse de la commande :")
+  //  .setImage("image/shield_rav.gif")
+    .setColor("#15f153")
+    .addField(":white_check_mark: Vous avez reçus chez Serdaigle ! ", "👮Bravo à vous et bienvenue dans notre classe !");
+    msg.channel.send(serdEmbed);
+  break;
+
+   default :
+    let defaultembed = new Discord.RichEmbed()
+    .setTitle("Réponse de la commande :")
+    .setColor("#bc0000")
+    .addField(":x: Vous avez été refusé pour rentrer chez Poudlard.", "👮Re tenter votre chance plu tard !")
+    msg.channel.send(defaultembed);
+ }
+   msg.delete().catch(O_o=>{});
+
+}
