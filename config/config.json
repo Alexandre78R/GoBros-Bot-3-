@@ -3,5 +3,6 @@
     "key": "Clé du bot ",
     "MESSAGE_REACTION_REGLEMENT" : "Id message de votre réglement",
     "MESSAGE_REACTION_ROLE" : "Id message de votre liste de role",
-    "fortnite" : "Clé de votre api fortnite"
+    "fortnite" : "Clé de votre api fortnite",
+    "giphy" : "Clé de votre api giphy"
 }

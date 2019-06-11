@@ -237,6 +237,7 @@ function getCmdFunction(cmd) {
         'parihelp' : cmds.parihelp,
         'poudlard' : cmds.poudlard,
         'fortnite' : cmds.fortnite,
+        'giphy' : cmds.giphy,
     }
     return COMMANDS[cmd] ? COMMANDS[cmd] : () => {};
 }

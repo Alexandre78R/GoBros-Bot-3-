@@ -12,6 +12,9 @@ const aide_cmdconsole = require('../utils/generate').aide_cmd();
 const Discord = require("discord.js");
 const fortnitejs = require("fortnite");
 const fortnitebdd = new fortnitejs(config.fortnite)
+var giphy = require('giphy-api')({
+  apiKey : config.giphy
+});
 
 module.exports = {
     'aide': aide,
@@ -27,6 +30,7 @@ module.exports = {
     'parihelp' : parihelp, 
     'poudlard' : poudlard,
     'fortnite' : fortnite,
+    'giphy' : giphy,
  } 
 
 //TODO Liste des commandes disponible sur le bot pour tous les membres.
@@ -57,6 +61,7 @@ function aide (message) {
     .addField("!avatar", "Permettre de voir votre photo de profils et avoir le lien.")
     .addField("!poudlard", "Permettre de vous choisir dnas une classe de Harry Potter")
     .addField("!fortnite", "Pour voir vos stats sur fortnite !")
+    .addField("!gif", "Pour utilisÃ© les gifs.")
     message.channel.send(aideembed);
 
     return;
@@ -557,7 +562,7 @@ function pari (message) { // commande pari pour juste Apex Legend
     reportschannel.send(pariEmbed);
     return;
 }
-//TODO Détaile de l'ussage commande pari 
+//TODO Détaile de l'usage commande pari 
 function parihelp (message) {
 
  if(message.author.bot) return;
@@ -659,7 +664,7 @@ function poudlard (msg){
 
 }
 
-//TODO Commande vos stats sur fornite.
+//TODO Commande sur vos stats pour fornite.
 function fortnite (msg) {
 
   if(msg.author.bot) return;
@@ -977,4 +982,111 @@ switch (stats) {
 
     }
   })
+}
+
+function gif (msg){
+
+  if(msg.author.bot) return;
+  if(msg.channel.type === "dm") return;
+
+     if (msg.length == 1){
+         if (msg[0].charAt(0) == config.prefix)
+             msg[0] = msg[0].slice(1);
+
+    }
+
+let messageArray = msg.content.split(" ");
+let cmd = messageArray[0];
+let args = messageArray.slice(1);
+
+let errormethod = new Discord.RichEmbed()
+.setColor("#3498DB")
+.setTitle("Commant utilisé la commande gif :")
+.setDescription(`!gif [Méthode de recherche ] [argument] (Sans les crochets)
+
+Pour infos cette commande marche que avec le site : https://giphy.com.
+
+Pour la méthode vous avez le choix entre : 
+
+- random : 
+Donner un gif aléatoire dans leurs base de donnés. 
+Vous pouvez précisez un argument pour cherche un gif plus précis/
+
+EX :  !gif random pokémon
+Et sa vous donneras un gif de pokémon qui viens de leur site. 
+
+- id : 
+Faut récupérer l'id du gif que vous voulez utilisé sur leurs site en argument.
+
+Vous avez que une solution pour récupérer l'id :
+
+EX : !gif id NS7gPxeumewkWDOIxi (Sa devrais sortir un gif de pikachu en détective.)
+https://giphy.com/gifs/detectivepikachumovie-[(id) --> NS7gPxeumewkWDOIxi]
+Ce que vous voyez entre le crochet c'est son id.
+
+`);
+
+var method = args[0];
+if (!method) return msg.channel.send(errormethod);
+
+switch (method) {
+
+  case "random":
+  var gif_random = args[1];
+  giphy.random(gif_random, function (err, res) {
+    if (res.message == "API rate limit exceeded"){
+    //  msg.channel.send("Merci de patienter avant de refaire la commande, la limitation à était dépasser...")
+    let errorlimitation = new Discord.RichEmbed()
+    .setTitle("Réponse de la commande :")
+    .setColor("#bc0000")
+    .addField(":x: La donnée passente avec l'API est dépasser ", "👮 Merci d'attendre 10-15 min avant de refaire la commande. ")
+     msg.channel.send(errorlimitation);
+
+    }else if(res.data.url === undefined) {
+      //msg.channel.send("Avec se mot de clé on n'a pas trouver de gif...")
+      let errorargument = new Discord.RichEmbed()
+      .setTitle("Réponse de la commande :")
+      .setColor("#bc0000")
+      .addField(":x: On n'a pas trouver de gif qui conrespond avec ce argument", "👮 Merci de refaire la commande avec un autre argument.")
+       msg.channel.send(errorargument);
+    }else{
+       msg.channel.send(res.data.url);
+    }
+  //console.log(res)
+  });
+  break;
+
+  case "id":
+  var gif_id = args[1];
+
+  let errorid1 = new Discord.RichEmbed()
+  .setTitle("Réponse de la commande :")
+  .setColor("#bc0000")
+  .addField(":x: Vous n'avez pas rentrer d'id", "👮 Merci de refaire la commande avec un id. ")
+
+ if (!gif_id) return msg.channel.send(errorid1)
+  giphy.id(gif_id, function (err, res) {
+
+    if (res.message == "API rate limit exceeded") {
+      let errorlimitation2 = new Discord.RichEmbed()
+      .setTitle("Réponse de la commande :")
+      .setColor("#bc0000")
+      .addField(":x: La donnée passente avec l'API est dépasser ", "👮 Merci d'attendre 10-15 min avant de refaire la commande. ")
+       msg.channel.send(errorlimitation2);
+    }else if (res.meta.status  == "404") {
+      let errorid = new Discord.RichEmbed()
+      .setTitle("Réponse de la commande :")
+      .setColor("#bc0000")
+      .addField(":x: On n'a pas trouver de gif qui conrespond avec cette id", "👮 Merci de refaire la commande avec un autre id corect.")
+       msg.channel.send(errorid);
+    }else {
+      msg.channel.send(res.data[0].url)
+    }
+  });
+  break;
+
+  default :
+
+  msg.channel.send("La cathégorie est introuvable..");
+};
 }
