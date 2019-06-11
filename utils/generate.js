@@ -1,13 +1,5 @@
-var fs = require('fs');
-const os = require('os');
-//const rp = require('request-promise');
-const stripIndent = require('strip-indent');
-
-var formattedItems = [];
-var formattedSets = [];
-
 module.exports = {
-	'name': name,
+    'name': name,
     'aide': aide,
     'aide_modo': aide_modo,
     'clean': clean,
