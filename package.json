@@ -1,0 +1,29 @@
+{
+  "name": "gobros-bot",
+  "version": "1.0.0",
+  "description": "",
+  "main": "bot.js",
+  "dependencies": {
+    "colors": "^1.2.1",
+    "discord.js": "^11.4.2",
+    "dotenv": "^5.0.1",
+    "express": "^4.16.4",
+    "i": "^0.3.6",
+    "prompt": "^1.0.0",
+    "strip-indent": "^2.0.0"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Alexandre78R/GoBros-Bot.git"
+  },
+  "author": "Alexandre78R",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Alexandre78R/GoBros-Bot/issues"
+  },
+  "homepage": "https://github.com/Alexandre78R/GoBros-Bot#readme"
+}
