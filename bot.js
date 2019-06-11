@@ -5,15 +5,8 @@ const client = new Discord.Client();
 const config = require('./config/config.json');
 const cmds = require('./commands/commands.js');
 const cmds_admin = require('./commands/commands_admin.js');
-const prompt = require('prompt');
-const colors = require('colors'); 
 const express = require("express");
 const app = express();
-const stripIndent = require('strip-indent');
-const os = require('os');
-const { Client, Util } = require('discord.js');
-let cooldown = new Set();
-let cdseconds = 5;
 
 app.set('port', (process.env.PORT || Math.floor(Math.random() * Math.floor(5000))))
 
@@ -66,273 +59,6 @@ client.on('message', msg => {
     getCmdFunction(cmd)(msg);
 });
 
-client.on('message', msg => { // Systèmme de message interdit.
-
-     if (msg.content.includes('<message supprimé>')) {
-       
-        let permEmbed = new Discord.RichEmbed()
-        .setDescription("Réponse de la commande :")
-        .setColor("#15f153")
-        .addField(`:white_check_mark: ${msg.author.username}, vous s'avez la permission pour dire ce mot.`, "👮Ce message s'autodétruira dans 10s.");
-        if(msg.member.hasPermission("MANAGE_MESSAGES")) return msg.channel.send(permEmbed).then(msg => {msg.delete(6000)}); 
-        //msg.channel.send(permEmbed).then(message => {message.delete(6000)});
-
-        let defaultembed = new Discord.RichEmbed()
-        .setDescription("Réponse de la commande :")
-        .setColor("#bc0000")
-        .addField(":x: Vous avez utilisé un mot interdit. ' <message supprimé> ' !", "👮Merci de ne plus écrire ' <message supprimé> '.(Auto-destruction du message dans 20s.)")
-        .setDescription(msg.delete().catch(O_o=>{}));
-        if(!msg.member.hasPermission("MANAGE_MESSAGES")) return msg.channel.send(defaultembed).then(message => {message.delete(12000)}); 
-
-    }
-
-    else if (msg.content.includes('<message supprime>')) {
-
-        let mspermEmbed = new Discord.RichEmbed()
-        .setDescription("Réponse de la commande :")
-        .setColor("#15f153")
-        .addField(`:white_check_mark: ${msg.author.username}, vous s'avez la permission pour dire ce mot.`, "👮Ce message s'autodétruira dans 10s.");
-        if(msg.member.hasPermission("MANAGE_MESSAGES")) return msg.channel.send(mspermEmbed).then(msg => {msg.delete(6000)}); 
-        //msg.channel.send(permEmbed).then(message => {message.delete(6000)});
-
-        let msdefaultembed = new Discord.RichEmbed()
-        .setDescription("Réponse de la commande :")
-        .setColor("#bc0000")
-        .addField(":x: Vous avez utilisé un mot interdit. '<message supprime> ' !", "👮Merci de ne plus écrire ' <message supprime> '.(Auto-destruction du message dans 20s.)")
-        .setDescription(msg.delete().catch(O_o=>{}));
-        if(!msg.member.hasPermission("MANAGE_MESSAGES")) return msg.channel.send(msdefaultembed).then(message => {message.delete(12000)});  
-   
-    }
-
-});
-
-client.on("channelCreate", channel => { 
- 
-  try{
-  
-    let channelCreateEmbed = new Discord.RichEmbed()
-    .setTitle("Log Canal créer :")
-    .setColor("#15f153")
-    .addField("Nom du canal :", `${channel.name}`)
-    .addField("ID du canal :", `${channel.id}`)
-    .setTimestamp();
-   
-    let createChannel = channel.guild.channels.find(`name`, "📝log-serveur");
-    createChannel.send(channelCreateEmbed);
- 
-    }catch (e){
-   
-    console.log(`Impossible de récupéré la création du channel !`);
-    
-    }
-}); 
-
-client.on("channelUpdate", channel => { 
-  
-    try {
-   
-    let channelUpdateEmbed = new Discord.RichEmbed()
-    .setTitle("Log canal supprimée :")
-    .setColor("#15f153")
-    .addField("Nom du canal :", `${channel.name}`)
-    .addField("ID du canal :", `${channel.id}`)
-    .setTimestamp();
-    
-    let updateChannel = channel.guild.channels.find(`name`, "📝log-serveur");
-    updateChannel.send(channelUpdateEmbed);
- 
-    }catch (e){
-   
-    console.log(`Impossible de récupéré la modification du channel !`);
-    
-    }
-});
-
-client.on("channelDelete", channel => { 
-  
-    try {
-   
-    let channelDeleteEmbed = new Discord.RichEmbed()
-    .setTitle("Log canal supprimée :")
-    .setColor("#15f153")
-    .addField("Nom du canal :", `${channel.name}`)
-    .addField("ID du canal :", `${channel.id}`)
-    .setTimestamp();
-    
-    let deleteChannel = channel.guild.channels.find(`name`, "📝log-serveur");
-    deleteChannel.send(channelDeleteEmbed);
- 
-    }catch (e){
-   
-    console.log(`Impossible de récupéré la supression du channel !`);
-    
-    }
-});
-
-client.on("emojiCreate", emoji => { 
-    
-    try{
-   
-    let emojiCreateEmbed = new Discord.RichEmbed()
-    .setTitle("Log emoji créer :")
-    .setColor("#15f153")
-    .addField("Nom de l'Emoji :", `${emoji.name}`, true)
-    .addField("ID de l'Emoji :", `${emoji.id}`, true)
-    .addField("Code de l'Emoji :", `${emoji.identifier}`, true)
-    .addField("Url de l'Emoji :", `${emoji.url}`, true)
-    .addField("Animation de l'Emoji :", `${emoji.animated}`, true)
-    .setTimestamp();
-    
-    let createEmoji = emoji.guild.channels.find(`name`, "📝log-serveur");
-    createEmoji.send(emojiCreateEmbed);
-   
-    }catch (e){
-    
-    console.log(`Impossible de récupéré la création de l'emoji !`);
-   
-    }
-});
-
-client.on("emojiDelete", emoji => { 
-
-    try{
-
-    let emojiDeleteEmbed = new Discord.RichEmbed()
-    .setTitle("Log emoji supprimée :")
-    .setColor("#15f153")
-    .addField("Nom de l'Emoji :", `${emoji.name}`, true)
-    .addField("ID de l'Emoji :", `${emoji.id}`, true)
-    .addField("Code de l'Emoji :", `${emoji.identifier}`, true)
-    .addField("Url de l'Emoji :", `${emoji.url}`, true)
-    .addField("Animation de l'Emoji :", `${emoji.animated}`, true)
-    .setTimestamp();
-    let deleteEmoji = emoji.guild.channels.find(`name`, "📝log-serveur");
-    deleteEmoji.send(emojiDeleteEmbed);
-
-    }catch (e){
-
-    console.log(`Impossible de récupéré la supression de l'emoji !`);
-
-    }
-});
-
-client.on("roleCreate", role => { 
-
-    try{
-
-    let roleCreateEmbed = new Discord.RichEmbed()
-    .setTitle("Log rôle créer :")
-    .setColor("#15f153")
-    .addField("Nom du rôle :", `${role.name}`, true)
-    .addField("ID du rôle :", `${role.id}`, true)
-    .addField("Coleur du rôle :", `${role.color}`,true)
-    .addField("Position du rôle :", `${role.calculatedPosition}`, true)
-    .addField("Permissions du rôle :", `${role.permissions}`, true)
-    .addField("Rôle memtionabble :", `${role.mentionable}`, true)
-    .setTimestamp();
-    let deleteRole = role.guild.channels.find(`name`, "📝log-serveur");
-    deleteRole.send(roleCreateEmbed);
-
-    }catch (e){
-
-    console.log(`Impossible de récupéré la créations du rôle !`);
-
-    }
-});
-
-client.on("roleUpdate", role => { 
-
-    try{
-
-    let roleUpdateEmbed = new Discord.RichEmbed()
-    .setTitle("Log rôle update :")
-    .setColor("#15f153")
-    .addField("Nom du rôle :", `${role.name}`, true)
-    .addField("ID du rôle :", `${role.id}`, true)
-    .addField("Coleur du rôle :", `${role.color}`,true)
-    .addField("Permissions du rôle :", `${role.permissions}`, true)
-    .addField("Rôle memtionabble :", `${role.mentionable}`, true)
-    .setTimestamp();
-    let updateRole = role.guild.channels.find(`name`, "📝log-serveur");
-    updateRole.send(roleUpdateEmbed);
-
-    }catch (e){
-
-    console.log(`Impossible de récupéré la mise à jour du rôle !`);
-
-    }
-});
-
-client.on("roleDelete", role => { 
-
-    try{
-
-    let roleDeleteEmbed = new Discord.RichEmbed()
-    .setTitle("Log rôle supprimée :")
-    .setColor("#15f153")
-    .addField("Nom du rôle :", `${role.name}`, true)
-    .addField("ID du rôle :", `${role.id}`, true)
-    .addField("Coleur du rôle :", `${role.color}`,true)
-    .addField("Position du rôle :", `${role.calculatedPosition}`, true)
-    .addField("Permissions du rôle :", `${role.permissions}`, true)
-    .addField("Rôle memtionabble :", `${role.mentionable}`, true)
-    .setTimestamp();
-    let deleteRole = role.guild.channels.find(`name`, "📝log-serveur");
-    deleteRole.send(roleDeleteEmbed);
-
-    }catch (e){
-
-    console.log(`Impossible de récupéré la supression du rôle !`);
-
-    }
-});
-
-client.on("messageDelete", message => { 
-    try{
-
-    let messageDeleteEmbed = new Discord.RichEmbed()
-    .setTitle("Log Message Block supprimée :")
-    .setColor("#15f153")
-    .addField("Message  par :", `${message.author}`)
-    .addField("Contenant du message :", `${message.content}`)
-    .addField("Mention du message :", `${message.mentions}`)
-    .addField("Epingler le message :", `${message.pinned}`)
-    .addField("Editable le message :", `${message.editable}`)
-    .setTimestamp();
-
-    let deleteMessage = message.guild.channels.find(`name`, "📝log-serveur");
-    deleteMessage.send(messageDeleteEmbed);
-
-    } catch (e) {
-
-    console.log(`Impossible de récupéré la supression du message !`);
- 
-    }
-});
-
-client.on("messageUpdate", message => { 
-    try{
-
-    let messageUpdateEmbed = new Discord.RichEmbed()
-    .setTitle("Log Message Block supprimée :")
-    .setColor("#15f153")
-    .addField("Message  par :", `${message.author}`)
-    .addField("Contenant du message :", `${message.content}`)
-    .addField("Mention du message :", `${message.mentions}`)
-    .addField("Epingler le message :", `${message.pinned}`)
-    .addField("Editable le message :", `${message.editable}`)
-    .setTimestamp();
-
-    let updateMessage = message.guild.channels.find(`name`, "📝log-serveur");
-    updateMessage.send(messageUpdateEmbed);
-
-    } catch (e) {
-
-    console.log(`Impossible de récupéré la mise à jour du message !`);
-    
-    } 
-});
-
 function getCmdFunction(cmd) {
     const COMMANDS = {
         'aide': cmds.aide,
@@ -359,3 +85,281 @@ function getCmdFunction(cmd) {
     }
     return COMMANDS[cmd] ? COMMANDS[cmd] : () => {};
 }
+
+
+// client.on('message', msg => { // Systèmme de message interdit.
+
+//      if (msg.content.includes('<message supprimé>')) {
+       
+//         let permEmbed = new Discord.RichEmbed()
+//         .setDescription("Réponse de la commande :")
+//         .setColor("#15f153")
+//         .addField(`:white_check_mark: ${msg.author.username}, vous s'avez la permission pour dire ce mot.`, "👮Ce message s'autodétruira dans 10s.");
+//         if(msg.member.hasPermission("MANAGE_MESSAGES")) return msg.channel.send(permEmbed).then(msg => {msg.delete(6000)}); 
+//         //msg.channel.send(permEmbed).then(message => {message.delete(6000)});
+
+//         let defaultembed = new Discord.RichEmbed()
+//         .setDescription("Réponse de la commande :")
+//         .setColor("#bc0000")
+//         .addField(":x: Vous avez utilisé un mot interdit. ' <message supprimé> ' !", "👮Merci de ne plus écrire ' <message supprimé> '.(Auto-destruction du message dans 20s.)")
+//         .setDescription(msg.delete().catch(O_o=>{}));
+//         if(!msg.member.hasPermission("MANAGE_MESSAGES")) return msg.channel.send(defaultembed).then(message => {message.delete(12000)}); 
+
+//     }
+
+//     else if (msg.content.includes('<message supprime>')) {
+
+//         let mspermEmbed = new Discord.RichEmbed()
+//         .setDescription("Réponse de la commande :")
+//         .setColor("#15f153")
+//         .addField(`:white_check_mark: ${msg.author.username}, vous s'avez la permission pour dire ce mot.`, "👮Ce message s'autodétruira dans 10s.");
+//         if(msg.member.hasPermission("MANAGE_MESSAGES")) return msg.channel.send(mspermEmbed).then(msg => {msg.delete(6000)}); 
+//         //msg.channel.send(permEmbed).then(message => {message.delete(6000)});
+
+//         let msdefaultembed = new Discord.RichEmbed()
+//         .setDescription("Réponse de la commande :")
+//         .setColor("#bc0000")
+//         .addField(":x: Vous avez utilisé un mot interdit. '<message supprime> ' !", "👮Merci de ne plus écrire ' <message supprime> '.(Auto-destruction du message dans 20s.)")
+//         .setDescription(msg.delete().catch(O_o=>{}));
+//         if(!msg.member.hasPermission("MANAGE_MESSAGES")) return msg.channel.send(msdefaultembed).then(message => {message.delete(12000)});  
+   
+//     }
+
+// });
+
+//TODO Désactivé pour des raisons de crash !
+// client.on("channelCreate", channel => { 
+ 
+//   try{
+  
+//     let channelCreateEmbed = new Discord.RichEmbed()
+//     .setTitle("Log Canal créer :")
+//     .setColor("#15f153")
+//     .addField("Nom du canal :", `${channel.name}`)
+//     .addField("ID du canal :", `${channel.id}`)
+//     .setTimestamp();
+   
+//     let createChannel = channel.guild.channels.find(`name`, "📝log-serveur");
+//     createChannel.send(channelCreateEmbed);
+ 
+//     }catch (e){
+   
+//     console.log(`Impossible de récupéré la création du channel !`);
+    
+//     }
+// }); 
+
+//TODO Désactivé pour des raisons de crash !
+// client.on("channelUpdate", channel => { 
+  
+//     try {
+   
+//     let channelUpdateEmbed = new Discord.RichEmbed()
+//     .setTitle("Log canal supprimée :")
+//     .setColor("#15f153")
+//     .addField("Nom du canal :", `${channel.name}`)
+//     .addField("ID du canal :", `${channel.id}`)
+//     .setTimestamp();
+    
+//     let updateChannel = channel.guild.channels.find(`name`, "📝log-serveur");
+//     updateChannel.send(channelUpdateEmbed);
+ 
+//     }catch (e){
+   
+//     console.log(`Impossible de récupéré la modification du channel !`);
+    
+//     }
+// });
+
+//TODO Désactivé pour des raisons de crash !
+// client.on("channelDelete", channel => { 
+  
+//     try {
+   
+//     let channelDeleteEmbed = new Discord.RichEmbed()
+//     .setTitle("Log canal supprimée :")
+//     .setColor("#15f153")
+//     .addField("Nom du canal :", `${channel.name}`)
+//     .addField("ID du canal :", `${channel.id}`)
+//     .setTimestamp();
+    
+//     let deleteChannel = channel.guild.channels.find(`name`, "📝log-serveur");
+//     deleteChannel.send(channelDeleteEmbed);
+ 
+//     }catch (e){
+   
+//     console.log(`Impossible de récupéré la supression du channel !`);
+    
+//     }
+// });
+
+//TODO Désactivé pour des raisons de crash !
+// client.on("emojiCreate", emoji => { 
+    
+//     try{
+   
+//     let emojiCreateEmbed = new Discord.RichEmbed()
+//     .setTitle("Log emoji créer :")
+//     .setColor("#15f153")
+//     .addField("Nom de l'Emoji :", `${emoji.name}`, true)
+//     .addField("ID de l'Emoji :", `${emoji.id}`, true)
+//     .addField("Code de l'Emoji :", `${emoji.identifier}`, true)
+//     .addField("Url de l'Emoji :", `${emoji.url}`, true)
+//     .addField("Animation de l'Emoji :", `${emoji.animated}`, true)
+//     .setTimestamp();
+    
+//     let createEmoji = emoji.guild.channels.find(`name`, "📝log-serveur");
+//     createEmoji.send(emojiCreateEmbed);
+   
+//     }catch (e){
+    
+//     console.log(`Impossible de récupéré la création de l'emoji !`);
+   
+//     }
+// });
+
+//TODO Désactivé pour des raisons de crash !
+// client.on("emojiDelete", emoji => { 
+
+//     try{
+
+//     let emojiDeleteEmbed = new Discord.RichEmbed()
+//     .setTitle("Log emoji supprimée :")
+//     .setColor("#15f153")
+//     .addField("Nom de l'Emoji :", `${emoji.name}`, true)
+//     .addField("ID de l'Emoji :", `${emoji.id}`, true)
+//     .addField("Code de l'Emoji :", `${emoji.identifier}`, true)
+//     .addField("Url de l'Emoji :", `${emoji.url}`, true)
+//     .addField("Animation de l'Emoji :", `${emoji.animated}`, true)
+//     .setTimestamp();
+//     let deleteEmoji = emoji.guild.channels.find(`name`, "📝log-serveur");
+//     deleteEmoji.send(emojiDeleteEmbed);
+
+//     }catch (e){
+
+//     console.log(`Impossible de récupéré la supression de l'emoji !`);
+
+//     }
+// });
+
+//TODO Désactivé pour des raisons de crash !
+// client.on("roleCreate", role => { 
+
+//     try{
+
+//     let roleCreateEmbed = new Discord.RichEmbed()
+//     .setTitle("Log rôle créer :")
+//     .setColor("#15f153")
+//     .addField("Nom du rôle :", `${role.name}`, true)
+//     .addField("ID du rôle :", `${role.id}`, true)
+//     .addField("Coleur du rôle :", `${role.color}`,true)
+//     .addField("Position du rôle :", `${role.calculatedPosition}`, true)
+//     .addField("Permissions du rôle :", `${role.permissions}`, true)
+//     .addField("Rôle memtionabble :", `${role.mentionable}`, true)
+//     .setTimestamp();
+//     let deleteRole = role.guild.channels.find(`name`, "📝log-serveur");
+//     deleteRole.send(roleCreateEmbed);
+
+//     }catch (e){
+
+//     console.log(`Impossible de récupéré la créations du rôle !`);
+
+//     }
+// });
+
+//TODO Désactivé pour des raisons de crash !
+// client.on("roleUpdate", role => { 
+
+//     try{
+
+//     let roleUpdateEmbed = new Discord.RichEmbed()
+//     .setTitle("Log rôle update :")
+//     .setColor("#15f153")
+//     .addField("Nom du rôle :", `${role.name}`, true)
+//     .addField("ID du rôle :", `${role.id}`, true)
+//     .addField("Coleur du rôle :", `${role.color}`,true)
+//     .addField("Permissions du rôle :", `${role.permissions}`, true)
+//     .addField("Rôle memtionabble :", `${role.mentionable}`, true)
+//     .setTimestamp();
+//     let updateRole = role.guild.channels.find(`name`, "📝log-serveur");
+//     updateRole.send(roleUpdateEmbed);
+
+//     }catch (e){
+
+//     console.log(`Impossible de récupéré la mise à jour du rôle !`);
+
+//     }
+// });
+
+//TODO Désactivé pour des raisons de crash !
+// client.on("roleDelete", role => { 
+
+//     try{
+
+//     let roleDeleteEmbed = new Discord.RichEmbed()
+//     .setTitle("Log rôle supprimée :")
+//     .setColor("#15f153")
+//     .addField("Nom du rôle :", `${role.name}`, true)
+//     .addField("ID du rôle :", `${role.id}`, true)
+//     .addField("Coleur du rôle :", `${role.color}`,true)
+//     .addField("Position du rôle :", `${role.calculatedPosition}`, true)
+//     .addField("Permissions du rôle :", `${role.permissions}`, true)
+//     .addField("Rôle memtionabble :", `${role.mentionable}`, true)
+//     .setTimestamp();
+//     let deleteRole = role.guild.channels.find(`name`, "📝log-serveur");
+//     deleteRole.send(roleDeleteEmbed);
+
+//     }catch (e){
+
+//     console.log(`Impossible de récupéré la supression du rôle !`);
+
+//     }
+// });
+
+//TODO Désactivé pour des raisons de crash !
+// client.on("messageDelete", message => { 
+//     try{
+
+//     let messageDeleteEmbed = new Discord.RichEmbed()
+//     .setTitle("Log Message Block supprimée :")
+//     .setColor("#15f153")
+//     .addField("Message  par :", `${message.author}`)
+//     .addField("Contenant du message :", `${message.content}`)
+//     .addField("Mention du message :", `${message.mentions}`)
+//     .addField("Epingler le message :", `${message.pinned}`)
+//     .addField("Editable le message :", `${message.editable}`)
+//     .setTimestamp();
+
+//     let deleteMessage = message.guild.channels.find(`name`, "📝log-serveur");
+//     deleteMessage.send(messageDeleteEmbed);
+
+//     } catch (e) {
+
+//     console.log(`Impossible de récupéré la supression du message !`);
+ 
+//     }
+// });
+
+//TODO Désactivé pour des raisons de crash !
+// client.on("messageUpdate", message => { 
+//     try{
+
+//     let messageUpdateEmbed = new Discord.RichEmbed()
+//     .setTitle("Log Message Block supprimée :")
+//     .setColor("#15f153")
+//     .addField("Message  par :", `${message.author}`)
+//     .addField("Contenant du message :", `${message.content}`)
+//     .addField("Mention du message :", `${message.mentions}`)
+//     .addField("Epingler le message :", `${message.pinned}`)
+//     .addField("Editable le message :", `${message.editable}`)
+//     .setTimestamp();
+
+//     let updateMessage = message.guild.channels.find(`name`, "📝log-serveur");
+//     updateMessage.send(messageUpdateEmbed);
+
+//     } catch (e) {
+
+//     console.log(`Impossible de récupéré la mise à jour du message !`);
+    
+//     } 
+// });
