@@ -1,4 +1,6 @@
 {
     "prefix": "__-",
-    "key": "Clé de votre bot "
+    "key": "Clé du bot ",
+    "MESSAGE_REACTION_REGLEMENT" : "Id message de votre réglement",
+    "MESSAGE_REACTION_ROLE" : "Id message de votre liste de role"
 }

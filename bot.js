@@ -69,6 +69,151 @@ client.on('message', msg => {
     getCmdFunction(cmd)(msg);
 });
 
+// ! INFOS IMPORTANT faut que le nom du rôle à le même nom de l'émoji de la réaction pour que sa marche !
+//TODO Système de réaction 
+client.on('raw', event => {
+    const eventName = event.t;
+    if(eventName ===  'MESSAGE_REACTION_ADD'){
+        if (event.d.message_id === config.MESSAGE_REACTION_ROLE)
+        {
+           // console.log("Reaction ADD-->", event.d)
+            var reactionChannel = client.channels.get(event.d.channel_id);
+            if(reactionChannel.messages.has(event.d.message_id)){
+                return;
+            }else {
+                reactionChannel.fetchMessage(event.d.message_id)
+                .then(msg => {
+                    var msgReaction = msg.reactions.get(event.d.emoji.name + ":" + event.d.emoji.id)
+                    var user = client.users.get(event.d.user_d)
+                    client.emit('messageReactionAdd', msgReaction, user)
+                })
+                .catch(err => { 
+                    console.log(err);
+                })
+            }
+        }
+            if (event.d.message_id === config.MESSAGE_REACTION_REGLEMENT)
+        {
+           // console.log("Reaction ADD-->", event.d)
+            var reactionChannel = client.channels.get(event.d.channel_id);
+            if(reactionChannel.messages.has(event.d.message_id)){
+                return;
+            }else {
+                reactionChannel.fetchMessage(event.d.message_id)
+                .then(msg => {
+                    var msgReaction = msg.reactions.get(event.d.emoji.name + ":" + event.d.emoji.id)
+                    var user = client.users.get(event.d.user_d)
+                    client.emit('messageReactionAdd', msgReaction, user)
+                })
+                .catch(err => { 
+                    console.log(err);
+                })
+            }
+        }
+    }else if (eventName === 'MESSAGE_REACTION_REMOVE') {
+        if(event.d.message_id === config.MESSAGE_REACTION_ROLE /* || '581852966651166742'*/){
+           // console.log("Reaction REMOVE -->",event.d)
+            var reactionChannel = client.channels.get(event.d.channel_id);
+            if(reactionChannel.messages.has(event.d.message_id)){
+                return;
+            }else {
+                reactionChannel.fetchMessage(event.d.message_id)
+                .then(msg => {
+                    var msgReaction = msg.reactions.get(event.d.emoji.name + ':' + event.d.emoji.id);
+                    var user = client.users.get(event.d.user_id);
+                    client.emit('messageReactionRemove', msgReaction, user)
+                })
+                .catch(err => console.log(err))
+            }
+        }
+        if(event.d.message_id === config.MESSAGE_REACTION_REGLEMENT){
+           // console.log("Reaction REMOVE -->",event.d)
+            var reactionChannel = client.channels.get(event.d.channel_id);
+            if(reactionChannel.messages.has(event.d.message_id)){
+                return;
+            }else {
+                reactionChannel.fetchMessage(event.d.message_id)
+                .then(msg => {
+                    var msgReaction = msg.reactions.get(event.d.emoji.name + ':' + event.d.emoji.id);
+                    var user = client.users.get(event.d.user_id);
+                    client.emit('messageReactionRemove', msgReaction, user)
+                })
+                .catch(err => console.log(err))
+            }
+        }
+    }
+})
+
+//TODO Ajout d'un rôle si tu fait la réaction.
+client.on('messageReactionAdd', (messageReaction, user) => {
+
+
+    function three (chaine) {
+    chaine = chaine.toLowerCase()
+    chaine = chaine.replace(/[\s]{1,}/g,""); // Enlève les espaces doubles, triples, etc.
+    chaine = chaine.replace(/^[\s]/,""); // Enlève les espaces au début
+    chaine = chaine.replace(/[\s]$/,""); // Enlève les espaces à la fin
+    return chaine;       
+}
+    
+    var roleName = messageReaction.emoji.name
+    //console.log(roleName);
+    var role = messageReaction.message.guild.roles.find(role => three(role.name) === three(roleName));
+
+    if(role) {
+         var member = messageReaction.message.guild.members.find(member => member.id === user.id)
+        if(member){
+            member.addRole(role.id);
+          //  console.log(`Rôle ajouté sur ${member.user.username} (id : ${member.user.id}) `)
+            
+            member.createDM().then(channel => {
+            let addRole = new Discord.RichEmbed()
+            .setTitle("Réponse de l'ajout  du rôle :")
+            .setColor("#15f153") 
+            .addField(`:white_check_mark: Tu a récupérer le rôle ${role.name} !  `, "👮 Pour le supprimer faudra juste retirer la réaction !");
+            return channel.send(addRole)
+
+              
+                }).catch(console.error);
+
+        }
+    }
+})
+
+//TODO Retire un rôle quand te retire la réaction
+client.on('messageReactionRemove', (messageReaction, user) => {
+
+    function three (chaine) {
+    chaine = chaine.toLowerCase()
+    chaine = chaine.replace(/[\s]{1,}/g,""); // Enlève les espaces doubles, triples, etc.
+    chaine = chaine.replace(/^[\s]/,""); // Enlève les espaces au début
+    chaine = chaine.replace(/[\s]$/,""); // Enlève les espaces à la fin
+    return chaine;       
+}
+    
+    var roleName = messageReaction.emoji.name
+    //console.log(roleName);
+    var role = messageReaction.message.guild.roles.find(role => three(role.name) === three(roleName));
+
+    if(role) {
+        var member = messageReaction.message.guild.members.find(member => member.id === user.id)
+        if(member){
+            member.removeRole(role.id);
+            //console.log(`Rôle suprimé sur ${member.user.username} (id : ${member.user.id}) `)
+        }
+        member.createDM().then(channel => {
+            let removeRole = new Discord.RichEmbed()
+            .setTitle("Réponse de supression du rôle :")
+            .setColor("#15f153")
+            .addField(`:white_check_mark: Tu a retiré le rôle ${role.name} !  `, "👮 Pour le récupérer faudra juste remettre la réaction !");
+            return channel.send(removeRole)
+          
+            }).catch(console.error);
+
+    
+    }
+})
+
 //TODO Gestion des commandes.
 function getCmdFunction(cmd) {
     const COMMANDS = {
