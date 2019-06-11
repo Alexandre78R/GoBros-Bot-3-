@@ -5,8 +5,6 @@ const kickconsole = require('../utils/generate').kick();
 const banconsole = require('../utils/generate').ban();
 const addroleconsole = require('../utils/generate').addrole();
 const delroleconsole = require('../utils/generate').delrole();
-const stripIndent = require('strip-indent');
-const os = require('os');
 const Discord = require("discord.js");
 
 module.exports = {
@@ -14,12 +12,12 @@ module.exports = {
     'clean': clean,
     'kick': kick,
     'ban': ban,
-    'addrole_admin': addrole_admin,
-    'delrole_admin': delrole_admin,
+    'addrole': addrole,
+    'delrole': delrole,
     'messageprivate': messageprivate,
-    'reactaddrole': reactaddrole,
 } 
 
+//TODO Commande HELP pour modo ou admin.
 function aide_modo (message) {
 
  if(message.author.bot) return;
@@ -63,6 +61,7 @@ function aide_modo (message) {
 
 } 
 
+//TODO Commande clean canal.
 function clean (message) {
        if (message.length == 1){
            if (message[0].charAt(0) == config.prefix) 
@@ -105,7 +104,8 @@ function clean (message) {
       }
     };
 
-function kick (message) { // !reportbug @membre-a-kick raison
+//TODO Commande Kick du serveur
+ function kick (message) { // !reportbug @membre-a-kick raison
 
  if(message.author.bot) return;
   if(message.channel.type === "dm") return;
@@ -185,7 +185,7 @@ function kick (message) { // !reportbug @membre-a-kick raison
 
     return;
   }
-
+//TODO Commmande ban du serveur.
 function ban (message) { // !ban @membre-a-ban raison
 
  if(message.author.bot) return;
@@ -264,8 +264,8 @@ function ban (message) { // !ban @membre-a-ban raison
 
     return;
 }
-
-function addrole_admin (message){ // !addrole @pseudo nom_du_role
+//TODO Commande pour ajouté un role à un membre
+function addrole (message){ // !addrole @pseudo nom_du_role
 
   let messageArray = message.content.split(" ");
   let cmd = messageArray[0];
@@ -342,8 +342,8 @@ function addrole_admin (message){ // !addrole @pseudo nom_du_role
     message.channel.send(addRoleMembre);
     message.delete().catch(O_o=>{});
 }
-
-function delrole_admin (message){ // !delrole @pseudo nom_du_role
+//TODO Commande pour supprimé un role à un membre
+function delrole (message){ // !delrole @pseudo nom_du_role
 
   let messageArray = message.content.split(" ");
   let cmd = messageArray[0];
@@ -420,7 +420,7 @@ function delrole_admin (message){ // !delrole @pseudo nom_du_role
     message.channel.send(delRoleMembre);
     message.delete().catch(O_o=>{});
 }
-
+//TODO Commande pour envoyer un message privé à un membre par le bot.
 function messageprivate (message) { // en cours développement 
 
   let messageArray = message.content.split(" ");
@@ -484,73 +484,4 @@ function messageprivate (message) { // en cours développement
 
      messageMembre.send(messagePrvateMembre);
      message.delete().catch(O_o=>{});
-}
-
-function reactaddrole (message){ // !reactaddrole idmessage :smiley: @role  en cours de développement !
-
-if(message.author.bot) return;
-  if(message.channel.type === "dm") return;
-
-       if (message.length == 1){
-           if (message[0].charAt(0) == config.prefix) 
-               message[0] = message[0].slice(1);
-
-      } 
-/*
-    let messageArray = message.content.split(" ");
-    let cmd = messageArray[0];
-    let argsid = messageArray.slice(1, 2);
-    let argsemoji = messageArray.slice(2, 3);
-    let argsrole = messageArray.slice(3);
-
-    let errorid = new Discord.RichEmbed()
-    .setDescription("Réponse de la commande :")
-    .setColor("#bc0000")
-    .addField(":x: ERROR ID", "👮 ERROR ID")
-   // message.delete().catch(O_o=>{});
-
-    let erroremoji = new Discord.RichEmbed()
-    .setDescription("Réponse de la commande :")
-    .setColor("#bc0000")
-    .addField(":x: ERROR EMOJI", "👮 ERROR EMOJI")
-  //  message.delete().catch(O_o=>{});
-
-    let errorrole = new Discord.RichEmbed()
-    .setDescription("Réponse de la commande :")
-    .setColor("#bc0000")
-    .addField(":x: ERROR ROLE", "👮 ERROR ROLE")
-   // message.delete().catch(O_o=>{});
-
-    let id = message.guild.members.get([1]) || argsid.join(" ");
-    if(!id) return message.channel.send(errorid); 
-
-    let emoji = argsemoji.join(" ");
-    if(!emoji) return message.channel.send(erroremoji); 
-
-    let role = argsrole.join(" ");
-    if(!role) return message.channel.send(errorrole); 
-
-    let reportEmbed = new Discord.RichEmbed()
-    .setDescription("Info réaction role:")
-    .setColor("#15f153")
-    .addField("ID :", id)
-    .addField("EMOJI :", emoji)
-    .addField("ROLE :", role);
-   
-    let canalerror = new Discord.RichEmbed()
-    .setDescription("Réponse de la commande :")
-    .setColor("#bc0000")
-    .addField(":x: Je ne trouve pas le canal d'envoi.", "👮Merci de contacter un Administrateur.")
-    //message.delete().catch(O_o=>{});
-
-    let reportschannel = message.guild.channels.find(`name`, "test-dev");
-    if(!reportschannel) return message.channel.send(canalerror);
-
-    //message.delete().catch(O_o=>{}); 
-    reportschannel.send(reportEmbed).then(msg => {msg.react(":x:")});
-    message.react(":x:");
-
-    return;*/
-
-    message.reply('Commande en développement');
 }
