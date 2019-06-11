@@ -4,13 +4,9 @@
   "description": "",
   "main": "bot.js",
   "dependencies": {
-    "colors": "^1.2.1",
     "discord.js": "^11.4.2",
     "dotenv": "^5.0.1",
-    "express": "^4.16.4",
-    "i": "^0.3.6",
-    "prompt": "^1.0.0",
-    "strip-indent": "^2.0.0"
+    "express": "^4.16.4"
   },
   "devDependencies": {},
   "scripts": {
