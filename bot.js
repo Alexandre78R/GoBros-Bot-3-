@@ -37,7 +37,7 @@ client.on('ready', () => {
  });
 
  //TODO Clé du bot de discord (A vous de renplire par la votre !)
-client.login("");
+client.login(config.key);
 
 //TODO Message de bienvenue dans un canal et en privé.
 client.on('guildMemberAdd', member => {
