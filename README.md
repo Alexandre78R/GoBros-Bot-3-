@@ -43,3 +43,33 @@ La configuration est très simple à faire, sa seras juste à modifier les infor
 ## Démarrage du bot 
 
 Vous devrez utilisé la commande `node bot`!
+
+## Liste  des commandes 
+
+Les commandes pour les membres de l'équipe sur  le discord :
+
+- `(prefix)clean` Supprime des messages en grande quantité.
+- `(prefix)kick` Kick un utilisateur // EX : !kick @nom_de_la_personne_a_kick raison.
+- `(prefix)ban` Ban un utilisateur // EX : !ban @nom_de_la_personne_a_ban raison.
+- `(prefix)addrole_admin` Donne un rôle à un membre. // EX : !addrole_admin @nom_de_la_personne_a_ban rôle (PAS DE MENTION POUR LE ROLE).
+- `(prefix)delrole_admin` Retire un rôle à un membre. // EX : !delrole_admin @nom_de_la_personne_a_ban rôle (PAS DE MENTION POUR LE ROLE).
+- `(prefix)messageprivate` Envoi un message privé à un membre. // EX : !messageprivate @nom_de_la_personne_a_ban message.
+ 
+
+>**Note:** Vue le bot n'est pas optimisé vous devrais changer les id des salons pour les commandes kick et ban.
+
+Les commandes pour les membres sur le discord :
+
+- `(prefix)aide` Voir les commandes du bot.
+- `(prefix)reportmembre` Report d'un membre du serveur // EX : !reportmembre message.
+- `(prefix)reportbug` Report un bug sur le discord ou sur le bot
+- `(prefix)serverinfo` Indique les informations du serveur.
+- `(prefix)jeux`Permettre de proposée vos jeux pour les streams.
+- `(prefix)mascotte` Pour avoir le rôle 'Apprenti Mascotte' ou le retirer.
+- `(prefix)aide_cmd` Permettre de vous aidez pour l'utilisation des commandes.
+- `(prefix)avatar` Permettre de voir votre photo de profils et avoir le lien.
+- `(prefix)poudlard` Permettre de vous choisir dnas une classe de Harry Potter
+- `(prefix)fortnite` Pour voir vos stats sur fortnite ! (tous est expliqué avec la simple commande)
+- `(prefix)gif`Pour utilisé les gifs. (tous est expliqué avec la simple commande)
+
+>**Note:** Vue le bot n'est pas optimisé vous devrais changer l'id du rôle pour la commande mascotte et jeux le salons d’annonce des jeux  puis les id des salons des report (reportbug et reportmembre).
