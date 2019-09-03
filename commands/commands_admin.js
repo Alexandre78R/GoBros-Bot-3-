@@ -48,12 +48,12 @@ function aide_modo (message) {
     let aideembed = new Discord.RichEmbed()
     .setColor("#15f153")
     //.setThumbnail(sicon)
-    .addField("!clean", "Suprime des messages en grande quantité.")
-    .addField("!kick", "Kick un utilisateur // EX : !kick @nom_de_la_personne_a_kick raison.")
-    .addField("!ban", "Ban un utilisateur // EX : !ban @nom_de_la_personne_a_ban raison.")
-    .addField("!addrole_admin", "Donne un rôle à un membre. // EX : !addrole_admin @nom_de_la_personne_a_ban rôle (PAS DE MENTION POUR LE ROLE).")
-    .addField("!delrole_admin", "Retire un rôle à un membre. // EX : !delrole_admin @nom_de_la_personne_a_ban rôle (PAS DE MENTION POUR LE ROLE).")
-    .addField("!messageprivate", "Envoi un message privé à un membre. // EX : !messageprivate @nom_de_la_personne_a_ban message.")    
+    .addField(config.prefix +"clean", "Suprime des messages en grande quantité.")
+    .addField(config.prefix +"kick", "Kick un utilisateur // EX : !kick @nom_de_la_personne_a_kick raison.")
+    .addField(config.prefix +"ban", "Ban un utilisateur // EX : !ban @nom_de_la_personne_a_ban raison.")
+    .addField(config.prefix +"addrole_admin", "Donne un rôle à un membre. // EX : !addrole_admin @nom_de_la_personne_a_ban rôle (PAS DE MENTION POUR LE ROLE).")
+    .addField(config.prefix +"delrole_admin", "Retire un rôle à un membre. // EX : !delrole_admin @nom_de_la_personne_a_ban rôle (PAS DE MENTION POUR LE ROLE).")
+    .addField(config.prefix +"messageprivate", "Envoi un message privé à un membre. // EX : !messageprivate @nom_de_la_personne_a_ban message.")    
 
     message.channel.send(aideembed);
 
