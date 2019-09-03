@@ -36,10 +36,10 @@ Liste des modules installer dedans  :
 - Api de fornite ( `npm install fortnite --save`)
 - Api de Giphy ( `npm install giphy-api --save` )
 
-# Configuration
+## Configuration
 
 La configuration est très simple à faire, sa seras juste à modifier les informations dans le fichier `./config/config.json` tous est expliquer de dans  !
 
-# Démarrage du bot 
+## Démarrage du bot 
 
 Vous devrez utilisé la commande `node bot`!
