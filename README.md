@@ -39,3 +39,7 @@ Liste des modules installer dedans  :
 # Configuration
 
 La configuration est très simple à faire, sa seras juste à modifier les informations dans le fichier `./config/config.json` tous est expliquer de dans  !
+
+# Démarrage du bot 
+
+Vous devrez utilisé la commande `node bot`!
